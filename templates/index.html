@@ -1,4 +1,6 @@
 <html>
+{% load static %}
+{% load get_str %}
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>IT之家 - 数码，科技，生活 - 软媒旗下</title>
@@ -12,13 +14,11 @@
     <meta name="format-detection" content="telephone=no">
     <link href="https://www.ithome.com/css/style.css?v=7" rel="stylesheet" type="text/css">
     <link rel="canonical" href="//www.ithome.com/">
-    <link rel="preload" href="https://adservice.google.com/adsid/integrator.js?domain=www.ithome.com" as="script">
-    <script type="text/javascript" async="" src="https://pos.baidu.com/auto_dup?psi=f737a857ab097410dccf35234a698825&amp;di=0&amp;dri=0&amp;dis=0&amp;dai=0&amp;ps=0&amp;enu=encoding&amp;exps=110011&amp;ant=0&amp;dcb=___baidu_union_callback&amp;dtm=AUTO_JSONP&amp;dvi=0.0&amp;dci=-1&amp;dpt=none&amp;tsr=0&amp;tpr=1577258978707&amp;ti=IT%E4%B9%8B%E5%AE%B6%20-%20%E6%95%B0%E7%A0%81%EF%BC%8C%E7%A7&amp;ari=2&amp;ver=1217&amp;dbv=2&amp;drs=1&amp;pcs=1366x625&amp;pss=1366x625&amp;cfv=0&amp;cpl=3&amp;chi=2&amp;cce=true&amp;cec=UTF-8&amp;tlm=1577258922&amp;prot=2&amp;rw=625&amp;ltu=https%3A%2F%2Fwww.ithome.com%2F&amp;ecd=1&amp;uc=1366x728&amp;pis=-1x-1&amp;sr=1366x768&amp;tcn=1577258979&amp;dc=4"></script><script src="https://hm.baidu.com/hm.js?cfebe79b2c367c4b89b285f412bf9867"></script><script src="https://www.googletagservices.com/activeview/js/current/osd.js?cb=%2Fr20100101"></script>
+    <script src="https://www.googletagservices.com/activeview/js/current/osd.js?cb=%2Fr20100101"></script>
     <script src="https://pagead2.googlesyndication.com/pagead/js/r20191205/r20190131/show_ads_impl.js" id="google_shimpl"></script>
-    <script type="text/javascript" src="https://adservice.google.com/adsid/integrator.js?domain=www.ithome.com"></script>
-    <link rel="icon" href="//img.ithome.com/img/favicon_news_yellow.ico" type="image/x-icon">
-    <link rel="icon" href="//img.ithome.com/img/favicon_news_yellow.ico" mce_href="//www.ithome.com/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="//img.ithome.com/img/favicon_news_yellow.ico" type="image/x-icon">
+    <link rel="icon" href="{% static 'image/favicon_news_yellow.ico' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'image/favicon_news_yellow.ico' %}" mce_href="//www.ithome.com/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static 'image/favicon_news_yellow.ico' %}" type="image/x-icon">
     <style type="text/css">
         .rt .nlst .lst {
             padding-top: 33px;
@@ -37,7 +37,7 @@
             width: 920px;
             height: 44px;
             padding-bottom: 25px;
-            background: url(https://img.ithome.com/images/v2.1/bottom_line.png) 0 0 repeat-x;
+            background: url({% static "image/bottom_line.png" %}) 0 0 repeat-x;
         }
         li span.title {
             display: block;
@@ -46,24 +46,47 @@
             text-overflow: ellipsis;
             white-space: nowrap;
         }
+
+        ul.pagelist {
+            display: inline-block;
+            padding: 0;
+            margin: 0;
+        }
+        ul.pagelist li {
+            display: inline;
+        }
+        ul.pagelist li a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        ul.pagelist li.active a {
+            background-color: #d22222;
+            color: white;
+            border-radius: 5px;
+        }
+        ul.pagelist li a:hover:not(.active) {
+            background-color: #ddd;
+        }
+
     </style>
-    <link rel="stylesheet" href="css/dateTime.css">
+    <link rel="stylesheet" href="{% static 'css/dateTime.css' %}">
     <script src="https://cdn.bootcss.com/font-awesome/5.11.2/js/all.js"></script>
 
 </head>
 
 <body class="index hello vsc-initialized">
 
-    <script src="//img.ithome.com/file/js/cookie.js"></script>
     <script>
         if ((navigator.userAgent.match(/(iPhone|iPod|Android|Windows Phone)/i))) {
             if (getCookie('gotoweb') == '')
                 location.replace("//m.ithome.com");
         }
     </script>
-    <script src="https://dup.baidustatic.com/js/ds.js"></script>
+
     <link rel="stylesheet" href="//www.ithome.com/css/top.css?r=2017021312" type="text/css">
-    <script src="//img.ithome.com/file/js/ua.js?r=2017110" type="text/javascript"></script>
     <style type="text/css">
         .sc input.focus {
             height: 35px;
@@ -97,6 +120,9 @@
         }
         .post-meta {
             margin: 2px 0;
+        }
+        .post_meta span {
+            padding: 0 5px;
         }
         a {
             color: #d22222;
@@ -284,7 +310,7 @@
 </div>
 <div id="top5" class="clearfix">
     <a href="//www.ithome.com" id="logo" style="border: 0px;">
-        <img src="//img.ithome.com/images/v2.3/ithome.logo.png" alt="IT之家">
+        <img src="{% static "image/ithome.logo.png" %}" alt="IT之家">
     </a>
     <div class="col">
         <a href="//it.ithome.com/">业界资讯</a>
@@ -324,91 +350,52 @@
             <div class="nlst" id="idnlst">
                 <div class="ct">
                     <ul>
-                        <li><a href="javascript:;" class="current">当日更新</a></li>
-                        <li><a href="javascript:;" id="t_date">选择日期&nbsp;<i class="far fa-calendar-alt"></i></a></li>
+                        <li><a href="/" {% ifequal request.path|get_str '/' %} class="current"{% endifequal %}>当日更新</a></li>
+                        <li><a href="javascript:;" id="t_date" {% ifequal request.path|get_str 'date' %} class="current"{% endifequal %}>选择日期&nbsp;<i class="far fa-calendar-alt"></i></a></li>
+                        <div style="display:inline-block;height: 44px;line-height: 44px;width: 572px;text-align:right;">
+                            {{ articles.object_list.0.t_date }}
+                        </div>
                     </ul>
                 </div>
-{% for article in articles %}
+
+{% for article in articles.object_list %}
                 <article id="post-{{ forloop.counter }}" class="post-item post-7403 post type-post status-publish format-standard hentry category-uncategorized">
                     <div class="left">
                         <h2 class="post-title">
-                            <a href="" title="{{ article.title }}" rel="bookmark">{{ article.title }}</a>
+                            <a href="{% url 'article' article.total_id %}" title="{{ article.title }}" rel="bookmark" target="_blank">{{ article.title|safe }}</a>
                         </h2>
                         <div class="post-meta">
-                            <span id="pubtime_baidu">2020/1/9 22:24:31</span>
-                            <span id="source_baidu">来源：<a href="http://www.techweb.com.cn/internet/2020-01-09/2773053.shtml" target="_blank" rel="external nofollow">TechWeb</a></span>
-                            <span id="author_baidu">作者：<strong>周小白</strong></span>
+                            {{ article.meta|safe }}
                         </div>
                         <div class="post-excerpt">
-                            <p>你们很多人应该也都看新闻了吧，当地时间8日清晨，伊朗军队用导弹轰炸了美国在伊拉克的军事基地，我查了一下伊朗是东三区，时间…</p>
-                            <a class="read-more" href="http://www.gushequ.com/2020/01/%e6%98%a8%e5%8d%8a%e5%a4%9c%ef%bc%8c%e4%bc%8a%e6%9c%97%e8%bd%b0%e7%82%b8%e7%be%8e%e5%86%9b%e5%9f%ba%e5%9c%b0-20200108/">阅读全文 »</a>
+                            <p>{{ article.excerpt|safe }}…</p>
+                            <a class="read-more" href="{% url 'article' article.total_id %}" target="_blank">阅读全文 »</a>
                         </div>
                     </div>
                 </article>
 {% endfor %}
-<article id="post-7398" class="post-item post-7398 post type-post status-publish format-standard hentry category-uncategorized">
-    <div class="left">
-        <h2 class="post-title">
-		    <a href="http://www.gushequ.com/2020/01/%e8%af%b4%e4%b8%80%e4%b8%aa%e6%8e%a5%e4%b8%8b%e6%9d%a5%e7%9a%84%e7%8c%9c%e6%83%b3-20200107/" title="说一个接下来的猜想 -20200107" rel="bookmark">说一个接下来的猜想 -20200107</a>
-        </h2>
-		<div class="post-meta">
-	<span class="vcard author">
-		<a href="http://www.gushequ.com/author/yang/" class="vcard author">YANG</a></span>
-		<span class="divider">•</span>
-	<time class="entry-date published" datetime="2020-01-08T09:02:03+00:00">2020年1月8日</time>
-		<span class="divider">•</span>
-		<span class="comments-count"><a href="http://www.gushequ.com/2020/01/%e8%af%b4%e4%b8%80%e4%b8%aa%e6%8e%a5%e4%b8%8b%e6%9d%a5%e7%9a%84%e7%8c%9c%e6%83%b3-20200107/#respond">暂无评论</a></span>
-		</div>
-<!-- END .post-meta -->
-		<div class="post-excerpt">
-			<p>今天又是暴力逼空的普涨行情，我能很明显的感觉到踏空资金的焦虑情绪，看着场内股民每天捡钱，为盈利欢呼雀跃，在旁边看的难免会…</p>
-<a class="read-more" href="http://www.gushequ.com/2020/01/%e8%af%b4%e4%b8%80%e4%b8%aa%e6%8e%a5%e4%b8%8b%e6%9d%a5%e7%9a%84%e7%8c%9c%e6%83%b3-20200107/">阅读全文 »</a>		</div>
-		<!-- END .post-excerpt -->
-	</div>
 
-</article>
-
-<article id="post-7393" class="post-item post-7393 post type-post status-publish format-standard hentry category-uncategorized">
-		<div class="left">
-				<h2 class="post-title">
-		<a href="http://www.gushequ.com/2020/01/%e4%b8%8b%e5%8d%88-%e5%8f%88%e4%bd%9c%e5%a6%96%e4%ba%86-20200106/" title="下午…又作妖了 -20200106" rel="bookmark">下午…又作妖了 -20200106</a>		</h2>
-		<div class="post-meta">
-	<span class="vcard author">
-		<a href="http://www.gushequ.com/author/yang/" class="vcard author">YANG</a></span>
-		<span class="divider">•</span>
-	<time class="entry-date published" datetime="2020-01-07T08:51:43+00:00">2020年1月7日</time>
-		<span class="divider">•</span>
-		<span class="comments-count"><a href="http://www.gushequ.com/2020/01/%e4%b8%8b%e5%8d%88-%e5%8f%88%e4%bd%9c%e5%a6%96%e4%ba%86-20200106/#respond">暂无评论</a></span>
-		</div>
-<!-- END .post-meta -->
-		<div class="post-excerpt">
-			<p>&nbsp; 今天A股继续顺着惯性向上涨，虽然收盘的时候上证指数微跌0.1%，但A股整体人气活跃，上涨个股2059个，比…</p>
-<a class="read-more" href="http://www.gushequ.com/2020/01/%e4%b8%8b%e5%8d%88-%e5%8f%88%e4%bd%9c%e5%a6%96%e4%ba%86-20200106/">阅读全文 »</a>		</div>
-		<!-- END .post-excerpt -->
-	</div>
-	<!-- END .left -->
-</article>
-
-<article id="post-7389" class="post-item post-7389 post type-post status-publish format-standard hentry category-uncategorized">
-		<div class="left">
-				<h2 class="post-title">
-		<a href="http://www.gushequ.com/2020/01/%e7%be%8e%e5%9b%bd%e7%82%b8%e6%ad%bb%e4%ba%86%e4%bc%8a%e6%9c%97%e4%ba%8c%e5%8f%b7%e4%ba%ba%e7%89%a9-20200105/" title="美国炸死了伊朗二号人物 -20200105" rel="bookmark">美国炸死了伊朗二号人物 -20200105</a>		</h2>
-		<div class="post-meta">
-	<span class="vcard author">
-		<a href="http://www.gushequ.com/author/yang/" class="vcard author">YANG</a></span>
-		<span class="divider">•</span>
-	<time class="entry-date published" datetime="2020-01-06T08:52:11+00:00">2020年1月6日</time>
-		<span class="divider">•</span>
-		<span class="comments-count"><a href="http://www.gushequ.com/2020/01/%e7%be%8e%e5%9b%bd%e7%82%b8%e6%ad%bb%e4%ba%86%e4%bc%8a%e6%9c%97%e4%ba%8c%e5%8f%b7%e4%ba%ba%e7%89%a9-20200105/#respond">暂无评论</a></span>
-		</div>
-<!-- END .post-meta -->
-		<div class="post-excerpt">
-			<p>周末最被热议的头条，无疑是1月3日，美国发起斩首行动，利用无人机发射导弹，炸死了伊朗少将苏莱曼尼。 这里要解释一下，大家…</p>
-<a class="read-more" href="http://www.gushequ.com/2020/01/%e7%be%8e%e5%9b%bd%e7%82%b8%e6%ad%bb%e4%ba%86%e4%bc%8a%e6%9c%97%e4%ba%8c%e5%8f%b7%e4%ba%ba%e7%89%a9-20200105/">阅读全文 »</a>		</div>
-		<!-- END .post-excerpt -->
-	</div>
-	<!-- END .left -->
-</article>
+                <div class="pageturn">
+		            <ul class="pagelist">
+{% if articles.has_previous %}
+		                <li class="long"><a href="?{{ articles.previous_page_number.querystring }}" >«</a></li>
+{% endif %}
+{% for page in articles.pages %}
+    {% if page %}
+        {% ifequal page articles.number %}
+                        <li class="active"><a href="?{{ page.querystring }}">{{ page }}</a></li>
+        {% else %}
+		                <li><a href="?{{ page.querystring }}">{{ page }}</a></li>
+        {% endifequal %}
+    {% else %}
+                        <li class="none"><a href="">...</a></li>
+    {% endif %}
+{% endfor %}
+{% if articles.has_next %}
+		                <li class="long"><a href="?{{ articles.next_page_number.querystring }}">»</a></li>
+{% endif %}
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -427,56 +414,65 @@
     </div>
     <div class="if">
         <div class="bx1">
-            <a href="//www.ithome.com/about.htm" target="_blank"><strong>关于IT之家</strong></a><span class="v">|</span><a href="//www.ruanmei.com/aboutus/" target="_blank"><strong>关于软媒</strong></a><span class="v">|</span><a href="//www.ruanmei.com/contact/" target="_blank"><strong>联系我们</strong></a><span class="v">|</span><a href="//www.ruanmei.com/joinus/" target="_blank"><strong>加入软媒</strong></a><span class="v">|</span><a href="//m.ithome.com/" target="_blank"><strong>WAP版</strong></a><span class="v">|</span><a href="//www.ithome.com/sitemap/" target="_blank"><strong>网站地图</strong></a><span class="v">|</span><a href="//www.ithome.com/archiver/" target="_blank"><strong>Archiver</strong></a><span class="v">|</span><a href="http://www.cike.cn/" target="_blank"><strong>刺客团队</strong></a></div><div class="bx2"><p>IT之家，软媒旗下科技门户网站 - 爱科技，爱这里。</p><p>Copyright (C)<a href="//www.ruanmei.com" target="_blank">RuanMei.com</a>, All Rights Reserved.</p><p><a href="//www.ruanmei.com/" target="_blank">软媒公司</a>版权所有
+            <a href="//www.ithome.com/about.htm" target="_blank"><strong>关于IT之家</strong></a><span class="v">|</span><a href="//www.ruanmei.com/aboutus/" target="_blank"><strong>关于软媒</strong></a><span class="v">|</span><a href="//www.ruanmei.com/contact/" target="_blank"><strong>联系我们</strong></a><span class="v">|</span><a href="//www.ruanmei.com/joinus/" target="_blank"><strong>加入软媒</strong></a><span class="v">|</span><a href="//m.ithome.com/" target="_blank"><strong>WAP版</strong></a><span class="v">|</span><a href="//www.ithome.com/sitemap/" target="_blank"><strong>网站地图</strong></a><span class="v">|</span><a href="//www.ithome.com/archiver/" target="_blank"><strong>Archiver</strong></a><span class="v">|</span><a href="http://www.cike.cn/" target="_blank"><strong>刺客团队</strong></a></div><div class="bx2"><p>IT之家，软媒旗下科技门户网站 - 爱科技，爱这里。</p><p>Copyright (C)<a href="//www.ruanmei.com" target="_blank">RuanMei.com</a>, All Rights Reserved.</p><p><a href="//www.ruanmei.com/" target="_blank">软媒公司</a>版权所有</p>
+        </div>
         <script>document.write('<a href="http://www.miitbeian.gov.cn" target="_blank" rel ="nofollow">鲁ICP备11016544号-10</a>')</script>
-        <a href="http://www.miitbeian.gov.cn" target="_blank" rel="nofollow">鲁ICP备11016544号-10</a>&nbsp;&nbsp;
-        <script>document.write('<a href="http://www.slxun.com/wfjb/" target="_blank" rel ="nofollow">青岛市互联网违法信息举报中心</a>&nbsp;&nbsp<a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=37020202000026" rel ="nofollow"><img src="//img.ithome.com/images/ithome/110.png">鲁公网安备 37020202000026号</a>')</script>
-        <a href="http://www.slxun.com/wfjb/" target="_blank" rel="nofollow">青岛市互联网违法信息举报中心</a>&nbsp;&nbsp;<a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=37020202000026" rel="nofollow" style="border: 0px;"><img src="//img.ithome.com/images/ithome/110.png">鲁公网安备 37020202000026号</a>违法不良信息举报电话：0532-83661100</p></div>
+        <a href="http://www.miitbeian.gov.cn" target="_blank" rel="nofollow">鲁ICP备11016544号-10</a>
     </div>
 </div>
+
 <script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/2.1.1/jquery.min.js"></script>
 <script>(window.jQuery || document.write("<script src='https://img.ithome.com/file/js/jquery/jquery.min.js'><\/script>"));</script>
-<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-<script>(window.jQuery && window.jQuery.fn && window.jQuery.fn.cookie || document.write("<script src='https://img.ithome.com/file/js/jquery/jquery.cookie.js'><\/script>"));</script>
-<script src="https://img.ithome.com/file/js/jquery/jquery.cookie.js"></script>
+
+
 <iframe id="google_osd_static_frame_4955450173217" name="google_osd_static_frame" style="display: none; width: 0px; height: 0px;"></iframe>
 <script src="https://s3.pstatp.com/cdn/expire-1-M/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
 <script>(window.jQuery && window.jQuery.fn && window.jQuery.fn.lazyload || document.write("<script src='https://img.ithome.com/file/js/jquery/jquery.lazyload.js'><\/script>"));</script>
-<script src="//img.ithome.com/file/js/v2.3/top.js?r=2017021312"></script>
-<script src="//img.ithome.com/file/js/jquery/popwin.js?r=2018071003"></script>
-<script src="//img.ithome.com/file/js/v2.3/common.js?r=2018071302"></script>
-<div style="display:none;">undefined</div>
-<script type="text/javascript" src="//img.ithome.com/file/js/v2/tt.js"></script>
-<script type="text/javascript" charset="utf-8">$(function () { $("img.lazy").lazyload(); });</script>
-<div style="display:none">
-    <script>var _hmt = _hmt || [];(function() {  var hm = document.createElement("script");  hm.src = "https://hm.baidu.com/hm.js?cfebe79b2c367c4b89b285f412bf9867";  var s = document.getElementsByTagName("script")[0];  s.parentNode.insertBefore(hm, s);})();</script>
-</div>
-<script src="//img.ithome.com/file/js/v2/coin-slider.min.js"></script>
-<script>var newsid = 465015</script><script src="https://www.ithome.com//js/index.js?r=3"></script>
-<script>$('#coin-slider').coinslider({ width: 300, height: 375, spw: 3, sph: 2, effect: 'random', delay: 6000 });</script>
 
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/dateTime.js"></script>
+<div style="display:none;">undefined</div>
+<script>var newsid = 465015</script><script src="https://www.ithome.com//js/index.js?r=3"></script>
+
+<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/dateTime.js' %}"></script>
 <script type="text/javascript">
     var myDate = new Date();
     var year = myDate.getFullYear();    //获取完整的年份(4位,1970-????)
     var month = myDate.getMonth()+1;       //获取当前月份(0-11,0代表1月)
     var day = myDate.getDate();        //获取当前日(1-31)
+
+    if(window.location.href.indexOf("date") != -1){
+        if(window.location.href.indexOf("page") == -1){
+            year = window.location.href.substr(-10,4);
+            month = window.location.href.substr(-5,2);
+            day = window.location.href.substr(-2,2);
+        }else{
+            year = window.location.href.substr(window.location.href.indexOf("?")-10,4);
+            month = window.location.href.substr(window.location.href.indexOf("?")-5,2);
+            day = window.location.href.substr(window.location.href.indexOf("?")-2,2);
+        }
+    }
+
     $("#t_date").datetime({
         type:"date",
         value:[year,month,day],
         success:function(res){
-            console.log(res)        //在这边定义一个ajax，成功发送ajax请求，接收返回数据，再把数据在前端选择日期界面显示
+            console.log(res);       //在这边定义一个ajax，成功发送ajax请求，接收返回数据，再把数据在前端选择日期界面显示
+            if(res[1]<10){
+                if(res[2]<10){
+                    window.location.href="//"+window.location.host+"/date/"+res[0]+"-0"+res[1]+"-0"+res[2];
+                }else{
+                    window.location.href="//"+window.location.host+"/date/"+res[0]+"-0"+res[1]+"-"+res[2];
+                }
+            }else{
+                if(res[2]<10){
+                    window.location.href="//"+window.location.host+"/date/"+res[0]+"-"+res[1]+"-0"+res[2];
+                }else{
+                    window.location.href="//"+window.location.host+"/date/"+res[0]+"-"+res[1]+"-"+res[2];
+                }
+            }
         }
     })
-    document.onclick=function(){
-        if($(".dateTimeWrap").css("display") == "block"){
-            $(".dateTimeWrap").hide();
-        }
-    }
-    $("#t_date").bind("click",function(event){
-        event.stopPropagation();    //  阻止事件冒泡
-    });
+
 
 </script>
 

@@ -18,11 +18,13 @@ from django.urls import path
 from django.views.static import serve
 from ithome.settings import MEDIA_ROOT
 
-from article.views import IndexView
+from article.views import IndexView, ArticleView, DateArticleListView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', IndexView.as_view(), name="index"),
+    path('date/<t_date>', DateArticleListView.as_view(), name="DateArticle"),
+    path('article/<int:total_id>', ArticleView.as_view(), name="article"),
 
     path("media/<path:path>", serve, {"document_root": MEDIA_ROOT}),
 ]

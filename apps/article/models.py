@@ -8,7 +8,7 @@ class Articles(models.Model):
 
     total_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
     t_date = models.CharField(max_length=32, verbose_name="日期")
-    day_id = models.IntegerField(max_length=6,verbose_name="当日ID")
+    day_id = models.IntegerField(verbose_name="当日ID")
     url = models.CharField(max_length=100, verbose_name="url")
     title = models.CharField(max_length=100, verbose_name="标题")
     meta = models.CharField(max_length=500, verbose_name="meta")
