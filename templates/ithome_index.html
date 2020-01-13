@@ -219,9 +219,6 @@
             </div>
         </div>
         <ul class="nav_list">
-            <li>
-                <a target="_blank" href="//www.lapin365.com/" class="nav-item nav-item-7">辣品</a>
-            </li>
             <li class="quan">
                 <a href="//quan.ithome.com/" class="nav-item nav-item-5" target="_blank">IT圈</a>
                 <div class="nlquan">
@@ -237,44 +234,6 @@
             </li>
         </ul>
         <div class="tb-nav">
-            <div class="tb-item">
-                <a href="//dyn.ithome.com/tougao/" target="_blank" class="item-link">投稿</a>
-            </div>
-            <div class="tb-item dm">
-                <a href="javascript:;" class="item-link item-link-2">订阅</a>
-                <div id="dy" class="menu feed" style="display: none; height: 68px; padding-top: 5px; margin-top: 0px; padding-bottom: 5px; margin-bottom: 0px;">
-                    <ul class="mn_con">
-                        <li>
-                            <a href="//www.ithome.com/rss/">RSS订阅</a>
-                        </li>
-                        <li>
-                            <a href="#" onclick="window.external.addFavorite('http://www.ithome.com/', 'IT之家 - ithome.com')">收藏IT之家</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="tb-item dm">
-                <a href="javascript:;" class="item-link item-link-3" id="rm_app">软媒应用</a>
-                <div id="app" class="menu app">
-                    <ul class="mn_con">
-                        <li>
-                            <a href="https://m.ruanmei.com/" target="_blank">软媒App应用</a>
-                        </li>
-                        <li>
-                            <a href="http://qiyu.ruanmei.com/" target="_blank">旗鱼浏览器</a>
-                        </li>
-                        <li>
-                            <a href="http://mofang.ruanmei.com/" target="_blank">软媒魔方</a>
-                        </li>
-                        <li>
-                            <a href="http://sj.ruanmei.com/" target="_blank">软媒时间</a>
-                        </li>
-                        <li>
-                            <a href="http://www.cooldock.com/" target="_blank">酷点桌面</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
             <div class="tb-item dm">
                 <div id="toplogin">
                     <div class="prelogin">
@@ -350,7 +309,7 @@
             <div class="nlst" id="idnlst">
                 <div class="ct">
                     <ul>
-                        <li><a href="/" {% ifequal request.path|get_str '/' %} class="current"{% endifequal %}>当日更新</a></li>
+                        <li><a href="{% url "article:index" %}" {% ifequal request.path|get_str '/' %} class="current"{% endifequal %}>当日更新</a></li>
                         <li><a href="javascript:;" id="t_date" {% ifequal request.path|get_str 'date' %} class="current"{% endifequal %}>选择日期&nbsp;<i class="far fa-calendar-alt"></i></a></li>
                         <div style="display:inline-block;height: 44px;line-height: 44px;width: 572px;text-align:right;">
                             {{ articles.object_list.0.t_date }}
@@ -362,14 +321,14 @@
                 <article id="post-{{ forloop.counter }}" class="post-item post-7403 post type-post status-publish format-standard hentry category-uncategorized">
                     <div class="left">
                         <h2 class="post-title">
-                            <a href="{% url 'article' article.total_id %}" title="{{ article.title }}" rel="bookmark" target="_blank">{{ article.title|safe }}</a>
+                            <a href="{% url 'article:fulltext' article.total_id %}" title="{{ article.title|slice:"5:-5" }}" rel="bookmark" target="_blank">{{ article.title|safe }}</a>
                         </h2>
                         <div class="post-meta">
                             {{ article.meta|safe }}
                         </div>
                         <div class="post-excerpt">
                             <p>{{ article.excerpt|safe }}…</p>
-                            <a class="read-more" href="{% url 'article' article.total_id %}" target="_blank">阅读全文 »</a>
+                            <a class="read-more" href="{% url 'article:fulltext' article.total_id %}" target="_blank">阅读全文 »</a>
                         </div>
                     </div>
                 </article>
@@ -423,7 +382,7 @@
 
 <script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/2.1.1/jquery.min.js"></script>
 <script>(window.jQuery || document.write("<script src='https://img.ithome.com/file/js/jquery/jquery.min.js'><\/script>"));</script>
-
+<script src="{% static 'js/top.js' %}"></script>
 
 <iframe id="google_osd_static_frame_4955450173217" name="google_osd_static_frame" style="display: none; width: 0px; height: 0px;"></iframe>
 <script src="https://s3.pstatp.com/cdn/expire-1-M/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
@@ -459,15 +418,15 @@
             console.log(res);       //在这边定义一个ajax，成功发送ajax请求，接收返回数据，再把数据在前端选择日期界面显示
             if(res[1]<10){
                 if(res[2]<10){
-                    window.location.href="//"+window.location.host+"/date/"+res[0]+"-0"+res[1]+"-0"+res[2];
+                    window.location.href="//"+window.location.host+"/article/date/"+res[0]+"-0"+res[1]+"-0"+res[2];
                 }else{
-                    window.location.href="//"+window.location.host+"/date/"+res[0]+"-0"+res[1]+"-"+res[2];
+                    window.location.href="//"+window.location.host+"/article/date/"+res[0]+"-0"+res[1]+"-"+res[2];
                 }
             }else{
                 if(res[2]<10){
-                    window.location.href="//"+window.location.host+"/date/"+res[0]+"-"+res[1]+"-0"+res[2];
+                    window.location.href="//"+window.location.host+"/article/date/"+res[0]+"-"+res[1]+"-0"+res[2];
                 }else{
-                    window.location.href="//"+window.location.host+"/date/"+res[0]+"-"+res[1]+"-"+res[2];
+                    window.location.href="//"+window.location.host+"/article/date/"+res[0]+"-"+res[1]+"-"+res[2];
                 }
             }
         }

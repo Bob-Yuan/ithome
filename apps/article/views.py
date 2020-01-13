@@ -8,7 +8,7 @@ from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 from .models import Articles
 
 
-class IndexView(View):
+class ArticleIndexView(View):
     """首页view"""
 
     def get(self, request):
@@ -22,7 +22,7 @@ class IndexView(View):
         p = Paginator(articles, 10, request=request)
         articles = p.page(page)
 
-        return render(request, 'index.html', {"articles": articles})
+        return render(request, 'ithome_index.html', {"articles": articles})
 
 
 class DateArticleListView(View):
@@ -36,7 +36,7 @@ class DateArticleListView(View):
         p = Paginator(articles, 10, request=request)
         articles = p.page(page)
 
-        return render(request, 'index.html', {"articles": articles})
+        return render(request, 'ithome_index.html', {"articles": articles})
 
 
 class ArticleView(View):
