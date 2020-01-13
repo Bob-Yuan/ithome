@@ -149,6 +149,23 @@ class RegisterView(View):
         return render(
             request, "register.html", {
                 'register_form': register_form})
+
+    def post(self, request):
+        user_name = request.POST.get("email", "")
+        if UserProfile.objects.filter(email=user_name):
+            return render(request, "register.html", {"msg": "用户已存在"})
+        pass_word = request.POST.get("password", "")
+        user_profile = UserProfile()
+        user_profile.username = user_name
+        user_profile.email = user_name
+
+        # 默认激活状态为false
+        user_profile.is_active = False
+
+        # 加密password进行保存
+        user_profile.password = make_password(pass_word)
+        user_profile.save()
+        return render(request, "login.html", {"msg": "注册成功！请注意邮箱激活链接！"})
 #
 #     def post(self, request):
 #         # 实例化form

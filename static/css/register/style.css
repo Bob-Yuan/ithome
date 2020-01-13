@@ -277,7 +277,7 @@ body.night .reg_now {
 .one_press_login {
     width: 270px;
     color: #8A8A8A;
-    margin-bottom: 15px;
+    margin: 15px 0px;
     text-align: center;
 }
 

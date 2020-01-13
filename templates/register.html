@@ -12,40 +12,55 @@
     <script type="text/javascript" src="{% static 'js/register/common.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/register/default.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/register/lrz.all.bundle.js' %}"></script>
+    <style type="text/css">
+        input{
+            width:30px;
+        }
+        #id_captcha_1{
+            margin: 8px 5px 0px 0px;
+            width: 270px;
+            outline: none;
+            border: none;
+            font-size: 14px;
+            color: #888;
+
+        }
+        .captcha1{
+            position:absolute;
+        }
+        .captcha1 img{
+            position:absolute;
+            right:0px;
+            bottom:0px;
+        }
+    </style>
 </head>
 
 <body class="lr">
-    <form method="post" action="./?page=register" id="form1" class="form_style">
-<div class="aspNetHidden">
-<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTEyNTAxNDAwMzlkZHJqnfgQN8abFqfK9A0t0+XxVEL+KKm3w2ji4o4HhUzY" />
-</div>
-
-<div class="aspNetHidden">
-
-	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="CA0B0334" />
-</div>
+    <form method="post" action="{% url 'register' %}" id="form1" class="form_style">
+        {% csrf_token %}
 
         <div id="rm_login">
             <div class="txtAccount">使用软媒通行证，畅享软媒所有服务</div>
-            <div class="product">
-                <img src="{% static 'image/register/ithome.png' %}" width="32" height="32" alt="IT之家" />
-                <img src="{% static 'image/register/mytime.png' %}" class="qiyuproduct" width="32" height="32" alt="云日历" />
-                <img src="{% static 'image/register/qiyu.png' %}" class="qiyuproduct" width="32" height="32" alt="旗鱼浏览器" />
-                <img src="{% static 'image/register/lapin.png' %}" width="32" height="32" alt="辣品" />
-            </div>
+{#            <div class="product">#}
+{#                <img src="{% static 'image/register/ithome.png' %}" width="32" height="32" alt="IT之家" />#}
+{#                <img src="{% static 'image/register/mytime.png' %}" class="qiyuproduct" width="32" height="32" alt="云日历" />#}
+{#                <img src="{% static 'image/register/qiyu.png' %}" class="qiyuproduct" width="32" height="32" alt="旗鱼浏览器" />#}
+{#                <img src="{% static 'image/register/lapin.png' %}" width="32" height="32" alt="辣品" />#}
+{#            </div>#}
 
             <div id="login_panel">
                 <div class="userinput_parent">
                     <div class="user_input_text">&nbsp;</div>
                     <div>
-                        <input type="text" name="username" class="user_input" id="txtEmail" placeholder="邮箱/手机号" />
+                        <input type="text" name="username" class="user_input" id="txtEmail" placeholder="邮箱/手机号"  autocomplete="new-password" />
                     </div>
                 </div>
                 <div class="userinput_parent">
                     <div style="float: left">
                         <div class="user_input_text">&nbsp;</div>
                         <div>
-                            <input name="password" type="password" class="user_input user_pw" id="txtPwd" placeholder="密码" />
+                            <input name="password" type="password" class="user_input user_pw" id="txtPwd" placeholder="密码" autocomplete="new-password" />
                         </div>
                     </div>
                     <a class="forgotpsw a_link" href="javascript:forgetpsw_clilcked()">忘记密码？</a>
@@ -67,24 +82,35 @@
             <div id="reg_panel" style="display: none;">
                 <div class="userinput_parent">
                     <div class="user_input_text">&nbsp;</div>
-                    <input type="number" class="user_input" id="phone" placeholder="手机号" />
+                    <input type="number" class="user_input" id="phone" name="email" placeholder="邮箱" />
                 </div>
+                <div class="userinput_parent">
+                    <div class="user_input_text">&nbsp;</div>
+                    <input type="number" class="user_input" id="password" name="password" placeholder="密码" />
+                </div>
+
+{#                <div class="userinput_parent captcha1 {% if register_form.captcha.errors %} errorput{% endif %}">#}
+{#                    {{ register_form.captcha }}#}
+{#                    {{ active_form.captcha }}#}
+{#                </div>#}
+
                 <div id="validateParent" class="userinput_parent"  style='display:none;'>
                     <div class="user_input_text">&nbsp;</div>
                     <input type="text" class="user_input validate_input" id="validate" onblur="this.value = this.value.toLowerCase();" placeholder="请输入验证码，再发送短信" />
                     <img src="validate.aspx" onclick="this.src = 'validate.aspx?' + Math.random()" alt="将图中的文字填到左边输入框中" id="randomNoImg" />
                 </div>
-                <div class="userinput_parent no_border">
-                    <div class="code_parent">
-                        <div class="user_input_text">&nbsp;</div>
-                        <div>
-                            <input type="number" class="user_input code_input" id="code" maxlength="6" placeholder="短信验证码" />
-                        </div>
-                    </div>
-                    <a id="sendsms" class="sendsms sendsms_enable a_link" href="javascript:send_sms_click()">获取验证码</a>
-                </div>
+{#                <div class="userinput_parent no_border">#}
+{#                    <div class="code_parent">#}
+{#                        <div class="user_input_text">&nbsp;</div>#}
+{#                        <div>#}
+{#                            <input type="number" class="user_input code_input" id="code" maxlength="6" placeholder="短信验证码" />#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <a id="sendsms" class="sendsms sendsms_enable a_link" href="javascript:send_sms_click()">获取验证码</a>#}
+{#                </div>#}
                 <div><a class="login_now a_link" href="javascript:loginnow_clicked()">已有软媒通行证</a></div>
-                <div><a class="regbtn" href="javascript:registerbtn_clicked()">注册</a></div>
+{#                <div><a class="regbtn" href="javascript:registerbtn_clicked()">注册</a></div>#}
+                <div><input type="submit" value="注册" class="regbtn"></div>
                 <div class="rm-protocol">
                     <a href="javascript:read_protocol_click()">
                         <img id="read_protocol_img" width="15" height="15" src="{% static 'image/register/unchecked.png' %}" /></a>我已阅读并同意<a class="a_link register_protocol" href="https://www.ruanmei.com/agreement/reg.htm">《注册协议》</a>和<a class="a_link privacy_policy" href="https://www.ruanmei.com/agreement/privacy.htm">《隐私政策》</a>
@@ -109,6 +135,12 @@
                         <img width="40" height="40" src="{% static 'image/register/iconweibo.png' %}" alt="" /></a>
                 </span>
             </div>
+<div class="error btns login-form-tips" id="jsLoginTips">
+    {% for key, error in login_form.errors.items %}
+    {{ error }}
+    {% endfor %}
+    {{ msg }}
+</div>
         </div>
 
         <div id="rm_userinfo" style="display: none;">

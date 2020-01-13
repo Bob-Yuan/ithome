@@ -335,9 +335,9 @@ function GetBackUrlWithCheck() {
 function remember_me_click() {
     var src = $("#remember_me_img").attr("src");
     if (src.indexOf("un") > 0) {//当前unchecked
-        src = "images/checked.png";
+        src = "/static/image/register/checked.png";
     } else {
-        src = "images/unchecked.png";
+        src = "/static/image/register/unchecked.png";
     }
     $("#remember_me_img").attr("src", src);
 }
@@ -345,9 +345,9 @@ function remember_me_click() {
 function read_protocol_click() {
     var src = $("#read_protocol_img").attr("src");
     if (src.indexOf("un") > 0) { //当前unchecked
-        src = "images/checked.png";
+        src = "/static/image/register/checked.png";
     } else {
-        src = "images/unchecked.png";
+        src = "/static/image/register/unchecked.png";
     }
     $("#read_protocol_img").attr("src", src);
 }
@@ -624,7 +624,7 @@ function getReloadUrl() {
     // if (null != source && "" != source && "ruanmei" != source) {
     //     url += "&source=" + source;
     // }
-    var url = "http" + window.location.host + "/register";
+    var url = "http://" + window.location.host + "/register";
     return url;
 }
 
@@ -1157,9 +1157,9 @@ function ShowErrorMessage(msg, type) {
     var errimg = $(".error_img");
     if (null != errimg) {
         if (1 == type) {
-            errimg.attr("src", "images/ok.png");
+            errimg.attr("src", "http://"+window.location.host+"/static/image/register/ok.png");
         } else {
-            errimg.attr("src", "images/error.png");
+            errimg.attr("src", "http://"+window.location.host+"/static/image/register/error.png");
         }
     }
 
