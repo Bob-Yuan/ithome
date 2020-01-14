@@ -139,33 +139,58 @@ class LogoutView(View):
         return HttpResponseRedirect(reverse("index"))
 
 
-class RegisterView(View):
+class LoginAndRegisterView(View):
     """注册功能的view"""
     # get方法直接返回页面
 
     def get(self, request):
         # 添加验证码
         register_form = RegisterForm()
+        redirect_url = request.GET.get('next', '')
         return render(
             request, "register.html", {
-                'register_form': register_form})
+                'register_form': register_form,
+                "redirect_url": redirect_url})
 
     def post(self, request):
-        user_name = request.POST.get("email", "")
-        if UserProfile.objects.filter(email=user_name):
-            return render(request, "register.html", {"msg": "用户已存在"})
-        pass_word = request.POST.get("password", "")
-        user_profile = UserProfile()
-        user_profile.username = user_name
-        user_profile.email = user_name
 
-        # 默认激活状态为false
-        user_profile.is_active = False
+        #login_form = LoginForm(request.POST)
 
-        # 加密password进行保存
-        user_profile.password = make_password(pass_word)
-        user_profile.save()
-        return render(request, "login.html", {"msg": "注册成功！请注意邮箱激活链接！"})
+        # is_valid判断我们字段是否有错执行我们原有逻辑，验证失败跳回login页面
+        #if login_form.is_valid():
+            # 取不到时为空，username，password为前端页面name值
+        user_name = request.POST.get("username", "")
+        register_user_name = request.POST.get("register_user_name", "")
+        pass_word_list = request.POST.getlist('password', '')
+
+        # 成功返回user对象,失败返回null
+        if user_name != "":
+            user = authenticate(username=user_name, password=pass_word_list[0])   #查询不到返回None
+
+            if user is not None:
+                login(request, user)
+                redirect_url = request.POST.get('next', '')
+                if redirect_url:
+                    return HttpResponseRedirect(redirect_url)
+                return HttpResponseRedirect(reverse("index"))
+            else:
+                return render(request, "register.html", {"msg": "用户名或密码错误!"})
+        else:
+            if register_user_name != "":
+                if UserProfile.objects.filter(email=register_user_name):    #检查是否已被注册
+                    #！验证邮箱格式是否正确
+                    return render(request, "register.html", {"msg": "用户已存在"})
+                else:                                                        #未被注册
+                    user_profile = UserProfile()
+                    user_profile.username = register_user_name
+                    user_profile.email = register_user_name
+                    # 默认激活状态为false
+                    user_profile.is_active = True
+                    # 加密password进行保存
+                    user_profile.password = make_password(pass_word_list[1])
+                    user_profile.save()
+                    return render(request, "register.html", {"msg": "注册成功！请注意邮箱激活链接！"})
+
 #
 #     def post(self, request):
 #         # 实例化form

@@ -7,11 +7,15 @@ from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 
 from .models import Articles
 
+from ithome_spider import ithome_spider
+
 
 class ArticleIndexView(View):
     """首页view"""
 
     def get(self, request):
+        obj_spider = ithome_spider.SpiderMain()
+        obj_spider.craw()
         date = time.strftime("%Y-%m-%d", time.localtime())
         articles = Articles.objects.filter(t_date=date).order_by("-total_id")
 
@@ -44,4 +48,4 @@ class ArticleView(View):
 
     def get(self, request, total_id):
         article = Articles.objects.filter(total_id=total_id)
-        return render(request, 'article.html', {"article": article[0]})
+        return render(request, 'ithome_article.html', {"article": article[0]})

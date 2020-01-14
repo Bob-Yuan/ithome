@@ -19,7 +19,7 @@ from django.views.static import serve
 from django.views.generic import TemplateView
 import xadmin
 
-from users.views import IndexView, LoginView, LogoutView, RegisterView #, ActiveUserView, ForgetPwdView, ResetView
+from users.views import IndexView, LoginView, LogoutView, LoginAndRegisterView #, ActiveUserView, ForgetPwdView, ResetView
 from ithome.settings import MEDIA_ROOT
 
 urlpatterns = [
@@ -31,13 +31,14 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name="main_index.html"), name="index"),
     path('login/', LoginView.as_view(), name="login"),
     path('logout/', LogoutView.as_view(), name="logout"),
-    path("register/", RegisterView.as_view(), name="register"),
+    path("register/", LoginAndRegisterView.as_view(), name="register"),
     # path('active/<active_code>/', ActiveUserView.as_view(), name="user_active"),
     # path('forget/', ForgetPwdView.as_view(), name="forget_pwd"),
     # path('reset/<active_code>/', ResetView.as_view(), name="reset_pwd"),
 
     path("users/", include("users.urls", namespace="users")),
     path("article/", include("article.urls", namespace="article")),
+    path("activity/", include("activity.urls", namespace="activity")),
 
     path("media/<path:path>", serve, {"document_root": MEDIA_ROOT}),
 ]

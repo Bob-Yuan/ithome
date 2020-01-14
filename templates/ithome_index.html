@@ -1,10 +1,13 @@
-<html>
+{% extends 'ithome_base.html' %}
 {% load static %}
 {% load get_str %}
+
+{% block scriptAndStyleHead %}
 <head>
+    {% block title %}
+        <title>IT之家 - 数码，科技，生活 - 软媒旗下</title>
+    {% endblock %}
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>IT之家 - 数码，科技，生活 - 软媒旗下</title>
-    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
     <meta name="description" content="IT之家，青岛软媒旗下，IT科技门户网站。快速精选IT新闻，实时报道科技周边，关注苹果iOS、谷歌Android、微软Windows Phone，紧盯iPhone/iPad、安卓智能设备、WP手机等数码潮流。技术资讯、攻略教程、资源下载 - IT人的生活，尽在IT之家，爱IT，爱这里。"><meta name="keywords" content="IT新闻,互联网,Internet,数码,科技,科普,通信,智能手机,IT之家,ithome,软媒">
     <meta http-equiv="pragma" content="no-cache">
@@ -128,181 +131,9 @@
             color: #d22222;
         }
     </style>
+{% endblock %}
 
-
-<div id="hd">
-    <div id="nav">
-        <div class="an">
-            <a href="//www.ithome.com/" class="nav-item nav-item-1 sel">IT之家</a>
-            <div class="nl">
-                <div class="nl-con">
-                    <div class="bx bx1">
-                        <h2 class="cate-title">资讯</h2>
-                        <ul class="cate-list">
-                            <li>
-                                <span class="cate-sub-title"><a href="//it.ithome.com/">IT资讯</a></span>
-                            </li>
-                            <li>
-                                <span class="cate-sub-title"><a href="//discovery.ithome.com/">科学频道</a></span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="bx bx1">
-                        <h2 class="cate-title">极客</h2>
-                        <ul class="cate-list">
-                            <li>
-                                <span class="cate-sub-title"><a href="//mobile.ithome.com/">玩手机</a></span>
-                            </li>
-                            <li>
-                                <span class="cate-sub-title"><a href="//android.ithome.com/">安卓之家</a></span>
-                            </li>
-                            <li>
-                                <span class="cate-sub-title"><a href="//digi.ithome.com/">数码之家</a></span>
-                            </li>
-                            <li>
-                                <span class="cate-sub-title"><a href="//next.ithome.com/">智能时代</a></span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="bx bx2">
-                        <h2 class="cate-title">微软</h2>
-                        <ul class="cate-list">
-                            <li>
-                                <span class="cate-sub-title"><a href="//wp.ithome.com/">WP之家</a></span>
-                            </li>
-                            <li>
-                                <span class="cate-sub-title"><a href="//win10.ithome.com/">Win10之家</a></span>
-                            </li>
-                            <li>
-                                <span class="cate-sub-title"><a href="//win8.ithome.com/">Win8之家</a></span>
-                            </li>
-                            <li>
-                                <span class="cate-sub-title"><a href="//win7.ithome.com/">Win7之家</a></span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="bx bx3">
-                        <h2 class="cate-title">苹果</h2>
-                        <ul class="cate-list">
-                            <li>
-                                <span class="cate-sub-title"><a href="//iphone.ithome.com/">iPhone之家</a></span>
-                            </li>
-                            <li>
-                                <span class="cate-sub-title"><a href="//ipad.ithome.com/">iPad之家</a></span>
-                            </li>
-                            <li>
-                                <span class="cate-sub-title"><a href="//mac.ithome.com/">Mac之家</a></span>
-                            </li>
-                            <li>
-                                <span class="cate-sub-title"><a href="//ios.ithome.com/">iOS之家</a></span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="bx bx5 nb">
-                        <h2 class="cate-title">资源</h2>
-                        <ul class="cate-list">
-                            <li>
-                                <span class="cate-sub-title"><a href="//soft.ithome.com/">软件之家</a></span>
-                            </li>
-                            <li>
-                                <span class="cate-sub-title"><a href="//zhuti.ithome.com/">主题之家</a></span>
-                            </li>
-                            <li>
-                                <span class="cate-sub-title"><a href="//www.ithome.com/bibei/">装机必备</a></span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="all_cate">
-                    <a href="//www.ithome.com/sitemap/">全部分类&gt;&gt;</a>
-                </div>
-            </div>
-        </div>
-        <ul class="nav_list">
-            <li class="quan">
-                <a href="//quan.ithome.com/" class="nav-item nav-item-5" target="_blank">IT圈</a>
-                <div class="nlquan">
-                    <a href="//quan.ithome.com/talk/">科技畅谈</a>
-                    <a href="//quan.ithome.com/geek/">极客圈</a>
-                    <a href="//quan.ithome.com/android/">安卓圈</a>
-                    <a href="//quan.ithome.com/ios/">iOS圈</a>
-                    <a href="//quan.ithome.com/win10/">Win10圈</a>
-                    <a href="//quan.ithome.com/win10mobile/">Win10手机圈</a>
-                    <a href="//quan.ithome.com/ruanmei/">软媒产品</a>
-                    <a href="//quan.ithome.com/helpcenter/">站务处理</a>
-                </div>
-            </li>
-        </ul>
-        <div class="tb-nav">
-            <div class="tb-item dm">
-                <div id="toplogin">
-                    <div class="prelogin">
-                        <a href="{% url 'register' %}" target="_blank">注册</a>
-                        <a href="javascript:; " class="login">登录</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="view view_setting">
-    <div class="set_con">
-        <p class="c_st">
-            <span class="set_op">内容字号：</span>
-            <a href="javascript:;" id="fs1">默认</a>
-            <span class="v"></span>
-            <a href="javascript:;" id="fs2">大号</a>
-            <span class="v"></span>
-            <a href="javascript:;" id="fs3">超大号</a>
-        </p>
-        <p class="c_st">
-            <span class="set_op">段落设置：</span>
-            <a href="javascript:;" id="indt">取消段首缩进</a>
-            <a href="javascript:;" id="noindt" class="hide">段首缩进</a>
-        </p>
-        <p class="g_st">
-            <span class="set_op">字体设置：</span>
-            <a href="javascript:;" id="yahei">切换到微软雅黑</a>
-            <a href="javascript:;" id="song" class="hide">切换到宋体</a>
-        </p>
-    </div>
-</div>
-<div id="top5" class="clearfix">
-    <a href="//www.ithome.com" id="logo" style="border: 0px;">
-        <img src="{% static "image/ithome.logo.png" %}" alt="IT之家">
-    </a>
-    <div class="col">
-        <a href="//it.ithome.com/">业界资讯</a>
-        <a href="//soft.ithome.com/">软件之家</a>
-    </div>
-    <div class="col">
-        <a href="//win10.ithome.com/">Win10之家</a>
-        <a href="//wp.ithome.com/">WP之家</a>
-    </div>
-    <div class="col">
-        <a href="//iphone.ithome.com/">iPhone之家</a>
-        <a href="//ipad.ithome.com/">iPad之家</a>
-    </div>
-    <div class="col">
-        <a href="//android.ithome.com/">安卓之家</a>
-        <a href="//digi.ithome.com/">数码之家</a>
-    </div>
-    <div class="col last">
-        <a href="//digi.ithome.com/labs/">评测中心</a>
-        <a href="//next.ithome.com/">智能设备</a>
-    </div>
-    <div class="sc">
-        <form action="//dyn.ithome.com/search" target="_blank">
-            <input type="hidden" name="s" value="10375816656400526905">
-            <input id="searchTextbox" class="focus" size="24" name="q" accesskey="s" autosave="baidu" results="8" autocomplete="off">
-            <button type="button" name="sa" onclick="location.href='//dyn.ithome.com/search/adt_all_'+ $('#searchTextbox').val() +'_0.html';">搜索</button>
-        </form>
-        <div class="extra_sc" style="">精准搜索请尝试：
-            <a href="//dyn.ithome.com/search/" target="_blank" class="js" title="精确搜索">精确搜索</a>
-        </div>
-    </div>
-</div>
-
+{% block content %}
 <div id="con" class="indexV3">
     <div class="con-block">
         <div class="rt">
@@ -359,32 +190,9 @@
         </div>
     </div>
 </div>
+{% endblock %}
 
-<div id="ft">
-    <div class="lk pre1">
-        <div class="bx1">
-            <p><strong><a href="//www.ruanmei.com/">软媒旗下网站</a>：</strong><span class="link"><a href="//www.ithome.com/" target="_blank">IT之家</a><span class="v">|</span><a href="//www.lapin365.com/" target="_blank">辣品 - 超值导购，优惠券</a><span class="v">|</span><a href="//quan.ithome.com/" target="_blank">IT圈（Win10/WP8.1/Win7论坛）</a><span class="v">|</span><a href="http://www.6655.com/" target="_blank" class="wz">6655网址之家</a><span class="v">|</span><a href="//win10.ithome.com/" target="_blank">Win10之家</a><span class="v">|</span><a href="http://www.win8china.com/" target="_blank">Win8之家</a><span class="v">|</span><a href="//www.win7china.com/" target="_blank">Win7之家</a><span class="v">|</span><a href="http://www.vista123.com/" target="_blank">Vista之家</a></span></p>
-            <p><strong>软媒旗下软件：</strong><span class="link"><a href="//mofang.ruanmei.com/" target="_blank">魔方</a><span class="v">|</span><a href="//qiyu.ruanmei.com/" target="_blank">旗鱼浏览器（极速内核）</a><span class="v">|</span><a href="//mytime.ruanmei.com/" target="_blank">云日历</a><span class="v">|</span><a href="http://www.cooldock.com/" target="_blank">酷点桌面</a><span class="v">|</span><a href="http://www.saayaa.com/" target="_blank">闪游浏览器（IE内核）</a><span class="v">|</span><a href="//www.win7china.com/windows7master/" target="_blank">Win7优化大师</a><span class="v">|</span><a href="http://www.win8china.com/windows8master/" target="_blank">Win8优化大师</a><span class="v">|</span><a href="//win10.ithome.com/windows10master/" target="_blank">Win10优化大师</a><span class="v">|</span><a href="//m.ruanmei.com/" target="_blank">软媒手机APP应用</a></span></p>
-        </div>
-        <div class="bx2">
-            <p><strong>友情链接（QQ：734121）</strong></p>
-            <p><a href="http://it.sohu.com/" target="_blank">搜狐IT</a><span class="v">|</span><a href="http://www.etuan.com/" target="_blank">一团网</a><span class="v">|</span><a href="http://www.admin5.com/" target="_blank">创业网</a><span class="v">|</span><a href="http://tech.hexun.com/" target="_blank">和讯科技</a><span class="v">|</span><a href="http://www.lebansoft.com" target="_blank">乐瓣</a><span class="v">|</span><a href="http://www.pchome.net/" target="_blank">电脑之家</a><span class="v">|</span><a href="http://www.mydrivers.com/" target="_blank">驱动之家</a><span class="v">|</span><a href="http://www.chinaz.com/" target="_blank">站长之家</a><span class="v">|</span><a href="http://www.c114.com.cn/" target="_blank">C114通信网</a><span class="v">|</span><a href="http://tech.huanqiu.com/" target="_blank">环球网科技</a><span class="v">|</span><a href="http://www.liuxue86.com/" target="_blank">出国留学网</a><span class="v">|</span><a href="http://www.elecfans.com/" target="_blank">电子发烧友</a><span class="v">|</span><a href="http://www.eepw.com.cn" target="_blank">电子产品世界</a><span class="v">|</span><a href="http://www.jb51.net/" target="_blank">脚本之家</a><span class="v">|</span><a href="https://www.smzdm.com/" target="_blank">什么值得买</a><span class="v">|</span><a href="http://www.xici.net/" target="_blank">西祠胡同</a><span class="v">|</span><a href="http://www.feng.com/" target="_blank">威锋网</a><span class="v">|</span><a href="http://www.leiphone.com/" target="_blank">雷锋网</a><span class="v">|</span><a href="http://www.qianzhan.com/" target="_blank">前瞻网</a><span class="v">|</span><a href="http://www.sootoo.com/" target="_blank">速途网</a><span class="v">|</span><a href="http://www.cnmo.com/" target="_blank">手机中国</a><span class="v">|</span><a href="http://www.fengniao.com/" target="_blank">蜂鸟网</a><span class="v">|</span><a href="http://www.kafan.cn/" target="_blank">卡饭网</a><span class="v">|</span><a href="http://www.newhua.com/" target="_blank">牛华网</a><span class="v">|</span><a href="http://www.ccidnet.com/" target="_blank">赛迪网</a><span class="v">|</span><a href="http://mobile.zol.com.cn/" target="_blank">中关村手机</a><span class="v">|</span><a href="http://www.ebrun.com/" target="_blank">亿邦动力网</a><span class="v">|</span><a href="http://www.51cto.com/" target="_blank">51CTO</a><span class="v">|</span><a href="http://www.kugou.com/" target="_blank">酷狗音乐</a><span class="v">|</span><a href="http://news.zol.com.cn/" target="_blank">中关村新闻</a><span class="v">|</span><a href="http://www.appchina.com/" target="_blank">应用汇</a><span class="v">|</span><a href="http://www.3gsc.com.cn/" target="_blank">3G书城</a><span class="v">|</span><a href="http://junshi.xilu.com/" target="_blank">西陆军事</a><span class="v">|</span><a href="http://www.a5xiazai.com/" target="_blank">A5下载</a><span class="v">|</span><a href="http://www.37.com/" target="_blank">三七玩</a><span class="v">|</span><a href="http://www.zongheng.com/" target="_blank">纵横小说网</a><span class="v">|</span><a href="http://it.enorth.com.cn/" target="_blank">北方网IT</a><span class="v">|</span><a href="http://www.tianqi.com/" target="_blank">天气网</a><span class="v">|</span><a href="http://www.askci.com/" target="_blank">中商情报网</a><span class="v">|</span><a href="http://www.znds.com/" target="_blank">智能电视网</a><span class="v">|</span><a href="http://www.yzmg.com/" target="_blank">亿智蘑菇</a><span class="v">|</span><a href="http://www.qudong.com/" target="_blank">驱动中国</a><span class="v">|</span></p>
-        </div>
-    </div>
-    <div class="if">
-        <div class="bx1">
-            <a href="//www.ithome.com/about.htm" target="_blank"><strong>关于IT之家</strong></a><span class="v">|</span><a href="//www.ruanmei.com/aboutus/" target="_blank"><strong>关于软媒</strong></a><span class="v">|</span><a href="//www.ruanmei.com/contact/" target="_blank"><strong>联系我们</strong></a><span class="v">|</span><a href="//www.ruanmei.com/joinus/" target="_blank"><strong>加入软媒</strong></a><span class="v">|</span><a href="//m.ithome.com/" target="_blank"><strong>WAP版</strong></a><span class="v">|</span><a href="//www.ithome.com/sitemap/" target="_blank"><strong>网站地图</strong></a><span class="v">|</span><a href="//www.ithome.com/archiver/" target="_blank"><strong>Archiver</strong></a><span class="v">|</span><a href="http://www.cike.cn/" target="_blank"><strong>刺客团队</strong></a></div><div class="bx2"><p>IT之家，软媒旗下科技门户网站 - 爱科技，爱这里。</p><p>Copyright (C)<a href="//www.ruanmei.com" target="_blank">RuanMei.com</a>, All Rights Reserved.</p><p><a href="//www.ruanmei.com/" target="_blank">软媒公司</a>版权所有</p>
-        </div>
-        <script>document.write('<a href="http://www.miitbeian.gov.cn" target="_blank" rel ="nofollow">鲁ICP备11016544号-10</a>')</script>
-        <a href="http://www.miitbeian.gov.cn" target="_blank" rel="nofollow">鲁ICP备11016544号-10</a>
-    </div>
-</div>
-
-<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/2.1.1/jquery.min.js"></script>
-<script>(window.jQuery || document.write("<script src='https://img.ithome.com/file/js/jquery/jquery.min.js'><\/script>"));</script>
-<script src="{% static 'js/article/common.js' %}"></script>
-<script src="{% static 'js/article/popwin.js' %}"></script>
-<script src="{% static 'js/article/top.js' %}"></script>
+{% block scriptAndStyleEnd %}
 
 <iframe id="google_osd_static_frame_4955450173217" name="google_osd_static_frame" style="display: none; width: 0px; height: 0px;"></iframe>
 <script src="https://s3.pstatp.com/cdn/expire-1-M/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
@@ -433,18 +241,5 @@
             }
         }
     })
-
-
 </script>
-
-<ins class="adsbygoogle adsbygoogle-noablate" data-adsbygoogle-status="done" style="display: none !important;">
-    <ins id="aswift_2_expand" style="display:inline-table;border:none;height:0px;margin:0;padding:0;position:relative;visibility:visible;width:0px;background-color:transparent;">
-        <ins id="aswift_2_anchor" style="display:block;border:none;height:0px;margin:0;padding:0;position:relative;visibility:visible;width:0px;background-color:transparent;">
-            <iframe frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_2" name="aswift_2" style="left:0;position:absolute;top:0;border:0px;width:0px;height:0px;"></iframe>
-        </ins>
-    </ins>
-</ins>
-</body>
-<iframe id="google_esf" name="google_esf" src="https://googleads.g.doubleclick.net/pagead/html/r20191205/r20190131/zrt_lookup.html#" data-ad-client="ca-pub-2801108544222208" style="display: none;"></iframe>
-</html>
-
+{% endblock %}

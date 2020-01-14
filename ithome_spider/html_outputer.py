@@ -1,20 +1,26 @@
+__author__ = 'boy'
+__date__ = '2019/12/23 1:36'
+
+import MySQLdb
+import time
+
+
+html1 = """
 <!doctype html>
 <html>
-{% load static %}
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>{{ article.title|safe|slice:"4:-5" }}</title>
+    <title>美团外卖回应外卖员杀人事件：因取货问题发生口角 - 美团外卖 - IT之家</title>
     <meta charset="utf-8" />
-    <meta name="referrer" content="no-referrer" />
     <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />
+    <meta name="description" content="针对武汉一外卖小哥持刀杀人致死事件，美团外卖发 表声明称，事件起因于该配送员到超市取货品时，因取货问题与店员发生口角酿成悲剧" />
+    <meta name="keywords" content="美团外卖,IT资讯,业界" />
     <meta name="format-detection" content="telephone=no"/>
     <link rel="icon" href="/favicon.ico" mce_href="/favicon.ico" type="image/x-icon">
-    <link rel="canonical" href="{{ article.url }}" />
+    <link rel="canonical" href="https://www.ithome.com/0/464/497.htm" />
     <link rel="shortcut icon" href="/favicon.ico" />
     <link href="//www.ithome.com/css/style.css" rel="stylesheet" type="text/css" />
-    <link rel="icon" href="{% static 'image/favicon_news_yellow.ico' %}" type="image/x-icon">
-    <link rel="icon" href="{% static 'image/favicon_news_yellow.ico' %}" mce_href="//www.ithome.com/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="{% static 'image/favicon_news_yellow.ico' %}" type="image/x-icon">
+    <link href="//img.ithome.com/file/js/prettify/prettify.css" rel="stylesheet" />
     <style type="text/css">
         .content{
             float:left;
@@ -24,15 +30,13 @@
             margin-left:50px;
             margin-right:50px;
         }
-        #paragraph p img{
-            display:block;
-            margin: 0 auto;
-        }
     </style>
 </head>
 
 <body class="single it">
+<script src="https://dup.baidustatic.com/js/ds.js"></script>
 <link rel="stylesheet" href="//www.ithome.com/css/top.css?r=2017021312" type="text/css" />
+<script src="//img.ithome.com/file/js/ua.js?r=2017110" type="text/javascript"></script>
 
 <div id="hd">
     <div id="nav">
@@ -232,7 +236,7 @@
 </div>
 <div id="top5" class="clearfix">
     <a href="//www.ithome.com" id="logo">
-        <img src="{% static "image/ithome.logo.png" %}" alt="IT之家" />
+        <img src="//img.ithome.com/images/v2.3/ithome.logo.png" alt="IT之家" />
     </a>
     <div class="col">
         <a href="//it.ithome.com/">业界资讯</a>
@@ -268,6 +272,7 @@
 <div id="tt50">
     <div id="hl-toutiao"></div>
 </div>
+<script src="//img.ithome.com/file/js/money/pc/content1.js"></script>
 <script>if (location.host === "www.ithome.com" || location.host === "lapin.ithome.com") document.domain = "ithome.com";</script>
 <div id="con">
     <div id="wrapper">
@@ -279,12 +284,9 @@
                 <span class="sub">&gt;</span>
                 <a href="https://it.ithome.com/ityejie/">业界</a>
             </div>
+"""
 
-            <div class="post_title">
-                {{ article.title|safe }}
-            </div>
-            {{ article.paragraph|safe }}
-
+html2 = """
         </div>
     </div>
 </div>
@@ -378,19 +380,69 @@
             <p>
                 <a href="//www.ruanmei.com/" target="_blank">软媒公司</a>
                 版权所有
+                <script>
+                    document.write('<a href="http://www.miitbeian.gov.cn" target="_blank" rel ="nofollow">鲁ICP备11016544号-10</a>')
+                </script>
             </p>
         </div>
     </div>
 </div>
 <script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/2.1.1/jquery.min.js"></script>
-<script>(window.jQuery || document.write("<script src='https://img.ithome.com/file/js/jquery/jquery.min.js'><\/script>"));</script>
+<script>(window.jQuery || document.write("<script src='https://img.ithome.com/file/js/jquery/jquery.min.js'></script>"));</script>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script>(window.jQuery && window.jQuery.fn && window.jQuery.fn.cookie || document.write("<script src='https://img.ithome.com/file/js/jquery/jquery.cookie.js'></script>"));</script>
 <script src="https://s3.pstatp.com/cdn/expire-1-M/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
-<script>(window.jQuery && window.jQuery.fn && window.jQuery.fn.lazyload || document.write("<script src='https://img.ithome.com/file/js/jquery/jquery.lazyload.js'><\/script>"));</script>
-
+<script>(window.jQuery && window.jQuery.fn && window.jQuery.fn.lazyload || document.write("<script src='https://img.ithome.com/file/js/jquery/jquery.lazyload.js'></script>"));</script>
+<script src="//img.ithome.com/file/js/v2.3/top.js?r=2017021312"></script>
+<script src="//img.ithome.com/file/js/jquery/popwin.js?r=2018071003"></script>
+<script src="//img.ithome.com/file/js/v2.3/common.js?r=2018071302"></script>
+<script type="text/javascript" src="//img.ithome.com/file/js/v2/tt.js"></script>
 <script type="text/javascript" charset="utf-8">$(function () { $("img.lazy").lazyload(); });</script>
 <script type="text/javascript" id="bdshare_js" data="type=tools&uid=192225"></script>
+<script src="//img.ithome.com/file/js/prettify/prettify.js"></script>
 <script src="//dyn.ithome.com/api/comment/count?newsid=464497"></script>
 <script type="text/javascript" src="//dyn.ithome.com/grade/464497"></script>
 <script>$(".newsgrade").html(gradestr)</script>
 </body>
 </html>
+"""
+
+
+class Htmloutputer(object):
+    def __init__(self):
+        self.day_id = 0
+
+    def collect_data(self, db, current_url, title, date, meta, excerpt, paragraph):
+        if str(title) == "" or str(paragraph) == "":
+            return None
+        self.day_id = self.day_id + 1
+
+        cursor = db.cursor()
+        #print(str(date)+"\n"+str(self.day_id)+"\n"+current_url+"\n"+title+"\n"+meta+"\n"+excerpt+"\n"+paragraph)
+        sql = "INSERT INTO article_articles(t_date, day_id, url, title, meta, excerpt, paragraph) VALUES ('" + str(date) + "', "+str(self.day_id)+", '"+current_url+"', '"+title+"', '"+meta+"', '"+excerpt+"', '"+paragraph+"');"
+        try:
+            cursor.execute(sql)
+            db.commit()
+            return 1
+        except Exception as e:
+            print(e)
+            print("db error")
+            db.rollback()
+            return None
+
+    def output_html(self, cursor):
+
+        sql = "select * from articles order by total_id DESC limit 1;"
+        cursor.execute(sql)
+        data = cursor.fetchone()
+        title = data[4]
+        paragraph = data[5]
+
+        fout = open("output.html", 'wb')
+
+        fout.write(html1.encode("utf-8"))
+        fout.write(title.encode("utf-8"))
+        fout.write(paragraph.encode("utf-8"))
+        fout.write(html2.encode("utf-8"))
+
+        fout.close()

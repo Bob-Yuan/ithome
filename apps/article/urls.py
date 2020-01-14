@@ -2,7 +2,7 @@ from django.urls import path
 
 from article.views import ArticleIndexView, ArticleView, DateArticleListView
 
-app_name = "users"
+app_name = "article"
 
 urlpatterns = [
     path('', ArticleIndexView.as_view(), name="index"),

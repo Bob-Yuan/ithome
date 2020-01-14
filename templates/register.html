@@ -42,18 +42,13 @@
 
         <div id="rm_login">
             <div class="txtAccount">使用软媒通行证，畅享软媒所有服务</div>
-{#            <div class="product">#}
-{#                <img src="{% static 'image/register/ithome.png' %}" width="32" height="32" alt="IT之家" />#}
-{#                <img src="{% static 'image/register/mytime.png' %}" class="qiyuproduct" width="32" height="32" alt="云日历" />#}
-{#                <img src="{% static 'image/register/qiyu.png' %}" class="qiyuproduct" width="32" height="32" alt="旗鱼浏览器" />#}
-{#                <img src="{% static 'image/register/lapin.png' %}" width="32" height="32" alt="辣品" />#}
-{#            </div>#}
 
             <div id="login_panel">
+                <input type="hidden" name="next" value="{{ redirect_url }}" />
                 <div class="userinput_parent">
                     <div class="user_input_text">&nbsp;</div>
                     <div>
-                        <input type="text" name="username" class="user_input" id="txtEmail" placeholder="邮箱/手机号"  autocomplete="new-password" />
+                        <input type="text" name="username" class="user_input" id="txtEmail" placeholder="邮箱/手机号" autocomplete="new-password" />
                     </div>
                 </div>
                 <div class="userinput_parent">
@@ -73,7 +68,8 @@
                         <img width="15" height="15" alt="" src="{% static 'image/register/arraw.png' %}" class="reg_now_img" /></a>
                     <div><a class="reg_now a_link" href="javascript:regnow_clicked()">立即注册</a></div>
                 </div>
-                <a class="loginbtn" href="javascript:loginbtn_clicked()">登录</a>
+{#                <a class="loginbtn" href="javascript:loginbtn_clicked()">登录</a>#}
+                <div><input type="submit" value="登录" class="regbtn"></div>
                 <div class="rm-protocol">
                     登录即代表您已同意<a class="a_link register_protocol" href="https://www.ruanmei.com/agreement/reg.htm">《注册协议》</a>和<a class="a_link privacy_policy" href="https://www.ruanmei.com/agreement/privacy.htm">《隐私政策》</a>
                 </div>
@@ -82,7 +78,7 @@
             <div id="reg_panel" style="display: none;">
                 <div class="userinput_parent">
                     <div class="user_input_text">&nbsp;</div>
-                    <input type="number" class="user_input" id="phone" name="email" placeholder="邮箱" />
+                    <input type="number" class="user_input" id="phone" name="register_user_name" placeholder="邮箱" />
                 </div>
                 <div class="userinput_parent">
                     <div class="user_input_text">&nbsp;</div>
