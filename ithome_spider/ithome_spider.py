@@ -3,6 +3,7 @@ __date__ = '2019/12/23 1:35'
 
 
 import MySQLdb
+import datetime
 
 from ithome_spider import html_downloader
 from ithome_spider import html_outputer
@@ -89,3 +90,8 @@ class SpiderMain(object):
 #if __name__ == "__main__":
 # obj_spider = SpiderMain()
 # obj_spider.craw()
+
+def start():
+    print(datetime.datetime.now())
+    obj_spider = SpiderMain()
+    obj_spider.craw()

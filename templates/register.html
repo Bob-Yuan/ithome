@@ -112,6 +112,12 @@
                         <img id="read_protocol_img" width="15" height="15" src="{% static 'image/register/unchecked.png' %}" /></a>我已阅读并同意<a class="a_link register_protocol" href="https://www.ruanmei.com/agreement/reg.htm">《注册协议》</a>和<a class="a_link privacy_policy" href="https://www.ruanmei.com/agreement/privacy.htm">《隐私政策》</a>
                 </div>
             </div>
+<div class="error btns login-form-tips" id="jsLoginTips">
+    {% for key, error in login_form.errors.items %}
+    {{ error }}
+    {% endfor %}
+    {{ msg }}
+</div>
             <div class="one_press_login_parent">
                 <img src="{% static 'image/register/line.png' %}" alt="线" width="270" height="1" class="one_press_login_img" />
                 <div class="one_press_login">一键登录</div>
@@ -131,12 +137,6 @@
                         <img width="40" height="40" src="{% static 'image/register/iconweibo.png' %}" alt="" /></a>
                 </span>
             </div>
-<div class="error btns login-form-tips" id="jsLoginTips">
-    {% for key, error in login_form.errors.items %}
-    {{ error }}
-    {% endfor %}
-    {{ msg }}
-</div>
         </div>
 
         <div id="rm_userinfo" style="display: none;">
