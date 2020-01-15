@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    #'django_crontab',    #windows下不可用
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,8 +43,8 @@ INSTALLED_APPS = [
     'pure_pagination',
     'captcha',
     'DjangoUeditor',
-    'django_crontab',
     'xadmin',
+    'crispy_forms',
     'article',
     'users',
     'activity',
@@ -53,7 +54,8 @@ AUTH_USER_MODEL = "users.UserProfile"
 
 # cron tasks
 CRONJOBS = [
-    ('*/1 * * * *', 'ithome_spider.ithome_spider.start', '>>' + os.path.join(BASE_DIR, 'logs/time.log'))
+    #('*/1 * * * *', 'ithome_spider.ithome_spider.start', '>>' + os.path.join(BASE_DIR, 'log/time.log'))
+    ('*/1 * * * *', 'ithome_spider.ithome_spider.start')
 ]
 """
      python3 manage.py crontab add  添加定时任务
@@ -110,13 +112,18 @@ WSGI_APPLICATION = 'ithome.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
+DATABASES_HOST = '127.0.0.1'
+DATABASES_NAME = 'ithome'
+DATABASES_USER = 'root'
+DATABASES_PASSWORD = '123456'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ithome',
-        'USER': 'root',
-        'PASSWORD': '123456',
-        'HOST': '127.0.0.1'
+        'NAME': DATABASES_NAME,
+        'USER': DATABASES_USER,
+        'PASSWORD': DATABASES_PASSWORD,
+        'HOST': DATABASES_HOST
     }
 }
 

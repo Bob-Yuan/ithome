@@ -1,6 +1,15 @@
 __author__ = 'boy'
 __date__ = '2019/12/23 1:35'
 
+import sys
+sys.path.insert(0, '../../')
+
+import os
+if not os.getenv('DJANGO_SETTINGS_MODULE'):
+    os.environ['DJANGO_SETTINGS_MODULE']='ithome.settings'
+
+import django
+django.setup()
 
 import MySQLdb
 import datetime
@@ -9,6 +18,8 @@ from ithome_spider import html_downloader
 from ithome_spider import html_outputer
 from ithome_spider import html_parser
 from ithome_spider import url_manager
+
+from ithome.settings import DATABASES_HOST, DATABASES_NAME, DATABASES_USER, DATABASES_PASSWORD
 
 
 def transferContent(content):
@@ -37,7 +48,7 @@ class SpiderMain(object):
         self.outputer = html_outputer.Htmloutputer()
 
     def craw(self):
-        db = MySQLdb.connect("localhost", "root", "123456", "ithome", charset="utf8")
+        db = MySQLdb.connect(DATABASES_HOST, DATABASES_USER, DATABASES_PASSWORD, DATABASES_NAME, charset="utf8")
         cursor = db.cursor()
         count = 0
         #self.urls.add_new_url(db)
@@ -95,3 +106,6 @@ def start():
     print(datetime.datetime.now())
     obj_spider = SpiderMain()
     obj_spider.craw()
+
+if __name__ == "__main__":
+    start()

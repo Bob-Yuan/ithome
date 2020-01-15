@@ -3,19 +3,15 @@ import time
 from django.shortcuts import render
 from django.views.generic.base import View
 
-from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
+from pure_pagination import Paginator, PageNotAnInteger
 
 from .models import Articles
-
-from ithome_spider import ithome_spider
 
 
 class ArticleIndexView(View):
     """首页view"""
 
     def get(self, request):
-        obj_spider = ithome_spider.SpiderMain()
-        obj_spider.craw()
         date = time.strftime("%Y-%m-%d", time.localtime())
         articles = Articles.objects.filter(t_date=date).order_by("-total_id")
 
