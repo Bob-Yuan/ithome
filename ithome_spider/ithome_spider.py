@@ -1,8 +1,12 @@
 __author__ = 'boy'
 __date__ = '2019/12/23 1:35'
 
+import MySQLdb
+import datetime
+
+#windows
 import sys
-sys.path.insert(0, '../../')
+sys.path.insert(0, '../')       #这边离根目录ithome有多远就加几个"../" 比如当前目录/ithome/ithome_spider/,那么就加一个
 
 import os
 if not os.getenv('DJANGO_SETTINGS_MODULE'):
@@ -10,16 +14,27 @@ if not os.getenv('DJANGO_SETTINGS_MODULE'):
 
 import django
 django.setup()
-
-import MySQLdb
-import datetime
-
 from ithome_spider import html_downloader
 from ithome_spider import html_outputer
 from ithome_spider import html_parser
 from ithome_spider import url_manager
 
 from ithome.settings import DATABASES_HOST, DATABASES_NAME, DATABASES_USER, DATABASES_PASSWORD
+#windwos
+
+
+
+#linux
+# import html_downloader
+# import html_outputer
+# import html_parser
+# import url_manager
+#
+# DATABASES_HOST="10.0.0.5"
+# DATABASES_NAME="ithome"
+# DATABASES_USER="root"
+# DATABASES_PASSWORD="123456"
+#linux
 
 
 def transferContent(content):
