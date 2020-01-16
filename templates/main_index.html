@@ -31,6 +31,13 @@
         div.search-group.group-a.s-current{
             padding:0px;
         }
+        .main_index_title{
+            font-family: PingFang SC,Microsoft YaHei UI,STHeitiSC-Light,Microsoft YaHei;
+            font-size: 14px;
+            color: #000;
+            display: inline-block;
+            margin: 4px;
+        }
     </style>
     <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
 </head>
@@ -92,13 +99,19 @@
             <nav class="navbar user-info-navbar" role="navigation">
                 <div style="position: absolute;background: #fff;width: 100%;box-shadow: 0 5px 20px rgba(0,0,0,.05);padding-bottom:1px;">
                     <ul class="user-info-menu left-links list-inline list-unstyled">
-                        <li class="hidden-sm hidden-xs">
+                        <li class="hidden-sm hidden-xs" >
                             <a href="#" data-toggle="sidebar"><i class="fa-bars"></i></a>
                         </li>
-                        <li>
+                        <li style="position:relative;">
                             <div id="tp-weather-widget" style="padding: 25px 10px;"></div>
 <script>(function(T,h,i,n,k,P,a,g,e){g=function(){P=h.createElement(i);a=h.getElementsByTagName(i)[0];P.src=k;P.charset="utf-8";P.async=1;a.parentNode.insertBefore(P,a)};T["ThinkPageWeatherWidgetObject"]=n;T[n]||(T[n]=function(){(T[n].q=T[n].q||[]).push(arguments)});T[n].l=+new Date();if(T.attachEvent){T.attachEvent("onload",g)}else{T.addEventListener("load",g,false)}}(window,document,"script","tpwidget","//widget.seniverse.com/widget/chameleon.js"))</script>
 <script>tpwidget("init",{"flavor": "slim","location": "WX4FBXXFKE4F","geolocation": "enabled","language": "zh-chs","unit": "c","theme": "white","container": "tp-weather-widget","bubble": "enabled","alarmType": "badge","uid": "UD5EFC1165","hash": "2ee497836a31c599f67099ec09b0ef62"});tpwidget("show");</script>
+                        </li>
+                        <li style="display: block;position:absolute;right:300px;" class="main_index_title">
+                            <a href="javascript:; " class="login">登录</a>
+                        </li>
+                        <li style="display: block;position:absolute;right:340px;" class="main_index_title">
+                            <a href="{% url 'register' %}" target="_blank">注册</a>
                         </li>
                     </ul>
                 </div>
@@ -177,7 +190,57 @@
             </div>
 
 <style type="text/css">
-    #search{max-width:717px;margin:100px auto 14px}#search form{position:relative}#search-text{padding:9pt;width:100%;height:50px;font-size:1pc;border:0;border-radius:3px;background-color:#fff}#search button{position:absolute;top:0;right:0;background:#313437;border:0;width:60px;height:36px;margin:7px 9pt 0;line-height:36px;border-radius:3px}#search button:hover{background:#000;cursor:pointer}#search button i{color:#fff;font-size:18px}.search-group{display:none;padding-left:75px}.s-current .search-type{padding-left:0;display:block}.s-current{display:block}#search-list{position:relative}.s-type{position:absolute;top:0;left:0;z-index:13;width:75px}.s-type:hover{height:auto}.s-type>span{display:block;height:31px;width:75px}.s-type-list{display:none;position:absolute;top:31px;padding:9pt 0;width:20pc;background:#fff;border-radius:4px;box-shadow:0 9px 20px rgba(0,0,0,.16)}.s-type-list:before{position:absolute;top:-1pc;left:10px;content:' ';display:block;width:0;height:0;border:10px solid transparent;border-bottom-color:#fff}.s-type-list label{display:block;font-size:1pc;line-height:2pc;text-align:center;width:33%;float:left}.s-type-list .tile-lg{color:#fff;width:3pc;height:3pc;font-size:1.25rem;line-height:3rem;border-radius:.3rem;display:block;margin:auto}.bg-blue{background-color:#0179a8!important}.bg-purple{background-color:#5f4b8b!important}.bg-pink{background-color:#b76ba3!important}.bg-red{background-color:#ea6759!important}.bg-orange{background-color:#ec935e!important}.bg-yellow{background-color:#f7c46c!important}.bg-green{background-color:#a7c796!important}.bg-teal{background-color:#00a28a!important}.bg-cyan{background-color:#3686a0!important}.bg-gray{background-color:#686f76!important}.s-type-list label:hover{color:#000}.s-type:hover .s-type-list{display:block;padding-top:22px}.type-text{position:absolute;left:0;width:75px;padding-left:9pt;font-size:1pc;line-height:31px}.type-text:after{content:"\f105";font-family:FontAwesome;margin:0 0 0 15px}.search-type{white-space:nowrap;margin:0}.search-type label{margin:0}.search-type li{display:inline-block}.search-type li label{display:inline-block;padding:0 11px;font-size:14px;line-height:31px;border-radius:3px 3px 0 0;cursor:pointer}.search-type input:checked+label,.search-type input:hover+label{background-color:#fff}.set-check{margin-top:3px;font-size:9pt}.set-check label{margin-left:3px}.set-check input,.set-check label{opacity:0;transition:all .3s ease}.search-type li{list-style:none;display:inline-block}@media screen and (max-width:767px){#search{margin:25px auto 15px}.search-type{overflow:scroll}.search-list{height:30px;overflow-y:hidden;overflow-x:scroll;white-space:nowrap}}@media screen and (max-width:767px){#search{margin:25px auto 15px}.search-type{overflow:scroll}.search-list{height:30px;overflow-y:hidden;overflow-x:scroll;white-space:nowrap}}.fa-2x{padding-top: 15px;font-size: 1.5em;}
+    #search{max-width:717px;margin:100px auto 14px}
+    #search form{position:relative}
+    #search-text{padding:9pt;width:100%;height:50px;font-size:1pc;border:0;border-radius:3px;background-color:#fff}
+    #search button{position:absolute;top:0;right:0;background:#313437;border:0;width:60px;height:36px;margin:7px 9pt 0;line-height:36px;border-radius:3px}
+    #search button:hover{background:#000;cursor:pointer}
+    #search button i{color:#fff;font-size:18px}
+    .search-group{display:none;padding-left:75px}
+    .s-current .search-type{padding-left:0;display:block}
+    .s-current{display:block}
+    #search-list{position:relative}
+    .s-type{position:absolute;top:0;left:0;z-index:13;width:75px}
+    .s-type:hover{height:auto}
+    .s-type>span{display:block;height:31px;width:75px}
+    .s-type-list{display:none;position:absolute;top:31px;padding:9pt 0;width:20pc;background:#fff;border-radius:4px;box-shadow:0 9px 20px rgba(0,0,0,.16)}
+    .s-type-list:before{position:absolute;top:-1pc;left:10px;content:' ';display:block;width:0;height:0;border:10px solid transparent;border-bottom-color:#fff}
+    .s-type-list label{display:block;font-size:1pc;line-height:2pc;text-align:center;width:33%;float:left}
+    .s-type-list .tile-lg{color:#fff;width:3pc;height:3pc;font-size:1.25rem;line-height:3rem;border-radius:.3rem;display:block;margin:auto}
+    .bg-blue{background-color:#0179a8!important}
+    .bg-purple{background-color:#5f4b8b!important}
+    .bg-pink{background-color:#b76ba3!important}
+    .bg-red{background-color:#ea6759!important}
+    .bg-orange{background-color:#ec935e!important}
+    .bg-yellow{background-color:#f7c46c!important}
+    .bg-green{background-color:#a7c796!important}
+    .bg-teal{background-color:#00a28a!important}
+    .bg-cyan{background-color:#3686a0!important}
+    .bg-gray{background-color:#686f76!important}
+    .s-type-list label:hover{color:#000}
+    .s-type:hover .s-type-list{display:block;padding-top:22px}
+    .type-text{position:absolute;left:0;width:75px;padding-left:9pt;font-size:1pc;line-height:31px}
+    .type-text:after{content:"\f105";font-family:FontAwesome;margin:0 0 0 15px}
+    .search-type{white-space:nowrap;margin:0}
+    .search-type label{margin:0}
+    .search-type li{display:inline-block}
+    .search-type li label{display:inline-block;padding:0 11px;font-size:14px;line-height:31px;border-radius:3px 3px 0 0;cursor:pointer}
+    .search-type input:checked+label,.search-type input:hover+label{background-color:#fff}
+    .set-check{margin-top:3px;font-size:9pt}
+    .set-check label{margin-left:3px}
+    .set-check input,.set-check label{opacity:0;transition:all .3s ease}
+    .search-type li{list-style:none;display:inline-block}
+    @media screen and (max-width:767px){
+        #search{margin:25px auto 15px}
+        .search-type{overflow:scroll}
+        .search-list{height:30px;overflow-y:hidden;overflow-x:scroll;white-space:nowrap}
+    }
+    @media screen and (max-width:767px){
+        #search{margin:25px auto 15px}
+        .search-type{overflow:scroll}
+        .search-list{height:30px;overflow-y:hidden;overflow-x:scroll;white-space:nowrap}
+        .fa-2x{padding-top: 15px;font-size: 1.5em;}
+    }
 </style>
 
 <script type="text/javascript">
