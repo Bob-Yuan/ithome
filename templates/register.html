@@ -13,12 +13,10 @@
     <script type="text/javascript" src="{% static 'js/register/default.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/register/lrz.all.bundle.js' %}"></script>
     <style type="text/css">
-        input{
-            width:30px;
-        }
+
         #id_captcha_1{
-            margin: 8px 5px 0px 0px;
-            width: 270px;
+            margin: 35px 5px 0px 0px;
+            width: 170px;
             outline: none;
             border: none;
             font-size: 14px;
@@ -26,7 +24,7 @@
 
         }
         .captcha1{
-            position:absolute;
+            position:relative;
         }
         .captcha1 img{
             position:absolute;
@@ -57,6 +55,10 @@
                         <div>
                             <input name="password" type="password" class="user_input user_pw" id="txtPwd" placeholder="密码" autocomplete="new-password" />
                         </div>
+                        <div class="userinput_parent captcha1 {% if register_form.captcha.errors %} errorput{% endif %}">
+                            {{ register_form.captcha }}
+                            {{ active_form.captcha }}
+                        </div>
                     </div>
                     <a class="forgotpsw a_link" href="javascript:forgetpsw_clilcked()">忘记密码？</a>
                 </div>
@@ -85,10 +87,10 @@
                     <input type="number" class="user_input" id="password" name="password" placeholder="密码" />
                 </div>
 
-{#                <div class="userinput_parent captcha1 {% if register_form.captcha.errors %} errorput{% endif %}">#}
-{#                    {{ register_form.captcha }}#}
-{#                    {{ active_form.captcha }}#}
-{#                </div>#}
+                <div class="userinput_parent captcha1 {% if register_form.captcha.errors %} errorput{% endif %}">
+                    {{ register_form.captcha }}
+                    {{ active_form.captcha }}
+                </div>
 
                 <div id="validateParent" class="userinput_parent"  style='display:none;'>
                     <div class="user_input_text">&nbsp;</div>
@@ -109,7 +111,12 @@
                 <div><input type="submit" value="注册" class="regbtn"></div>
                 <div class="rm-protocol">
                     <a href="javascript:read_protocol_click()">
-                        <img id="read_protocol_img" width="15" height="15" src="{% static 'image/register/unchecked.png' %}" /></a>我已阅读并同意<a class="a_link register_protocol" href="https://www.ruanmei.com/agreement/reg.htm">《注册协议》</a>和<a class="a_link privacy_policy" href="https://www.ruanmei.com/agreement/privacy.htm">《隐私政策》</a>
+                        <img id="read_protocol_img" width="15" height="15" src="{% static 'image/register/unchecked.png' %}" />
+                    </a>
+                    我已阅读并同意
+                    <a class="a_link register_protocol" href="https://www.ruanmei.com/agreement/reg.htm">《注册协议》</a>
+                    和
+                    <a class="a_link privacy_policy" href="https://www.ruanmei.com/agreement/privacy.htm">《隐私政策》</a>
                 </div>
             </div>
 <div class="error btns login-form-tips" id="jsLoginTips">
@@ -266,5 +273,6 @@
             });
         });
     </script>
+
 </body>
 </html>

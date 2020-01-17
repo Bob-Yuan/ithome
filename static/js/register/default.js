@@ -363,6 +363,7 @@ function forgetpsw_clilcked() {
 function regnow_clicked() {
     $("#login_panel").hide();
     $("#reg_panel").show();
+    $("#id_captcha_1").attr("placeholder","验证码");
 }
 
 //第三方登录

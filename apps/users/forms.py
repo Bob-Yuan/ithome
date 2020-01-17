@@ -22,7 +22,7 @@ class RegisterForm(forms.Form):
     password = forms.CharField(required=True, min_length=5)
     # 应用验证码 自定义错误输出key必须与异常一样
     captcha = CaptchaField(error_messages={"invalid": u"验证码错误"})
-
+#'type': "text", 'name': "captcha_1", 'class': "id_captcha_1", "autocapitalize": "off", "autocomplete": "off", "autocorrect": "off", "spellcheck": "false", "placeholder": "验证码"
 
 class ActiveForm(forms.Form):
     """激活时验证码实现"""

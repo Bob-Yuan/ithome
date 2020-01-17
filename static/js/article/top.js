@@ -65,7 +65,8 @@ if (document.domain.indexOf("quan.ithome.com") >= 0)
 {
 	commentText = "回复";
 }
-gotopcode = " \
+gotopcode = ""
+gotopcode1 = " \
 	<div id=\"side_func\"> \
 	<!--<a class=\"sfa lapin\" href=\"http://www.lapin365.com/\" title=\"辣品\"><span class=\"text1\"><img src=//img.ithome.com/images/side/lapin.png width=50></span><span class=\"text2\" style=\"display:none;\">辣品</span></a>--> \
 		<a class=\"sfa app\" href=\"http://m.ruanmei.com/d/it/\" target=\"_blank\" >App</a> \
@@ -76,7 +77,7 @@ gotopcode = " \
 	</div>"
 
 document.write(gotopcode);
-$('#side_func').prependTo('body');
+//$('#side_func').prependTo('body');
 window.setInterval("gotop()", 500);
 $('#side_func a.lapin').hover(
 	function () { $(this).find('span.text1').css({ 'display': 'none' }); $(this).find('span.text2').css({ 'display': 'block' }); },

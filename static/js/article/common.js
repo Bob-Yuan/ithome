@@ -109,7 +109,7 @@ $(document).ready(function () {
     }).mouseenter(function () {
         $('#bdshare_s').attr('te', 'displayed');
         hideTimer = setTimeout(function () {
-            $('#bdshare_s').appendTo('#side_func');
+            //$('#bdshare_s').appendTo('#side_func');
             $('#bdshare_l').addClass('show_bds').fadeIn(200);
         },
             500); //鼠标滑过元素1秒钟显示子元素
@@ -178,7 +178,7 @@ $(document).ready(function () {
             }
         });
     }
-    $.getScript("//dyn.ithome.com/js/login");
+    //$.getScript("//dyn.ithome.com/js/login");
 
     $('body').on("click",
         ".login",
