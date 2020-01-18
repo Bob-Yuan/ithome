@@ -9,6 +9,9 @@ var http = "http://";
 
 var reginfo = '';
 
+var login_url = http + window.location.host + "/login";
+var register_url = http + window.location.host + "/register";
+
 $(function () {
     //取得source参数
     source = GetQueryString("source");
@@ -257,10 +260,17 @@ $(function () {
 ***************************************/
 
 function loginbtn_clicked() {
-    var mail = $("#txtEmail").val();
+    var email = $("#txtEmail").val();
     var psw = $("#txtPwd").val();
-    if (null == mail || "" == mail || null == psw || "" == psw) {
+    var captcha_1 = $("#captcha_1").val();
+    var captcha_0 = $("#id_captcha_0").val();
+
+    if (null == email || "" == email || null == psw || "" == psw) {
         ShowErrorMessage("请输入账号密码");
+        return;
+    }
+    if (null == captcha_1 || "" == captcha_1) {
+        ShowErrorMessage("请输入验证码");
         return;
     }
 
@@ -279,42 +289,46 @@ function loginbtn_clicked() {
     }
 
     //发送验证请求
+    var login_data = { "email" :escape(email) , "password":psw,  "captcha_0": captcha_0, "captcha_1": captcha_1};  
+
     $.ajax({
         type: "POST",
         contentType: "application/json; charset=utf-8",
-        url: "Default.aspx/LoginUser",
+        headers: { "X-CSRFToken": token_csrf },
+        url: "/login/",
         dataType: "json",
         cache: false,
-        data: '{mail:"' + escape(mail) + '", psw:"' + psw + '", rememberme:"' + rememberme + '"  }',
+        data: JSON.stringify(login_data),
         error: function () {
             ShowErrorMessage("登录失败！");
         },
         success: function (data) {
             if (null != data && "" != data) {
-                if (data.d.indexOf("ok:") == 0) {
-                    var hash = data.d.replace("ok:", "");
-                    if (isIFrame) {
-                        var url = http + "my.ruanmei.com/openplat/callback.aspx?type=web&hash=" + hash;
-                        var iframe = createHiddenIFrameElement(url, function () {
-                            url = getCallbackUrl(hash, rememberme);
-                            if ("" != url) {
-                                createHiddenIFrameElement(url);
-                            }
-                        })
-                    } else {
-                        //如果是Wap或云日历
-                        if ("wapithome" == source || "mytime" == source) {
-                            var wapBackUrl = GetBackUrlWithCheck();
-                            if (wapBackUrl !== "")
-                                window.location.href = wapBackUrl + hash;
-                        } else {
-                            var url = getReturnUrl();
-                            location.replace(url);
-                        }
-                    }
-                } else {
-                    ShowErrorMessage(data.d);
-                }
+                console.log(data);
+                // if (data.d.indexOf("ok:") == 0) {
+                    // var hash = data.d.replace("ok:", "");
+                    // if (isIFrame) {
+                    //     var url = http + "my.ruanmei.com/openplat/callback.aspx?type=web&hash=" + hash;
+                    //     var iframe = createHiddenIFrameElement(url, function () {
+                    //         url = getCallbackUrl(hash, rememberme);
+                    //         if ("" != url) {
+                    //             createHiddenIFrameElement(url);
+                    //         }
+                    //     })
+                    // } else {
+                    //     //如果是Wap或云日历
+                    //     if ("wapithome" == source || "mytime" == source) {
+                    //         var wapBackUrl = GetBackUrlWithCheck();
+                    //         if (wapBackUrl !== "")
+                    //             window.location.href = wapBackUrl + hash;
+                    //     } else {
+                    //         var url = getReturnUrl();
+                    //         location.replace(url);
+                    //     }
+                    // }
+                // } else {
+                //     ShowErrorMessage(data.d);
+                // }
             }
         }
     });
@@ -361,8 +375,7 @@ function forgetpsw_clilcked() {
 
 //立即注册点击
 function regnow_clicked() {
-    $("#login_panel").hide();
-    $("#reg_panel").show();
+    window.location.href = register_url;
     $("#id_captcha_1").attr("placeholder","验证码");
 }
 
@@ -372,7 +385,7 @@ function connectLogin(type) {
         name = "",
         width = 630,
         height = 688;
-    var clienttime = parseInt((new Date).getTime() / 1000)
+    var clienttime = parseInt((new Date).getTime() / 1000);
 
     switch (type) {
         case "sina":
@@ -615,8 +628,8 @@ function sendSms(mobile, checkreg, validate, data, finish) {
 
 //立即登录点击
 function loginnow_clicked() {
-    var url = getReloadUrl();
-    location.replace(url);
+    location.replace(login_url);
+    $("#id_captcha_1").attr("placeholder","验证码");
 }
 
 //获得刷新url
@@ -625,7 +638,7 @@ function getReloadUrl() {
     // if (null != source && "" != source && "ruanmei" != source) {
     //     url += "&source=" + source;
     // }
-    var url = "http://" + window.location.host + "/register";
+    var url = window.location.href;
     return url;
 }
 

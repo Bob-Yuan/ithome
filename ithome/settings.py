@@ -52,6 +52,11 @@ INSTALLED_APPS = [
 
 AUTH_USER_MODEL = "users.UserProfile"
 
+AUTHENTICATION_BACKENDS = (
+    'users.views.CustomBackend',
+)
+
+
 # cron tasks
 CRONJOBS = [
     #('*/1 * * * *', 'ithome_spider.ithome_spider.start', '>>' + os.path.join(BASE_DIR, 'log/time.log'))
@@ -171,3 +176,16 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+EMAIL_HOST = "smtp.163.com"
+EMAIL_PORT = 25
+EMAIL_HOST_USER = "qq1178373915@163.com"
+EMAIL_HOST_PASSWORD = "83812355qq"   #这个是授权码，不是密码
+EMAIL_USE_TLS = False
+EMAIL_FROM = "qq1178373915@163.com"
+
+CAPTCHA_LENGTH = 4
+CAPTCHA_IMAGE_SIZE = (80, 35)
+CAPTCHA_TEXT_FIELD_TEMPLATE = BASE_DIR+"/templates/captcha/field_template.html"
+CAPTCHA_OUTPUT_FORMAT = "%(text_field)s %(hidden_field)s %(image)s"
+#CAPTCHA_FIELD_TEMPLATE =

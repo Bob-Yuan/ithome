@@ -51,32 +51,30 @@ class UserProfile(AbstractUser):
     #     return UserMessage.objects.filter(has_read=False, user=self.id).count()
 
 
-# class EmailVerifyRecord(models.Model):
-#     """邮箱验证码model"""
-#     SEND_CHOICES = (
-#         ("register", u"注册"),
-#         ("forget", u"找回密码"),
-#         ("update_email", u"修改邮箱"),
-#     )
-#     code = models.CharField(max_length=20, verbose_name=u"验证码")
-#     # 未设置null = true blank = true 默认不可为空
-#     email = models.EmailField(max_length=50, verbose_name=u"邮箱")
-#     send_type = models.CharField(
-#         choices=SEND_CHOICES,
-#         max_length=20,
-#         verbose_name=u"验证码类型")
-#     # 这里的now得去掉(),不去掉会根据编译时间。而不是根据实例化时间。
-#     send_time = models.DateTimeField(
-#         default=datetime.now, verbose_name=u"发送时间")
-#
-#     class Meta:
-#         verbose_name = "邮箱验证码"
-#         verbose_name_plural = verbose_name
-#
-#     # 重载str方法使后台不再直接显示object
-#
-#     def __str__(self):
-#         return '{0}({1})'.format(self.code, self.email)
+class EmailVerifyRecord(models.Model):
+    """邮箱验证码model"""
+    SEND_CHOICES = (
+        ("register", u"注册"),
+        ("forget", u"找回密码"),
+        ("update_email", u"修改邮箱"),
+    )
+    code = models.CharField(max_length=20, verbose_name=u"验证码")
+    # 未设置null = true blank = true 默认不可为空
+    email = models.EmailField(max_length=50, verbose_name=u"邮箱")
+    send_type = models.CharField(
+        choices=SEND_CHOICES,
+        max_length=20,
+        verbose_name=u"验证码类型")
+    # 这里的now得去掉(),不去掉会根据编译时间。而不是根据实例化时间。
+    send_time = models.DateTimeField(default=datetime.now, verbose_name=u"发送时间")
+
+    class Meta:
+        verbose_name = "邮箱验证码"
+        verbose_name_plural = verbose_name
+
+    # 重载str方法使后台不再直接显示object
+    def __str__(self):
+        return '{0}({1})'.format(self.code, self.email)
 
 
 # class Banner(models.Model):
@@ -99,3 +97,23 @@ class UserProfile(AbstractUser):
 #
 #     def __str__(self):
 #         return '{0}(位于第{1}位)'.format(self.title, self.index)
+
+class UserMessage(models.Model):
+    """用户消息表"""
+    # 因为我们的消息有两种:发给全员和发给某一个用户。
+    # 所以如果使用外键，每个消息会对应要有用户。很难实现全员消息。
+
+    # 机智版 为0发给所有用户，不为0就是发给用户的id
+    user = models.IntegerField(default=0, verbose_name=u"接收用户")
+    message = models.CharField(max_length=500, verbose_name=u"消息内容")
+
+    # 是否已读: 布尔类型 BooleanField False未读,True表示已读
+    has_read = models.BooleanField(default=False, verbose_name=u"是否已读")
+    add_time = models.DateTimeField(default=datetime.now, verbose_name=u"添加时间")
+
+    class Meta:
+        verbose_name = u"用户消息"
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return '用户({0})接收了{1} '.format(self.user, self.message)

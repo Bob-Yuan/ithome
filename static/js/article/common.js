@@ -184,7 +184,7 @@ $(document).ready(function () {
         ".login",
         function () {
             // popWin.showWin("400", "620", "软媒通行证登录", "//my.ruanmei.com/?source=ithome");
-            popWin.showWin("400", "620", "软媒通行证登录", "/register/");
+            popWin.showWin("400", "620", "软媒通行证登录", "/login/");
         });
     $('body').on("click",
         "#btnLogout",

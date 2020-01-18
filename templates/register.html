@@ -1,278 +1,36 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
+{% extends 'loginAndRegisterBase.html' %}
 {% load static %}
-<head id="Head1">
-    <title>软媒通行证</title>
-    <meta name="referrer" content="no-referrer" />
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta property="qc:admins" content="26733071625165516375" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
-    <link href="{% static 'css/register/style.css' %}" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="//img.ithome.com/file/js/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"></script>
-    <script type="text/javascript" src="{% static 'js/register/common.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/register/default.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/register/lrz.all.bundle.js' %}"></script>
-    <style type="text/css">
 
-        #id_captcha_1{
-            margin: 35px 5px 0px 0px;
-            width: 170px;
-            outline: none;
-            border: none;
-            font-size: 14px;
-            color: #888;
+{% block formHead %}
+<form method="post" action="{% url 'register' %}" id="form1" class="form_style">
+{% endblock %}
 
-        }
-        .captcha1{
-            position:relative;
-        }
-        .captcha1 img{
-            position:absolute;
-            right:0px;
-            bottom:0px;
-        }
-    </style>
-</head>
-
-<body class="lr">
-    <form method="post" action="{% url 'register' %}" id="form1" class="form_style">
-        {% csrf_token %}
-
-        <div id="rm_login">
-            <div class="txtAccount">使用软媒通行证，畅享软媒所有服务</div>
-
-            <div id="login_panel">
-                <input type="hidden" name="next" value="{{ redirect_url }}" />
-                <div class="userinput_parent">
-                    <div class="user_input_text">&nbsp;</div>
-                    <div>
-                        <input type="text" name="username" class="user_input" id="txtEmail" placeholder="邮箱/手机号" autocomplete="new-password" />
-                    </div>
-                </div>
-                <div class="userinput_parent">
-                    <div style="float: left">
-                        <div class="user_input_text">&nbsp;</div>
-                        <div>
-                            <input name="password" type="password" class="user_input user_pw" id="txtPwd" placeholder="密码" autocomplete="new-password" />
-                        </div>
-                        <div class="userinput_parent captcha1 {% if register_form.captcha.errors %} errorput{% endif %}">
-                            {{ register_form.captcha }}
-                            {{ active_form.captcha }}
-                        </div>
-                    </div>
-                    <a class="forgotpsw a_link" href="javascript:forgetpsw_clilcked()">忘记密码？</a>
-                </div>
-                <div class="remember_me_parent">
-                    <a class="remember_me_link" href="javascript:remember_me_click()" title="">
-                        <img id="remember_me_img" width="15" height="15" alt="" src="{% static 'image/register/checked.png' %}" /></a>
-                    <div id="remember_me_text_parent"><a href="javascript:remember_me_click()" class="remember_me a_link" title="">记住我</a></div>
-                    <a href="javascript:regnow_clicked()">
-                        <img width="15" height="15" alt="" src="{% static 'image/register/arraw.png' %}" class="reg_now_img" /></a>
-                    <div><a class="reg_now a_link" href="javascript:regnow_clicked()">立即注册</a></div>
-                </div>
-{#                <a class="loginbtn" href="javascript:loginbtn_clicked()">登录</a>#}
-                <div><input type="submit" value="登录" class="regbtn"></div>
-                <div class="rm-protocol">
-                    登录即代表您已同意<a class="a_link register_protocol" href="https://www.ruanmei.com/agreement/reg.htm">《注册协议》</a>和<a class="a_link privacy_policy" href="https://www.ruanmei.com/agreement/privacy.htm">《隐私政策》</a>
-                </div>
-            </div>
-
-            <div id="reg_panel" style="display: none;">
-                <div class="userinput_parent">
-                    <div class="user_input_text">&nbsp;</div>
-                    <input type="number" class="user_input" id="phone" name="register_user_name" placeholder="邮箱" />
-                </div>
-                <div class="userinput_parent">
-                    <div class="user_input_text">&nbsp;</div>
-                    <input type="number" class="user_input" id="password" name="password" placeholder="密码" />
-                </div>
-
-                <div class="userinput_parent captcha1 {% if register_form.captcha.errors %} errorput{% endif %}">
-                    {{ register_form.captcha }}
-                    {{ active_form.captcha }}
-                </div>
-
-                <div id="validateParent" class="userinput_parent"  style='display:none;'>
-                    <div class="user_input_text">&nbsp;</div>
-                    <input type="text" class="user_input validate_input" id="validate" onblur="this.value = this.value.toLowerCase();" placeholder="请输入验证码，再发送短信" />
-                    <img src="validate.aspx" onclick="this.src = 'validate.aspx?' + Math.random()" alt="将图中的文字填到左边输入框中" id="randomNoImg" />
-                </div>
-{#                <div class="userinput_parent no_border">#}
-{#                    <div class="code_parent">#}
-{#                        <div class="user_input_text">&nbsp;</div>#}
-{#                        <div>#}
-{#                            <input type="number" class="user_input code_input" id="code" maxlength="6" placeholder="短信验证码" />#}
-{#                        </div>#}
-{#                    </div>#}
-{#                    <a id="sendsms" class="sendsms sendsms_enable a_link" href="javascript:send_sms_click()">获取验证码</a>#}
-{#                </div>#}
-                <div><a class="login_now a_link" href="javascript:loginnow_clicked()">已有软媒通行证</a></div>
-{#                <div><a class="regbtn" href="javascript:registerbtn_clicked()">注册</a></div>#}
-                <div><input type="submit" value="注册" class="regbtn"></div>
-                <div class="rm-protocol">
-                    <a href="javascript:read_protocol_click()">
-                        <img id="read_protocol_img" width="15" height="15" src="{% static 'image/register/unchecked.png' %}" />
-                    </a>
-                    我已阅读并同意
-                    <a class="a_link register_protocol" href="https://www.ruanmei.com/agreement/reg.htm">《注册协议》</a>
-                    和
-                    <a class="a_link privacy_policy" href="https://www.ruanmei.com/agreement/privacy.htm">《隐私政策》</a>
-                </div>
-            </div>
-<div class="error btns login-form-tips" id="jsLoginTips">
-    {% for key, error in login_form.errors.items %}
-    {{ error }}
-    {% endfor %}
-    {{ msg }}
-</div>
-            <div class="one_press_login_parent">
-                <img src="{% static 'image/register/line.png' %}" alt="线" width="270" height="1" class="one_press_login_img" />
-                <div class="one_press_login">一键登录</div>
-            </div>
-            <div id="openplat">
-                <span class="openplaticon qqlogin_parent">
-                    <a href="javascript:connectLogin('qq');" title="使用QQ帐号登录">
-                        <img width="40" height="40" src="{% static 'image/register/iconqq.png' %}" alt="" /></a>
-                </span>
-
-                <span class="openplaticon wxlogin_parent">
-                    <a href="javascript:connectLogin('wx');" title="使用微信帐号登录">
-                        <img width="40" height="40" src="{% static 'image/register/iconwechat.png' %}" alt="" /></a>
-                </span>
-                <span class="openplaticon sinalogin_parent">
-                    <a href="javascript:connectLogin('sina')" title="使用新浪微博帐号登录">
-                        <img width="40" height="40" src="{% static 'image/register/iconweibo.png' %}" alt="" /></a>
-                </span>
-            </div>
+{% block loginOrRegister %}
+    <div id="reg_panel">
+        <div class="userinput_parent">
+            <div class="user_input_text">&nbsp;</div>
+            <input type="text" name="email" class="user_input" id="txtEmail" placeholder="邮箱" />
+        </div>
+        <div class="userinput_parent">
+            <div class="user_input_text">&nbsp;</div>
+            <input type="password" name="password" class="user_input" id="txtPwd"  placeholder="密码" />
         </div>
 
-        <div id="rm_userinfo" style="display: none;">
-            <div class="txtUserInfo">上传头像、填写QQ号</div>
-            <div class="avater_parent">
-                <a class="avater" href="javascript:avater_clicked()">
-                    <img id="avaterImg" src="{% static 'image/register/defaultavater.png' %}" width="80" height="80" alt="" /></a>
-            </div>
-            <input type="file" id="avaterFileInput" style="display: none;" accept=".jpg,.bmp,.png" />
-            <div class="userinput_parent">
-                <div class="user_input_text">&nbsp;</div>
-                <div>
-                    <input type="text" class="user_input" id="txtUserInfoNickName" placeholder="昵称（1-12个字符）" />
-                </div>
-            </div>
-            <div class="userinput_parent">
-                <div class="user_input_text">&nbsp;</div>
-                <div>
-                    <input type="password" class="user_input" id="txtUserInfoPsw" placeholder="密码（6位或以上的数字和字母）" />
-                </div>
-            </div>
-            <div class="userinput_parent">
-                <div class="user_input_text">&nbsp;</div>
-                <div>
-                    <input type="password" class="user_input" id="txtUserInfoPswConfirm" placeholder="确认密码（再次输入密码）" />
-                </div>
-            </div>
-            <div class="userinput_parent">
-                <div class="user_input_text">&nbsp;</div>
-                <div>
-                    <input type="number" class="user_input" id="txtUserInfoQQ" placeholder="QQ号码（便于活动等沟通）" />
-                </div>
-            </div>
-            <div><a class="save_user_info" href="javascript:save_user_info_clicked()">保存</a></div>
+        <div class="userinput_parent captcha1 {% if register_form.captcha.errors %} errorput{% endif %}">
+            <div class="user_input_text" id="user_input_text_captcha1">&nbsp;</div>
+            {{ register_form.captcha }}
+            {{ active_form.captcha }}
         </div>
-
-        <div id="rm_forgetpassword" style="display: none;">
-            <div id="fp_step1">
-                <div class="fp_title">找回密码</div>
-                <div class="userinput_parent">
-                    <div class="user_input_text">&nbsp;</div>
-                    <div>
-                        <input type="text" class="user_input" id="txtFpEmail" placeholder="邮箱/手机号" />
-                    </div>
-                </div>
-                <div id="validateParentFP" class="userinput_parent"  style='display:none;'>
-                    <div class="user_input_text">&nbsp;</div>
-                    <input type="text" class="user_input validate_input" id="validateFP" onblur="this.value = this.value.toLowerCase();" placeholder="请先输入验证码" />
-                    <img src="validate.aspx?s=fp" onclick="this.src = 'validate.aspx??s=fp&r=' + Math.random()" alt="将图中的文字填到左边输入框中" id="randomNoImgFP" />
-                </div>
-                <div class="userinput_parent no_border">
-                    <div class="code_parent">
-                        <div class="user_input_text">&nbsp;</div>
-                        <div>
-                            <input type="number" class="user_input code_input" id="txtFpCode" maxlength="6" placeholder="验证码" />
-                        </div>
-                    </div>
-                    <a id="fp_sendsms" class="sendsms sendsms_enable a_link" href="javascript:send_sp_sms_click()">获取验证码</a>
-                </div>
-                <a class="fp_nextbtn" href="javascript:fp_nextbtn_clicked()">下一步</a>
-                <div class="fp_backbtn_parent">
-                    <a class="fp_backbtn a_link" href="javascript:fp_backbtn_clicked()">
-                        <img src="{% static 'image/register/arraw_left.png' %}" width="6" height="10" alt="" />&nbsp;返回</a>
-                </div>
-            </div>
-        </div>
-        <div id="fp_step2" style="display: none;">
-            <div class="fp_title">修改密码</div>
-            <div class="userinput_parent">
-                <div class="user_input_text">&nbsp;</div>
-                <div>
-                    <input type="password" class="user_input" id="txtFpPsw" placeholder="新密码（6位或以上数字和字母）" />
-                </div>
-            </div>
-            <div class="userinput_parent">
-                <div class="user_input_text">&nbsp;</div>
-                <div>
-                    <input type="password" class="user_input" id="txtFpPswConfirm" placeholder="确认密码（再次输入密码）" />
-                </div>
-            </div>
-            <a class="fp_save_psw" href="javascript:fp_save_psw_clicked()">保存</a>
-        </div>
-    </form>
-
-    <div class="error_msg">
-        <div class="error_mask"></div>
-        <div class="error_content">
-            <img class="error_img" src="{% static 'image/register/ok.png' %}" width="50" height="50" alt="ok" />
-            <div class="error_text"></div>
+        <div><a class="login_now a_link" href="javascript:loginnow_clicked()">已有软媒通行证</a></div>
+        <div><a class="regbtn" href="javascript:registerbtn_clicked()">注册</a></div>
+        <div class="rm-protocol">
+            <a href="javascript:read_protocol_click()">
+                <img id="read_protocol_img" width="15" height="15" src="{% static 'image/register/unchecked.png' %}" />
+            </a>
+            我已阅读并同意
+            <a class="a_link register_protocol" href="https://www.ruanmei.com/agreement/reg.htm">《注册协议》</a>
+            和
+            <a class="a_link privacy_policy" href="https://www.ruanmei.com/agreement/privacy.htm">《隐私政策》</a>
         </div>
     </div>
-    <div class="avater_qq_msg">
-        <div class="aq_mask"></div>
-        <div class="aq_content">
-            <div class="aq_text">上传头像、填写QQ号码各获得50金币，您确定要放弃领取金币吗？</div>
-            <div style="display: inline-flex">
-                <a class="aq_backbtn" href="javascript:ContinueAvaterAndQQMessage()">放弃金币</a>
-                <a class="aq_savebtn" href="javascript:HideAvaterAndQQMessage()">返回填写</a>
-                <input type="hidden" id="data20190202" value='85FFD35212AEBBA1B56B5326CA409A4BB2F90694F854F59E664E3EC61492C7C6' />
-            </div>
-        </div>
-    </div>
-    <script type="text/javascript" src="https://dat.ruanmei.com/lib/rm-js-sdk.min.js"></script>
-    <script>
-        rm.ready(function () {
-            rm.setTextSelectEnable(true);
-            if (rm.isLegalEnv()) {
-                rm.hideMenus(["navigation", "openBrowser", "refresh", "share"]);
-                $(".rm-protocol .a_link").attr("href", "#");
-                $(".rm-protocol .register_protocol").click(function() {
-                    rm.navigateTo({
-                        url: "https://www.ruanmei.com/agreement/reg.htm?hidemenu=1"
-                    });
-                });
-                $(".rm-protocol .privacy_policy").click(function() {
-                    rm.navigateTo({
-                        url: "https://www.ruanmei.com/agreement/privacy.htm?hidemenu=1"
-                    });
-                });
-            }
-            rm.onAppThemeChanged(function(status) {
-                if (status.isDark && !$("body").hasClass("night")) {
-                    $("body").addClass("night");
-                } else if (!status.isDark && $("body").hasClass("night")) {
-                    $("body").removeClass("night");
-                }
-            });
-        });
-    </script>
-
-</body>
-</html>
+{% endblock %}
