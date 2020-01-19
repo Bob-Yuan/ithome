@@ -136,7 +136,7 @@ class LoginView(View):
         else:
             data = {
                 "status": 0,
-                'msg': "用户名或密码错误!",
+                'msg': "用户名或密码或验证码错误!",
             }
             return JsonResponse(data)
 

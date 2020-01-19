@@ -262,14 +262,14 @@ $(function () {
 function loginbtn_clicked() {
     var email = $("#txtEmail").val();
     var psw = $("#txtPwd").val();
-    var captcha_1 = $("#captcha_1").val();
-    var captcha_0 = $("#id_captcha_0").val();
+    var id_captcha_1 = $("#id_captcha_1").val();
+    var id_captcha_0 = $("#id_captcha_0").val();
 
     if (null == email || "" == email || null == psw || "" == psw) {
         ShowErrorMessage("请输入账号密码");
         return;
     }
-    if (null == captcha_1 || "" == captcha_1) {
+    if (null == id_captcha_1 || "" == id_captcha_1) {
         ShowErrorMessage("请输入验证码");
         return;
     }
@@ -289,7 +289,7 @@ function loginbtn_clicked() {
     }
 
     //发送验证请求
-    var login_data = { "email" :escape(email) , "password":psw,  "captcha_0": captcha_0, "captcha_1": captcha_1};  
+    var login_data = { "email" :escape(email) , "password":psw,  "captcha_0": id_captcha_0, "captcha_1": id_captcha_1};  
 
     $.ajax({
         type: "POST",
@@ -488,6 +488,23 @@ function getCallbackUrl(hash, rememberme) {
                 验证码相关
 ***************************************/
 
+//点击验证码刷新
+$(function() {
+    $('.captcha').css({
+        'cursor': 'pointer'
+    })
+    // ajax 刷新
+    $('.captcha').click(function () {
+        console.log('click');
+        $.getJSON("/captcha/refresh/",
+            function (result) {
+                $('.captcha').attr('src', result['image_url']);
+                $('#id_captcha_0').val(result['key']);
+            }
+        );
+    });
+});
+
 //检查发送验证码的超时时间
 var sendCodeTimeOutSecond = 60;
 $(function () {
@@ -638,7 +655,7 @@ function sendSms(mobile, checkreg, validate, data, finish) {
 //立即登录点击
 function loginnow_clicked() {
     location.replace(login_url);
-    $("#captcha_1").attr("placeholder","验证码");
+    $("#id_captcha_1").attr("placeholder","验证码");
 }
 
 //获得刷新url
@@ -669,14 +686,14 @@ function getReturnUrl() {
 function registerbtn_clicked() {
     var email = $("#txtEmail").val();
     var psw = $("#txtPwd").val();
-    var captcha_1 = $("#captcha_1").val();
-    var captcha_0 = $("#id_captcha_0").val();
+    var id_captcha_1 = $("#id_captcha_1").val();
+    var id_captcha_0 = $("#id_captcha_0").val();
 
     if (null == email || "" == email || null == psw || "" == psw) {
         ShowErrorMessage("请输入账号密码");
         return;
     }
-    if (null == captcha_1 || "" == captcha_1) {
+    if (null == id_captcha_1 || "" == id_captcha_1) {
         ShowErrorMessage("请输入验证码");
         return;
     }
@@ -692,7 +709,7 @@ function registerbtn_clicked() {
         return;
     }
 
-    var register_data = { "email" :escape(email) , "password":psw,  "captcha_0": captcha_0, "captcha_1": captcha_1};  
+    var register_data = { "email" :escape(email) , "password":psw,  "captcha_0": id_captcha_0, "captcha_1": id_captcha_1};  
 
     $.ajax({
         type: "POST",

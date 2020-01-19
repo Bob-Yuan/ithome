@@ -33,7 +33,6 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    #'django_crontab',    #windows下不可用
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
