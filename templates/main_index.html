@@ -3,6 +3,7 @@
 {% load static %}
 <head>
 <meta charset="UTF-8">
+<meta name="referrer" content="no-referrer" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>导航页 | qxdq.xyz</title>
 <meta name="theme-color" content="#2C2E2F" />
@@ -27,27 +28,6 @@
 <link rel='https://api.w.org/' href="https://hello-123.com/index.php/wp-json/" />
 
 <meta name="msapplication-TileImage" content="http://hello-123.com/wp-content/uploads/2019/11/cropped-1234-3-270x270.png" />
-    <style type="text/css">
-        div.search-group.group-a.s-current{
-            padding:0px;
-        }
-        .main_index_title{
-            font-family: PingFang SC,Microsoft YaHei UI,STHeitiSC-Light,Microsoft YaHei;
-            font-size: 14px;
-            color: #000;
-            display: inline-block;
-            margin: 4px;
-        }
-        #popWinClose {
-            position: absolute;
-            top: 15px;
-            right: 9pt;
-            width: 20px;
-            height: 20px;
-            background-image: url(https://img.ithome.com/images/popwin/close.svg);
-            cursor: pointer;
-        }
-    </style>
     <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
 </head>
 
@@ -116,12 +96,30 @@
 <script>(function(T,h,i,n,k,P,a,g,e){g=function(){P=h.createElement(i);a=h.getElementsByTagName(i)[0];P.src=k;P.charset="utf-8";P.async=1;a.parentNode.insertBefore(P,a)};T["ThinkPageWeatherWidgetObject"]=n;T[n]||(T[n]=function(){(T[n].q=T[n].q||[]).push(arguments)});T[n].l=+new Date();if(T.attachEvent){T.attachEvent("onload",g)}else{T.addEventListener("load",g,false)}}(window,document,"script","tpwidget","//widget.seniverse.com/widget/chameleon.js"))</script>
 <script>tpwidget("init",{"flavor": "slim","location": "WX4FBXXFKE4F","geolocation": "enabled","language": "zh-chs","unit": "c","theme": "white","container": "tp-weather-widget","bubble": "enabled","alarmType": "badge","uid": "UD5EFC1165","hash": "2ee497836a31c599f67099ec09b0ef62"});tpwidget("show");</script>
                         </li>
+{% if request.user.is_authenticated %}
+                        <li style="display: block;position:absolute;right:300px;">
+                            <a href="javascript:;" class="item-link" id="rm_avatar">
+                                <img src="https://avatar.ithome.com/avatars/001/71/89/07_60.jpg" onerror="this.src='//quan.ithome.com/statics/images/noavatar.png'">njupt
+                            </a>
+                        </li>
+                        <div id="avatar" class="menu" style="display: none;">
+                            <ul>
+                                <li>
+                                    <a href="https://my.ruanmei.com/?hash=68A7744A3E8AA1C906713549F337D35B2F2F782FFBE8570BFFCD5374FA09CE0975D449857F1F4FC62CD007C406BADE12511636A530F012729C650BB909AE47B38133BE4F36285D4607B4CD5E3B782FA86DD9782A9F4CAFD74172F02E83D654C5" target="_blank">个人资料</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+                                    <a href="http://quan.ithome.com/user/editavatar" target="_blank">修改头像</a>
+                                </li>
+                                <li class="line"></li>
+                                <li style="text-align:center;"><a id="btnLogout" href="javascript:;">退出登录</a></li>
+                            </ul>
+                        </div>
+{% else %}
                         <li style="display: block;position:absolute;right:300px;" class="main_index_title">
                             <a href="javascript:; " class="login">登录</a>
                         </li>
                         <li style="display: block;position:absolute;right:340px;" class="main_index_title">
                             <a href="{% url 'register' %}" target="_blank">注册</a>
                         </li>
+{% endif %}
                     </ul>
                 </div>
             </nav>
@@ -250,6 +248,65 @@
         .search-list{height:30px;overflow-y:hidden;overflow-x:scroll;white-space:nowrap}
         .fa-2x{padding-top: 15px;font-size: 1.5em;}
     }
+    {#<style type="text/css">#}
+    div.search-group.group-a.s-current{
+        padding:0px;
+    }
+    .main_index_title{
+
+    }
+    #popWinClose {
+        position: absolute;
+        top: 15px;
+        right: 9pt;
+        width: 20px;
+        height: 20px;
+        background-image: url(https://img.ithome.com/images/popwin/close.svg);
+        cursor: pointer;
+    }
+    a.item-link:after {
+        display: inline-block;
+        margin-left: 5px;
+        width: 16px;
+        height: 16px;
+        background: url(https://img.ithome.com/images/v2.3/narrow.png) no-repeat 0 3px;
+        background-size: 64px 16px;
+        content: '';
+    }
+    #rm_avatar img {
+        width: 26px;
+        height: 26px;
+        display: inline-block;
+        overflow: hidden;
+        margin: 5px;
+        border-radius: 50%;
+        background: #F8F8F8;
+        opacity: 1;
+    }
+    a.item-link {
+        position: relative !important;
+        display: block !important;
+        overflow: hidden !important;
+        padding: 0 16px 0 20px !important;
+        height: 35px !important;
+        color: #000 !important;
+        text-align: right !important;
+        line-height: 35px !important;
+        font-size: 14px !important;
+        margin: 20px 0px !important;
+        font-family: PingFang SC,Microsoft YaHei UI,STHeitiSC-Light,Microsoft YaHei !important;
+    }
+/*.user-info-navbar .user-info-menu>li>a {
+    position: relative;
+    display: block;
+    padding: 30px 20px;
+    color: #979898;
+    border-bottom: 1px solid #fff;
+    top: 1px;
+    z-index: 5;
+    text-decoration: none;
+}*/
+
 </style>
 
 <script type="text/javascript">

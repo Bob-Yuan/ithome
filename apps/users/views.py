@@ -113,24 +113,32 @@ class LoginView(View):
                     redirect_url = request.POST.get('next', '')
 
                     data = {
+                        "status": 1,
                         'redirect_url': redirect_url,
                     }
                     return JsonResponse(data)
-
-                    if redirect_url:
-                        return HttpResponseRedirect(redirect_url)
-                    # 跳转到首页 user request会被带回到首页
-                    return HttpResponseRedirect(reverse("index"))
                 # 即用户未激活跳转登录，提示未激活
                 else:
-                    return render(request, "login.html", {"msg": "用户名未激活! 请前往邮箱进行激活"})
+                    data = {
+                        "status": 0,
+                        'msg': "用户名未激活! 请前往邮箱进行激活!",
+                    }
+                    return JsonResponse(data)
             # 仅当用户真的密码出错时
             else:
-                return render(request, "login.html", {"msg": "用户名或密码错误!"})
+                data = {
+                    "status": 0,
+                    'msg': "用户名或密码错误!",
+                }
+                return JsonResponse(data)
         # 验证不成功跳回登录页面
         # 没有成功说明里面的值是None，并再次跳转回主页面
         else:
-            return render(request, "login.html", {"login_form": login_form})
+            data = {
+                "status": 0,
+                'msg': "用户名或密码错误!",
+            }
+            return JsonResponse(data)
 
 
 class LogoutView(View):
@@ -150,13 +158,14 @@ class RegisterView(View):
 
     def post(self, request):
         # 实例化form
-        register_form = RegisterForm(request.POST)
+        data = json.loads(request.body)
+        register_form = RegisterForm(data)
         if register_form.is_valid():
-            email_account = request.POST.get("email", "")
+            email_account = data["email"]
+            pass_word = data["password"]
             # 用户查重
             if UserProfile.objects.filter(email=email_account):
                 return render(request, "register.html", {"register_form": register_form, "msg": "用户已存在"})
-            pass_word = request.POST.get("password", "")
 
             # 实例化一个user_profile对象，将前台值存入
             user_profile = UserProfile()
@@ -164,7 +173,7 @@ class RegisterView(View):
             user_profile.username = email_account
 
             # 默认激活状态为false
-            user_profile.is_active = False
+            user_profile.is_active = True        #注意改为False
 
             # 加密password进行保存
             user_profile.password = make_password(pass_word)
@@ -175,11 +184,15 @@ class RegisterView(View):
             user_message.user = user_profile.id
             user_message.message = "欢迎注册慕学在线网!! --系统自动消息"
             user_message.save()
-            # 发送注册激活邮件
-            send_register_eamil(email_account, "register")
 
-            # 跳转到登录页面
-            return render(request, "login.html", {"register_form": register_form, "msg": "注册成功！请注意邮箱激活链接！"})
+            status = 1
+            # 发送注册激活邮件
+            #send_register_eamil(email_account, "register")
+            data = {
+                'status': status,
+                "msg": "注册成功！请注意邮箱激活链接！"
+            }
+            return JsonResponse(data)
         # 注册邮箱form验证失败
         else:
             return render(request, "register.html", {"register_form": register_form})

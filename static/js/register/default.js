@@ -304,7 +304,16 @@ function loginbtn_clicked() {
         },
         success: function (data) {
             if (null != data && "" != data) {
-                console.log(data);
+                //console.log(data);
+                if(data.status == 1){
+                    if(data.redirect_url != "" && data.redirect_url != null) {
+                        window.location.href = http+window.location.host + data.redirect_url;
+                    }
+                    else{
+                        //location.replace(http+window.location.host);
+                        window.location.href = http+window.location.host;
+                    }
+                }
                 // if (data.d.indexOf("ok:") == 0) {
                     // var hash = data.d.replace("ok:", "");
                     // if (isIFrame) {
@@ -629,7 +638,7 @@ function sendSms(mobile, checkreg, validate, data, finish) {
 //立即登录点击
 function loginnow_clicked() {
     location.replace(login_url);
-    $("#id_captcha_1").attr("placeholder","验证码");
+    $("#captcha_1").attr("placeholder","验证码");
 }
 
 //获得刷新url
@@ -658,60 +667,63 @@ function getReturnUrl() {
 
 //注册按钮点击
 function registerbtn_clicked() {
-    var phone = $('#phone');
-    var code = $('#code');
-    if (!isMobile(phone.val())) {
-        ShowErrorMessage("请输入正确的手机号码");
+    var email = $("#txtEmail").val();
+    var psw = $("#txtPwd").val();
+    var captcha_1 = $("#captcha_1").val();
+    var captcha_0 = $("#id_captcha_0").val();
+
+    if (null == email || "" == email || null == psw || "" == psw) {
+        ShowErrorMessage("请输入账号密码");
         return;
     }
+    if (null == captcha_1 || "" == captcha_1) {
+        ShowErrorMessage("请输入验证码");
+        return;
+    }
+    //密码转义
+    psw = escape(psw);
+    while (psw.indexOf("+") >= 0) {
+        psw = psw.replace("+", "%2B");
+    }
+
     var read_protocol_imgSrc = $("#read_protocol_img").attr("src");
     if (read_protocol_imgSrc.indexOf("un") > 0) {
         ShowErrorMessage("请先阅读并同意注册协议和隐私政策");
         return;
     }
-    var checkcode = code.val();
-    if (null == checkcode || "" == checkcode) {
-        ShowErrorMessage("请输入验证码");
-        return;
-    }
-    var checkcodeOk = true;
-    for (var i = 0; i < checkcode.length; ++i) {
-        var c = checkcode.charAt(i);
-        if (c < '0' || c > '9') {
-            checkcodeOk = false;
-            break;
-        }
-    }
-    if (6 != checkcode.length || !checkcodeOk) {
-        ShowErrorMessage("请输入正确的验证码");
-        return;
-    }
 
-    //发送验证请求
+    var register_data = { "email" :escape(email) , "password":psw,  "captcha_0": captcha_0, "captcha_1": captcha_1};  
+
     $.ajax({
         type: "POST",
         contentType: "application/json; charset=utf-8",
-        url: "Default.aspx/VerifyMobileCode",
+        headers: { "X-CSRFToken": token_csrf },
+        url: "/register/",
         dataType: "json",
         cache: false,
-        data: '{mobile:"' + escape(phone.val()) + '", sendcode:"' + escape(code.val()) + '"  }',
+        data: JSON.stringify(register_data),
         error: function () {
-            ShowErrorMessage("校验验证码失败！");
+            ShowErrorMessage("注册失败！");
         },
         success: function (data) {
             if (null != data && "" != data) {
+                console.log(data);
+                if(data.status == 1){
+                    alert("注册成功！")
+                    window.location.href = login_url;
+                }
                 //下面几行为调试使用
                 //$("#rm_login").hide();
                 //$("#rm_userinfo").show();
                 //return;
 
-                if ("ok" == data.d) {
-                    $("#rm_login").hide();
-                    $("#rm_forgetpassword").hide();
-                    $("#rm_userinfo").show();
-                } else {
-                    ShowErrorMessage(data.d);
-                }
+                // if ("ok" == data.d) {
+                //     $("#rm_login").hide();
+                //     $("#rm_forgetpassword").hide();
+                //     $("#rm_userinfo").show();
+                // } else {
+                //     ShowErrorMessage(data.d);
+                // }
             }
         }
     });
