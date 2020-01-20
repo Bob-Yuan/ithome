@@ -5,12 +5,11 @@ var isWeApp = false;
 var isIFrame = false;
 var source = "ruanmei";
 var app = "";
-var http = "http://";
 
 var reginfo = '';
 
-var login_url = http + window.location.host + "/login";
-var register_url = http + window.location.host + "/register";
+var login_url = "http://" + window.location.host + "/login";
+var register_url = "http://" + window.location.host + "/register";
 
 $(function () {
     //取得source参数
@@ -307,11 +306,11 @@ function loginbtn_clicked() {
                 //console.log(data);
                 if(data.status == 1){
                     if(data.redirect_url != "" && data.redirect_url != null) {
-                        window.location.href = http+window.location.host + data.redirect_url;
+                        window.location.href = "http://"+window.location.host + data.redirect_url;
                     }
                     else{
                         //location.replace(http+window.location.host);
-                        window.location.href = http+window.location.host;
+                        window.location.href = "http://"+window.location.host;
                     }
                 }
                 // if (data.d.indexOf("ok:") == 0) {
@@ -906,7 +905,7 @@ function RegisterUser(userNick, userPsw, userPswConfirm, userQQ, app) {
                                         if (null != isapp && "true" == isapp) {
                                             AppLogin(hash);
                                         } else {
-                                            var url = http + "my.ruanmei.com/openplat/callback.aspx?type=web&hash=" + hash;
+                                            var url = "http://" + "my.ruanmei.com/openplat/callback.aspx?type=web&hash=" + hash;
                                             location.replace(url);
                                         }
                                     } else {

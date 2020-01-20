@@ -189,10 +189,21 @@ $(document).ready(function () {
     $('body').on("click",
         "#btnLogout",
         function () {
-            var url = "https://www.ithome.com/logout";
-            $.getScript(url).done(function () {
-                location.reload();
-            });
+            //var url = "/logout";
+            // $.getScript(url).done(function () {
+            //     alert(1);
+            //     location.reload();
+            // });
+            $.ajax({
+                type: "GET",
+                url: "/logout/",
+                error: function () {
+                    ShowErrorMessage("登录失败！");
+                },
+                success: function (data) {
+                    window.location.href = window.location.href;
+                }
+            })
         });
     $(".refresh a").on({
         click: function () {
