@@ -636,6 +636,20 @@ li {
             scrollTop: pos
         }, 500);
     });
+
+        $(function(){
+        login.initPage();
+    });
+
+    var login = {
+        //初始化页面跳转，为了防止从iframe跳转到login页面直接在iframe中显示login页面
+        initPage : function() {
+            //alert(location.href);
+            if(window.top != window.self){
+                top.location.href = location.href;
+            }
+        },
+    }
     </script>
 <script type='text/javascript' src="https://hello-123.com/wp-content/themes/webstack/js/bootstrap.min.js?ver=1.1029"></script>
 <script type='text/javascript' src="https://hello-123.com/wp-content/themes/webstack/js/TweenMax.min.js?ver=1.1029"></script>
