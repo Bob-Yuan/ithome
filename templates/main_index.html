@@ -86,7 +86,7 @@
 
         <div class="main-content">
             <nav class="navbar user-info-navbar" role="navigation">
-                <div style="position: absolute;background: #fff;width: 100%;box-shadow: 0 5px 20px rgba(0,0,0,.05);padding-bottom:1px;">
+                <div class="tb-item" style="position: absolute;background: #fff;width: 100%;box-shadow: 0 5px 20px rgba(0,0,0,.05);padding-bottom:1px;">
                     <ul class="user-info-menu left-links list-inline list-unstyled">
                         <li class="hidden-sm hidden-xs" >
                             <a href="#" data-toggle="sidebar"><i class="fa-bars"></i></a>
@@ -97,21 +97,22 @@
 <script>tpwidget("init",{"flavor": "slim","location": "WX4FBXXFKE4F","geolocation": "enabled","language": "zh-chs","unit": "c","theme": "white","container": "tp-weather-widget","bubble": "enabled","alarmType": "badge","uid": "UD5EFC1165","hash": "2ee497836a31c599f67099ec09b0ef62"});tpwidget("show");</script>
                         </li>
 {% if request.user.is_authenticated %}
-                        <li style="display: block;position:absolute;right:300px;">
+                        <li class="dm" style="display: block;position:absolute;right:300px;">
                             <a href="javascript:;" class="item-link" id="rm_avatar">
                                 <img src="https://avatar.ithome.com/avatars/001/71/89/07_60.jpg" onerror="this.src='//quan.ithome.com/statics/images/noavatar.png'">njupt
                             </a>
+                            <div id="avatar" class="menu" style="display: block; height: 111px; padding-top: 5px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">
+                                <ul>
+                                    <li>
+                                        <a href="https://my.ruanmei.com/?hash=68A7744A3E8AA1C906713549F337D35B2F2F782FFBE8570BFFCD5374FA09CE0975D449857F1F4FC62CD007C406BADE12511636A530F012729C650BB909AE47B38133BE4F36285D4607B4CD5E3B782FA86DD9782A9F4CAFD74172F02E83D654C5" target="_blank">个人资料</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+                                        <a href="http://quan.ithome.com/user/editavatar" target="_blank">修改头像</a>
+                                    </li>
+                                    <li class="line"></li>
+                                    <li style="text-align:center;"><a id="btnLogout" href="javascript:;">退出登录</a></li>
+                                </ul>
+                            </div>
                         </li>
-                        <div id="avatar" class="menu" style="display: none;">
-                            <ul>
-                                <li>
-                                    <a href="https://my.ruanmei.com/?hash=68A7744A3E8AA1C906713549F337D35B2F2F782FFBE8570BFFCD5374FA09CE0975D449857F1F4FC62CD007C406BADE12511636A530F012729C650BB909AE47B38133BE4F36285D4607B4CD5E3B782FA86DD9782A9F4CAFD74172F02E83D654C5" target="_blank">个人资料</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-                                    <a href="http://quan.ithome.com/user/editavatar" target="_blank">修改头像</a>
-                                </li>
-                                <li class="line"></li>
-                                <li style="text-align:center;"><a id="btnLogout" href="javascript:;">退出登录</a></li>
-                            </ul>
-                        </div>
+
 {% else %}
                         <li style="display: block;position:absolute;right:300px;" class="main_index_title">
                             <a href="javascript:; " class="login">登录</a>
@@ -123,6 +124,8 @@
                     </ul>
                 </div>
             </nav>
+
+
             <div id="search" class="s-search">
                 <div id="search-list" class="hide-type-list">
                     <div class="search-group group-a">
@@ -249,6 +252,15 @@
         .fa-2x{padding-top: 15px;font-size: 1.5em;}
     }
     {#<style type="text/css">#}
+body, html body {
+    color: #262626;
+    font: 12px/1.5 Microsoft YaHei,tahoma,arial,Hiragino Sans GB,sans-serif;
+}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, button, textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+    font-family: "微软雅黑";
+}
     div.search-group.group-a.s-current{
         padding:0px;
     }
@@ -283,6 +295,17 @@
         background: #F8F8F8;
         opacity: 1;
     }
+    .tb-item #avatar {
+        right: -1px;
+        left: auto;
+        overflow: hidden;
+        padding-top: 5px;
+        padding-bottom: 0;
+        width: 200px;
+        border: 1px solid #ddd;
+        border-top: none;
+        background: #fff;
+    }
     a.item-link {
         position: relative !important;
         display: block !important;
@@ -296,16 +319,44 @@
         margin: 20px 0px !important;
         font-family: PingFang SC,Microsoft YaHei UI,STHeitiSC-Light,Microsoft YaHei !important;
     }
-/*.user-info-navbar .user-info-menu>li>a {
-    position: relative;
+
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+#avatar li {
+    margin: 10px 25px;
+    line-height: 35px;
+    list-style-type:none;
+}
+#avatar .line:before {
     display: block;
-    padding: 30px 20px;
-    color: #979898;
-    border-bottom: 1px solid #fff;
-    top: 1px;
-    z-index: 5;
-    text-decoration: none;
-}*/
+    margin: 0 0;
+    height: 1px;
+    background: #eee;
+    content: '';
+}
+#avatar .line {
+    height: 1px;
+}
+#avatar a {
+    display: inline;
+    margin: 0;
+    padding: 0;
+    text-decoration:none;
+}
+#avatar {
+    right: -1px;
+    left: auto;
+    overflow: hidden;
+    padding-top: 5px;
+    padding-bottom: 0;
+    width: 200px;
+    border: 1px solid #ddd;
+    border-top: none;
+    background: #fff;
+    font-size: 14px;
+}
 
 </style>
 
