@@ -722,15 +722,18 @@ function registerbtn_clicked() {
         dataType: "json",
         cache: false,
         data: JSON.stringify(register_data),
-        error: function () {
-            ShowErrorMessage("注册失败！");
+        error: function (data) {
+            console.log(data);
+            ShowErrorMessage(data.msg, data.status);     //1=成功，2=失败，默认为0
         },
         success: function (data) {
             if (null != data && "" != data) {
                 console.log(data);
                 if(data.status == 1){
-                    alert("注册成功！")
-                    window.location.href = login_url;
+                    ShowErrorMessage(data.msg, data.status);
+                    setTimeout(function (){window.location.href = login_url;}, 3500);
+                }else{
+                    ShowErrorMessage(data.msg, data.status);
                 }
                 //下面几行为调试使用
                 //$("#rm_login").hide();
@@ -1234,6 +1237,7 @@ function ShowErrorMessage(msg, type) {
     errmsg.show();
 
     //自动消失
+
     errRegTimer = setInterval(function () {
         errmsg.hide();
         clearInterval(errRegTimer);

@@ -15,7 +15,7 @@ from utils.email_send import send_register_eamil
 # from courses.models import Course
 # from operation.models import UserCourse, UserFavorite
 # from organization.models import CourseOrg, Teacher
-from .models import UserProfile, UserMessage        #, EmailVerifyRecord, Banner
+from .models import UserProfile, UserMessage, EmailVerifyRecord #, Banner
 from .forms import LoginForm, RegisterForm, ActiveForm, ForgetForm, ModifyPwdForm, UploadImageForm, UserInfoForm
 
 # Create your views here.
@@ -166,7 +166,11 @@ class RegisterView(View):
             pass_word = data["password"]
             # 用户查重
             if UserProfile.objects.filter(email=email_account):
-                return render(request, "register.html", {"register_form": register_form, "msg": "用户已存在"})
+                data = {
+                    'status': 2,
+                    "msg": "用户已存在！"
+                }
+                return JsonResponse(data)
 
             # 实例化一个user_profile对象，将前台值存入
             user_profile = UserProfile()
@@ -174,7 +178,7 @@ class RegisterView(View):
             user_profile.username = email_account
 
             # 默认激活状态为false
-            user_profile.is_active = True        #注意改为False
+            user_profile.is_active = False        #注意改为False
 
             # 加密password进行保存
             user_profile.password = make_password(pass_word)
@@ -186,124 +190,127 @@ class RegisterView(View):
             user_message.message = "欢迎注册慕学在线网!! --系统自动消息"
             user_message.save()
 
-            status = 1
             # 发送注册激活邮件
-            #send_register_eamil(email_account, "register")
+            send_register_eamil(email_account, "register")
             data = {
-                'status': status,
+                'status': 1,
                 "msg": "注册成功！请注意邮箱激活链接！"
             }
             return JsonResponse(data)
         # 注册邮箱form验证失败
         else:
-            return render(request, "register.html", {"register_form": register_form})
+            data = {
+                'status': 2,
+                "msg": "验证码错误！"
+            }
+            return JsonResponse(data)
 
 
-# class ActiveUserView(View):
-#     """激活用户的view"""
-#
-#     def get(self, request, active_code):
-#         # 查询邮箱验证记录是否存在
-#         all_record = EmailVerifyRecord.objects.filter(code=active_code)
-#         # 如果不为空也就是有用户
-#         active_form = ActiveForm(request.GET)
-#         if all_record:
-#             for record in all_record:
-#                 # 获取到对应的邮箱
-#                 email = record.email
-#                 # 查找到邮箱对应的user
-#                 user = UserProfile.objects.get(email=email)
-#                 user.is_active = True
-#                 user.save()
-#                 # 激活成功跳转到登录页面
-#                 return render(request, "login.html", {
-#                     "msg": "激活成功！您现在可以登录了！", "active_form": active_form})
-#         # 自己瞎输的验证码
-#         else:
-#             return render(
-#                 request, "register.html", {
-#                     "msg": "您的激活链接无效", "active_form": active_form})
-#
-#
-# class ForgetPwdView(View):
-#     """用户忘记密码的处理view"""
-#     # get方法直接返回页面
-#
-#     def get(self, request):
-#         # 给忘记密码页面加上验证码
-#         active_form = ActiveForm(request.POST)
-#         return render(request, "forgetpwd.html", {"active_form": active_form})
-#     # post方法实现
-#
-#     def post(self, request):
-#         forget_form = ForgetForm(request.POST)
-#         # form验证合法情况下取出email
-#         if forget_form.is_valid():
-#             email = request.POST.get("email", "")
-#             # 发送找回密码邮件
-#             send_register_eamil(email, "forget")
-#             # 发送完毕返回登录页面并显示发送邮件成功。
-#             return render(request, "login.html", {"msg": "重置密码邮件已发送,请注意查收"})
-#         # 如果表单验证失败也就是他验证码输错等。
-#         else:
-#             return render(
-#                 request, "forgetpwd.html", {
-#                     "forget_from": forget_form})
-#
-#
-# class ResetView(View):
-#     """重置密码的view"""
-#
-#     def get(self, request, active_code):
-#         # 查询邮箱验证记录是否存在
-#         all_record = EmailVerifyRecord.objects.filter(code=active_code)
-#         # 如果不为空也就是有用户
-#         active_form = ActiveForm(request.GET)
-#         if all_record:
-#             for record in all_record:
-#                 # 获取到对应的邮箱
-#                 email = record.email
-#                 # 将email传回来
-#                 # 只传回active_code
-#                 return render(
-#                     request, "password_reset.html", {
-#                         "active_code": active_code})
-#         # 自己瞎输的验证码
-#         else:
-#             return render(
-#                 request, "forgetpwd.html", {
-#                     "msg": "您的重置密码链接无效,请重新请求", "active_form": active_form})
-#
-#     def post(self, request, active_code):
-#         modiypwd_form = ModifyPwdForm(request.POST)
-#         if modiypwd_form.is_valid():
-#             pwd1 = request.POST.get("password1", "")
-#             pwd2 = request.POST.get("password2", "")
-#             # email = request.POST.get("email", "")
-#             # 如果两次密码不相等，返回错误信息
-#             if pwd1 != pwd2:
-#                 return render(
-#                     request, "password_reset.html", {
-#                         "active_code": active_code, "msg": "密码不一致"})
-#             # 如果密码一致
-#             # 找到激活码对应的邮箱
-#             all_record = EmailVerifyRecord.objects.filter(code=active_code)
-#             for record in all_record:
-#                 email = record.email
-#             user = UserProfile.objects.get(email=email)
-#             # 加密成密文
-#             user.password = make_password(pwd2)
-#             # save保存到数据库
-#             user.save()
-#             return render(request, "login.html", {"user": user, "msg": "密码修改成功，请登录"})
-#         # 验证失败说明密码位数不够。
-#         else:
-#             active_code = request.POST.get("active_code", "")
-#             return render(
-#                 request, "password_reset.html", {
-#                     "active_code": active_code,  "msg": "密码小于5位"})
-#
-#
+class ActiveUserView(View):
+    """激活用户的view"""
+
+    def get(self, request, active_code):
+        # 查询邮箱验证记录是否存在
+        all_record = EmailVerifyRecord.objects.filter(code=active_code)
+        # 如果不为空也就是有用户
+        print("request.GET", request.GET)
+        print("active_code", active_code)
+        active_form = ActiveForm(request.GET)
+        if all_record:
+            for record in all_record:
+                # 获取到对应的邮箱
+                email = record.email
+                # 查找到邮箱对应的user
+                user = UserProfile.objects.get(email=email)
+                user.is_active = True
+                user.save()
+                # 激活成功跳转到登录页面
+                return render(request, "login.html", {
+                    "msg": "激活成功！您现在可以登录了！", "active_form": active_form, "myflag": 1 })
+        # 自己瞎输的验证码
+        else:
+            return render(request, "register.html", {"msg": "您的激活链接无效", "active_form": active_form, "myflag": 2})
+
+
+class ForgetPwdView(View):
+    """用户忘记密码的处理view"""
+    # get方法直接返回页面
+
+    def get(self, request):
+        # 给忘记密码页面加上验证码
+        active_form = ActiveForm(request.POST)
+        return render(request, "forgetpwd.html", {"active_form": active_form})
+    # post方法实现
+
+    def post(self, request):
+        forget_form = ForgetForm(request.POST)
+        # form验证合法情况下取出email
+        if forget_form.is_valid():
+            email = request.POST.get("email", "")
+            # 发送找回密码邮件
+            send_register_eamil(email, "forget")
+            # 发送完毕返回登录页面并显示发送邮件成功。
+            return render(request, "login.html", {"msg": "重置密码邮件已发送,请注意查收"})
+        # 如果表单验证失败也就是他验证码输错等。
+        else:
+            return render(
+                request, "forgetpwd.html", {
+                    "forget_from": forget_form})
+
+
+class ResetView(View):
+    """重置密码的view"""
+
+    def get(self, request, active_code):
+        # 查询邮箱验证记录是否存在
+        all_record = EmailVerifyRecord.objects.filter(code=active_code)
+        # 如果不为空也就是有用户
+        active_form = ActiveForm(request.GET)
+        if all_record:
+            for record in all_record:
+                # 获取到对应的邮箱
+                email = record.email
+                # 将email传回来
+                # 只传回active_code
+                return render(
+                    request, "password_reset.html", {
+                        "active_code": active_code})
+        # 自己瞎输的验证码
+        else:
+            return render(
+                request, "forgetpwd.html", {
+                    "msg": "您的重置密码链接无效,请重新请求", "active_form": active_form})
+
+    def post(self, request, active_code):
+        modiypwd_form = ModifyPwdForm(request.POST)
+        if modiypwd_form.is_valid():
+            pwd1 = request.POST.get("password1", "")
+            pwd2 = request.POST.get("password2", "")
+            # email = request.POST.get("email", "")
+            # 如果两次密码不相等，返回错误信息
+            if pwd1 != pwd2:
+                return render(
+                    request, "password_reset.html", {
+                        "active_code": active_code, "msg": "密码不一致"})
+            # 如果密码一致
+            # 找到激活码对应的邮箱
+            all_record = EmailVerifyRecord.objects.filter(code=active_code)
+            for record in all_record:
+                email = record.email
+            user = UserProfile.objects.get(email=email)
+            # 加密成密文
+            user.password = make_password(pwd2)
+            # save保存到数据库
+            user.save()
+            return render(request, "login.html", {"user": user, "msg": "密码修改成功，请登录"})
+        # 验证失败说明密码位数不够。
+        else:
+            active_code = request.POST.get("active_code", "")
+            return render(
+                request, "password_reset.html", {
+                    "active_code": active_code,  "msg": "密码小于5位"})
+
+
 # class MyMessageView(LoginRequiredMixin, View):
 #     """我的消息"""
 #     login_url = '/login/'

@@ -53,12 +53,9 @@
 {% block loginOrRegister %}
 {% endblock %}
 
-<div class="error btns login-form-tips" id="jsLoginTips">
-    {% for key, error in login_form.errors.items %}
-    {{ error }}
-    {% endfor %}
-    {{ msg }}
-</div>
+
+
+
             <div class="one_press_login_parent">
                 <img src="{% static 'image/register/line.png' %}" alt="线" width="270" height="1" class="one_press_login_img" />
                 <div class="one_press_login">一键登录</div>
@@ -177,6 +174,11 @@
     </div>
     <script type="text/javascript" src="https://dat.ruanmei.com/lib/rm-js-sdk.min.js"></script>
     <script>
+
+        if({{ myflag }} != null){
+            ShowErrorMessage("{{ msg }}", {{ myflag }});
+        }
+
         rm.ready(function () {
             rm.setTextSelectEnable(true);
             if (rm.isLegalEnv()) {
@@ -208,6 +210,8 @@
             //刷新父页面
             setTimeout(window.opener.reload(), 10000);
         }
+
+
     </script>
 
 </body>

@@ -34,7 +34,7 @@ def send_register_eamil(email, send_type="register"):
     email_record.save()
 
     if send_type == "register":
-        email_title = "慕学在线网注册激活链接"
+        email_title = "qxdq.xyz注册激活链接"
         # email_body = "欢迎注册慕学在线网:  请点击下面的链接激活你的账号: http://127.0.0.1:8000/active/{0}".format(code)
 
         email_body = loader.render_to_string(
@@ -52,7 +52,7 @@ def send_register_eamil(email, send_type="register"):
 
         # 如果发送成功
         if send_status:
-            pass
+            return 0
     elif send_type == "forget":
         email_title = "慕学在线网找回密码链接"
         email_body = loader.render_to_string(
