@@ -201,11 +201,12 @@
                 }
             });
         });
+
         var token_csrf = "{{ csrf_token }}";
 
         window.onunload=function(){
             //刷新父页面
-            window.opener.reload();
+            setTimeout(window.opener.reload(), 10000);
         }
     </script>
 

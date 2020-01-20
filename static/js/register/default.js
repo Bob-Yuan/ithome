@@ -288,7 +288,7 @@ function loginbtn_clicked() {
     }
 
     //发送验证请求
-    var login_data = { "email" :escape(email) , "password":psw,  "captcha_0": id_captcha_0, "captcha_1": id_captcha_1};  
+    var login_data = { "email" :escape(email) , "password":psw,  "captcha_0": id_captcha_0, "captcha_1": id_captcha_1, "redirect_url": parent.location.href};  
 
     $.ajax({
         type: "POST",
@@ -298,20 +298,24 @@ function loginbtn_clicked() {
         dataType: "json",
         cache: false,
         data: JSON.stringify(login_data),
-        error: function () {
-            ShowErrorMessage("登录失败！");
+        error: function (data) {
+            alert("服务器错误！");
         },
         success: function (data) {
             if (null != data && "" != data) {
                 //console.log(data);
                 if(data.status == 1){
                     if(data.redirect_url != "" && data.redirect_url != null) {
-                        window.location.href = "http://"+window.location.host + data.redirect_url;
+                        ShowErrorMessage(data.msg, data.status);
+                        window.setTimeout(function(){ parent.location.href = data.redirect_url; },1000);
                     }
                     else{
                         //location.replace(http+window.location.host);
-                        window.location.href = "http://"+window.location.host;
+                        ShowErrorMessage(data.msg, data.status);
+                        window.setTimeout(function(){ parent.location.href = "http://"+window.location.host; },1000);
                     }
+                }else{
+                    ShowErrorMessage(data.msg, data.status);  //1=成功，2=失败，默认为0
                 }
                 // if (data.d.indexOf("ok:") == 0) {
                     // var hash = data.d.replace("ok:", "");
@@ -1234,7 +1238,7 @@ function ShowErrorMessage(msg, type) {
         errmsg.hide();
         clearInterval(errRegTimer);
         errRegTimer = null;
-    }, 2500, null);
+    }, 3500, null);
 }
 
 //隐藏错误信息

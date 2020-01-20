@@ -95,7 +95,8 @@ class LoginView(View):
         if login_form.is_valid():
             # 取不到时为空，username，password为前端页面name值
             email_account = data["email"]
-            pass_word =data["password"]
+            pass_word = data["password"]
+            redirect_url = data["redirect_url"]
 
             # 成功返回user对象,失败返回null
             user = authenticate(username=email_account, password=pass_word)
@@ -110,24 +111,24 @@ class LoginView(View):
                     login(request, user)
                     # 跳转到首页 user request会被带回到首页
                     # 增加重定向回原网页。
-                    redirect_url = request.POST.get('next', '')
 
                     data = {
                         "status": 1,
+                        "msg": "登录成功",
                         'redirect_url': redirect_url,
                     }
                     return JsonResponse(data)
                 # 即用户未激活跳转登录，提示未激活
                 else:
                     data = {
-                        "status": 0,
+                        "status": 2,
                         'msg': "用户名未激活! 请前往邮箱进行激活!",
                     }
                     return JsonResponse(data)
             # 仅当用户真的密码出错时
             else:
                 data = {
-                    "status": 0,
+                    "status": 2,
                     'msg': "用户名或密码错误!",
                 }
                 return JsonResponse(data)
@@ -135,8 +136,8 @@ class LoginView(View):
         # 没有成功说明里面的值是None，并再次跳转回主页面
         else:
             data = {
-                "status": 0,
-                'msg': "用户名或密码或验证码错误!",
+                "status": 2,
+                'msg': "验证码错误!",
             }
             return JsonResponse(data)
 
