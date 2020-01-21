@@ -188,3 +188,5 @@ CAPTCHA_IMAGE_SIZE = (80, 35)
 CAPTCHA_TEXT_FIELD_TEMPLATE = BASE_DIR+"/templates/captcha/field_template.html"
 CAPTCHA_OUTPUT_FORMAT = "%(text_field)s %(hidden_field)s %(image)s"
 #CAPTCHA_FIELD_TEMPLATE =
+
+ip_addr = "http://127.0.0.1:8000"

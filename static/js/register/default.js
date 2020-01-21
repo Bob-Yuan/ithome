@@ -307,7 +307,11 @@ function loginbtn_clicked() {
                 if(data.status == 1){
                     if(data.redirect_url != "" && data.redirect_url != null) {
                         ShowErrorMessage(data.msg, data.status);
-                        window.setTimeout(function(){ parent.location.href = data.redirect_url; },1000);
+                        if(top.location!=self.location){
+                            window.setTimeout(function(){ parent.location.href = data.redirect_url; },1000);
+                        }else{
+                            window.setTimeout(function(){ window.location.href = "http://"+window.location.host; },1000);
+                        }
                     }
                     else{
                         //location.replace(http+window.location.host);

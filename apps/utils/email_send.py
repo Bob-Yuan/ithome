@@ -18,7 +18,7 @@ def generate_random_str(random_length=8):
     return str
 
 
-def send_register_eamil(email, send_type="register"):
+def send_register_eamil(ip_addr, email, send_type="register"):
     """发送注册邮件"""
     # 发送之前先保存到数据库，到时候查询链接是否存在
     # 实例化一个EmailVerifyRecord对象
@@ -40,7 +40,8 @@ def send_register_eamil(email, send_type="register"):
         email_body = loader.render_to_string(
             "email_register.html",  # 需要渲染的html模板
             {
-                "active_code": code  # 参数
+                "active_code": code,  # 参数
+                "ip_addr": ip_addr
             }
         )
         #方法一：EmailMessage对象

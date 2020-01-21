@@ -11,6 +11,7 @@ from django.contrib.auth.backends import ModelBackend
 from django.db.models import Q
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 
+from ithome.settings import ip_addr
 from utils.email_send import send_register_eamil
 # from courses.models import Course
 # from operation.models import UserCourse, UserFavorite
@@ -83,7 +84,7 @@ class LoginView(View):
         # render三变量: request 模板名称 一个字典写明传给前端的值
         redirect_url = request.GET.get('next', '')
         login_form = LoginForm()
-        return render(request, "login.html", {"redirect_url": redirect_url, "login_form": login_form})
+        return render(request, "login.html", {"redirect_url": redirect_url, "login_form": login_form, "myflag": 0})
 
     def post(self, request):
         # 类实例化需要一个字典参数dict:request.POST就是一个QueryDict所以直接传入
@@ -122,7 +123,7 @@ class LoginView(View):
                 else:
                     data = {
                         "status": 2,
-                        'msg': "用户名未激活! 请前往邮箱进行激活!",
+                        'msg': "用户未激活! 请前往邮箱进行激活!",
                     }
                     return JsonResponse(data)
             # 仅当用户真的密码出错时
@@ -155,7 +156,7 @@ class RegisterView(View):
     def get(self, request):
         # 添加验证码
         register_form = RegisterForm()
-        return render(request, "register.html", {'register_form': register_form})
+        return render(request, "register.html", {'register_form': register_form, "myflag": 0})
 
     def post(self, request):
         # 实例化form
@@ -191,7 +192,7 @@ class RegisterView(View):
             user_message.save()
 
             # 发送注册激活邮件
-            send_register_eamil(email_account, "register")
+            send_register_eamil(ip_addr, email_account, "register")
             data = {
                 'status': 1,
                 "msg": "注册成功！请注意邮箱激活链接！"
