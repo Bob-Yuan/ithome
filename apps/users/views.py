@@ -245,18 +245,21 @@ class ForgetPwdView(View):
 
     def post(self, request):
         forget_form = ForgetForm(request.POST)
+        login_form = LoginForm()
         # form验证合法情况下取出email
         if forget_form.is_valid():
             email = request.POST.get("email", "")
-            # 发送找回密码邮件
-            send_register_eamil(email, "forget")
-            # 发送完毕返回登录页面并显示发送邮件成功。
-            return render(request, "login.html", {"msg": "重置密码邮件已发送,请注意查收"})
+            #
+            all_record = UserProfile.objects.filter(email=email)
+            if all_record:
+                send_register_eamil(email, "forget")
+                # 发送完毕返回登录页面并显示发送邮件成功。
+                return render(request, "login.html", {"msg": "重置密码邮件已发送,请注意查收", "login_form": login_form, "myflag": 0})
+            else:
+                return render(request, "forgetpwd.html", {"msg": "您的邮箱未注册", "forget_from": forget_form,  "myflag": 0})
         # 如果表单验证失败也就是他验证码输错等。
         else:
-            return render(
-                request, "forgetpwd.html", {
-                    "forget_from": forget_form})
+            return render(request, "forgetpwd.html", {"msg": "验证码错误", "login_form": login_form, "myflag": 0})
 
 
 class ResetView(View):

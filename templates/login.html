@@ -3,6 +3,10 @@
 
 {% block formHead %}
 <form method="post" action="{% url 'login' %}" id="form1" class="form_style">
+    <input type="text" name="_prevent_auto_complete_name" autocomplete="off" readonly="readonly" style="display: none !important;"/>
+    <input type="password" name="_prevent_auto_complete_pass" autocomplete="new-password" readonly="readonly" style="display: none !important;" />
+    <div id="rm_login">
+        <div class="txtAccount">使用软媒通行证，畅享软媒所有服务</div>
 {% endblock %}
 
 {% block loginOrRegister %}

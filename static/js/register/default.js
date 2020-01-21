@@ -10,6 +10,7 @@ var reginfo = '';
 
 var login_url = "http://" + window.location.host + "/login";
 var register_url = "http://" + window.location.host + "/register";
+var forget_url = "http://" + window.location.host + "/forget";
 
 $(function () {
     //取得source参数
@@ -396,9 +397,10 @@ function read_protocol_click() {
 
 //忘记密码点击
 function forgetpsw_clilcked() {
-    $("#rm_login").hide();
-    $("#reg_panel").hide();
-    $("#rm_forgetpassword").show();
+    //$("#rm_login").hide();
+    //$("#reg_panel").hide();
+    //$("#rm_forgetpassword").show();
+    window.location.href = forget_url;
 }
 
 //立即注册点击
@@ -1115,8 +1117,8 @@ function fp_nextbtn_clicked() {
 
 //返回按钮点击
 function fp_backbtn_clicked() {
-    var url = getReloadUrl();
-    location.replace(url);
+    //var url = getReloadUrl();
+    location.replace(login_url);
 }
 
 //保存新密码按钮点击

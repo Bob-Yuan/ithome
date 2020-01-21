@@ -1,0 +1,33 @@
+{% extends 'loginAndRegisterBase.html' %}
+{% load static %}
+
+{% block formHead %}
+<form method="post" action="{% url 'forget_pwd' %}" id="form1" class="form_style">
+    <input type="text" name="_prevent_auto_complete_name" autocomplete="off" readonly="readonly" style="display: none !important;"/>
+    <input type="password" name="_prevent_auto_complete_pass" autocomplete="new-password" readonly="readonly" style="display: none !important;" />
+    <div id="rm_login">
+{% endblock %}
+
+{% block loginOrRegister %}
+    <div id="rm_forgetpassword" style="">
+        <div id="fp_step1">
+            <div class="fp_title">找回密码</div>
+            <div class="userinput_parent">
+                <div class="user_input_text">&nbsp;</div>
+                <div>
+                    <input type="text" class="user_input" id="txtFpEmail" placeholder="邮箱">
+                </div>
+            </div>
+            <div class="userinput_parent captcha1 {% if register_form.captcha.errors %} errorput{% endif %}">
+                <div class="user_input_text" id="user_input_text_captcha1">&nbsp;</div>
+                {{ login_form.captcha }}
+                {{ active_form.captcha }}
+            </div>
+            <a class="fp_nextbtn" href="javascript:fp_nextbtn_clicked()">下一步</a>
+            <div class="fp_backbtn_parent">
+                <a class="fp_backbtn a_link" href="javascript:fp_backbtn_clicked()">
+                    <img src="/static/image/register/arraw_left.png" width="6" height="10" alt="">&nbsp;返回</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
