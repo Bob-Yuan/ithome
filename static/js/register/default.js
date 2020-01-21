@@ -1048,42 +1048,43 @@ function send_sp_sms_click() {
 
 //忘记密码下一步
 function fp_nextbtn_clicked() {
-    var mail = $("#txtFpEmail").val();
-    var code = $("#txtFpCode").val();
-    if (null == mail || "" == mail) {
-        ShowErrorMessage("请填写邮箱或者手机号");
+    var email = $("#txtFpEmail").val();
+    var id_captcha_0 = $("#id_captcha_0").val();
+    var id_captcha_1 = $("#id_captcha_1").val();
+    if (null == email || "" == email) {
+        ShowErrorMessage("请填写邮箱");
         return;
     }
-    if (null == code || "" == code) {
+    if (null == id_captcha_1 || "" == id_captcha_1) {
         ShowErrorMessage("请输入验证码");
         return;
     }
-    var checkcodeOk = true;
-    for (var i = 0; i < code.length; ++i) {
-        var c = code.charAt(i);
-        if (c < '0' || c > '9') {
-            checkcodeOk = false;
-            break;
-        }
-    }
-    if (6 != code.length || !checkcodeOk) {
-        ShowErrorMessage("请输入正确的验证码");
-        return;
-    }
+    // var checkcodeOk = true;
+    // for (var i = 0; i < code.length; ++i) {
+    //     var c = code.charAt(i);
+    //     if (c < '0' || c > '9') {
+    //         checkcodeOk = false;
+    //         break;
+    //     }
+    // }
+    // if (6 != code.length || !checkcodeOk) {
+    //     ShowErrorMessage("请输入正确的验证码");
+    //     return;
+    // }
 
     //根据用户输入的是Email还是手机发送验证码
-    var func = "";
-    var keyname = "";
-    if (isEmail(mail)) {
-        func = "VerifyEmailCode";
-        keyname = "mail";
-    } else if (isMobile(mail)) {
-        func = "VerifyMobileCode";
-        keyname = "mobile";
-    } else {
-        ShowErrorMessage("请正确填写邮箱或者手机号");
-        return;
-    }
+    // var func = "";
+    // var keyname = "";
+    // if (isEmail(mail)) {
+    //     func = "VerifyEmailCode";
+    //     keyname = "mail";
+    // } else if (isMobile(mail)) {
+    //     func = "VerifyMobileCode";
+    //     keyname = "mobile";
+    // } else {
+    //     ShowErrorMessage("请正确填写邮箱或者手机号");
+    //     return;
+    // }
 
     //以下是调试代码
     //$("#fp_step1").hide();
@@ -1091,28 +1092,35 @@ function fp_nextbtn_clicked() {
     //return;
 
     //校验验证码
+    var forgetpwd_data = { "email" :escape(email) ,  "captcha_0": id_captcha_0, "captcha_1": id_captcha_1};  
     $.ajax({
         type: "POST",
         contentType: "application/json; charset=utf-8",
-        url: "Default.aspx/" + func,
+        headers: { "X-CSRFToken": token_csrf },
+        url: "/forget/",
         dataType: "json",
         cache: false,
-        data: '{' + keyname + ':"' + escape(mail) + '", sendcode:"' + code + '"}',
+        data: JSON.stringify(forgetpwd_data),
         error: function () {
             ShowErrorMessage("校验验证码失败！");
         },
         success: function (data) {
             if (null != data && "" != data) {
-                var msg = data.d;
-                if ("ok" == data.d) {
-                    $("#fp_step1").hide();
-                    $("#fp_step2").show();
-                } else {
-                    ShowErrorMessage(data.d);
+                if(data.status == 1){
+                    ShowErrorMessage(data.msg, data.status);
+                    setTimeout(function (){window.location.href = login_url;}, 3500);
+                }else{
+                    ShowErrorMessage(data.msg, data.status);
                 }
             }
         }
     });
+    $.getJSON("/captcha/refresh/",
+        function (result) {
+            $('.captcha').attr('src', result['image_url']);
+            $('#id_captcha_0').val(result['key']);
+        }
+    );
 }
 
 //返回按钮点击

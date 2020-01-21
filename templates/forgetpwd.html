@@ -23,11 +23,27 @@
                 {{ login_form.captcha }}
                 {{ active_form.captcha }}
             </div>
-            <a class="fp_nextbtn" href="javascript:fp_nextbtn_clicked()">下一步</a>
+            <a class="fp_nextbtn" href="javascript:fp_nextbtn_clicked()">提交</a>
             <div class="fp_backbtn_parent">
                 <a class="fp_backbtn a_link" href="javascript:fp_backbtn_clicked()">
                     <img src="/static/image/register/arraw_left.png" width="6" height="10" alt="">&nbsp;返回</a>
             </div>
         </div>
+{#        <div id="fp_step2" style="display: none;">#}
+{#            <div class="fp_title">修改密码</div>#}
+{#            <div class="userinput_parent">#}
+{#                <div class="user_input_text">&nbsp;</div>#}
+{#                <div>#}
+{#                    <input type="password" class="user_input" id="txtFpPsw" placeholder="新密码（6位或以上数字和字母）" />#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="userinput_parent">#}
+{#                <div class="user_input_text">&nbsp;</div>#}
+{#                <div>#}
+{#                    <input type="password" class="user_input" id="txtFpPswConfirm" placeholder="确认密码（再次输入密码）" />#}
+{#                </div>#}
+{#            </div>#}
+{#            <a class="fp_save_psw" href="javascript:fp_save_psw_clicked()">保存</a>#}
+{#        </div>#}
     </div>
 {% endblock %}

@@ -47,15 +47,10 @@ def send_register_eamil(ip_addr, email, send_type="register"):
         #方法一：EmailMessage对象
         msg = EmailMessage(email_title, email_body, EMAIL_FROM, [email])
         msg.content_subtype = "html"
-        send_status = msg.send()
         # 方法二：使用Django内置函数完成邮件发送。四个参数：主题，邮件内容，从哪里发，接受者list
         # send_status = send_mail(email_title, email_body, EMAIL_FROM, [email])
-
-        # 如果发送成功
-        if send_status:
-            return 0
     elif send_type == "forget":
-        email_title = "慕学在线网找回密码链接"
+        email_title = "qxdq.xyz找回密码链接"
         email_body = loader.render_to_string(
             "email_forget.html",  # 需要渲染的html模板
             {
@@ -64,9 +59,8 @@ def send_register_eamil(ip_addr, email, send_type="register"):
         )
         msg = EmailMessage(email_title, email_body, EMAIL_FROM, [email])
         msg.content_subtype = "html"
-        send_status = msg.send()
     elif send_type == "update_email":
-        email_title = "mtianyan慕课小站 修改邮箱验证码"
+        email_title = "qxdq.xyz修改邮箱验证码"
         email_body = loader.render_to_string(
             "email_update_email.html",  # 需要渲染的html模板
             {
@@ -75,4 +69,9 @@ def send_register_eamil(ip_addr, email, send_type="register"):
         )
         msg = EmailMessage(email_title, email_body, EMAIL_FROM, [email])
         msg.content_subtype = "html"
-        send_status = msg.send()
+
+    send_status = msg.send()
+    # 如果发送成功
+    if send_status:
+        print(send_type, "邮件发送成功！")
+        return 0
