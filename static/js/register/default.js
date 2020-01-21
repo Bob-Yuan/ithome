@@ -300,6 +300,12 @@ function loginbtn_clicked() {
         data: JSON.stringify(login_data),
         error: function (data) {
             alert("服务器错误！");
+            $.getJSON("/captcha/refresh/",
+                function (result) {
+                    $('.captcha').attr('src', result['image_url']);
+                    $('#id_captcha_0').val(result['key']);
+                }
+            );
         },
         success: function (data) {
             if (null != data && "" != data) {
@@ -346,6 +352,12 @@ function loginbtn_clicked() {
                 //     ShowErrorMessage(data.d);
                 // }
             }
+            $.getJSON("/captcha/refresh/",
+                function (result) {
+                    $('.captcha').attr('src', result['image_url']);
+                    $('#id_captcha_0').val(result['key']);
+                }
+            );
         }
     });
 }
@@ -754,6 +766,12 @@ function registerbtn_clicked() {
             }
         }
     });
+    $.getJSON("/captcha/refresh/",
+        function (result) {
+            $('.captcha').attr('src', result['image_url']);
+            $('#id_captcha_0').val(result['key']);
+        }
+    );
 }
 
 /***************************************
