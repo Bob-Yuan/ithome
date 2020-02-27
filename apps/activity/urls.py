@@ -1,8 +1,10 @@
 from django.urls import path, include
 from django.views.generic import TemplateView
 
+from activity.views import Game2048
+
 app_name = "activity"
 
 urlpatterns = [
-    path('2048/', TemplateView.as_view(template_name="2048.html"), name="2048"),
+    path('2048/', Game2048.as_view(), name="2048"),
 ]

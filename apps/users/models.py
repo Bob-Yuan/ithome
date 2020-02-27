@@ -10,6 +10,8 @@ class UserProfile(AbstractUser):
         ("male", u"男"),
         ("female", u"女")
     )
+    #用户id
+    #id = models.CharField(max_length=11, verbose_name=u"用户id", default="")
     # 昵称
     nick_name = models.CharField(max_length=50, verbose_name=u"昵称", default="")
     # 生日，可以为空
