@@ -319,6 +319,7 @@ function myMoveLeft(){
         }
     }
     setTimeout("updateBoardView()",200);
+    send_score();
 
     return true;
 }

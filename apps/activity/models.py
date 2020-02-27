@@ -9,7 +9,7 @@ from users.models import UserProfile
 class Records2048(models.Model):
     send_time = models.DateTimeField(default=datetime.date.today, verbose_name=u"游戏日期")
     user_id = models.CharField(max_length=11, default=0, verbose_name=u"用户id")
-    # 未设置null = true blank = true 默认不可为空
+    user_name = models.CharField(max_length=50, default=0, verbose_name=u"用户名称")
     score = models.IntegerField(default=0, verbose_name=u"得分")
 
     class Meta:
@@ -18,4 +18,4 @@ class Records2048(models.Model):
 
     # 重载str方法使后台不再直接显示object
     def __str__(self):
-        return '{0}'.format(self.user_id)
+        return '{0}-{1}'.format(self.send_time, self.user_name)

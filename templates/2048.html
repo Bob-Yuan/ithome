@@ -245,8 +245,12 @@ ul{
         <div class="left">
             <h3>今日排行</h3>
             <ol>
-                <li>小红   1000</li>
-                <li>小明   100</li>
+                {% for record in records %}
+                    <tr>
+                        <li>{{ record.user_name }}&nbsp;&nbsp;&nbsp;{{ record.score }}</li>
+                    </tr>
+                {% empty %}
+                {% endfor %}
             </ol>
         </div>
 

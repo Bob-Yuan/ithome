@@ -19,11 +19,14 @@ class Game2048(View):
         #rep.set_cookie("session_id", 12345)
         #print(request.user.id, request.user.username, request.user.email)
         #print(request.user.is_authenticated())
+
+        records = Records2048.objects.filter(send_time=datetime.date.today()).order_by("-score")[0:10]
+
         if request.user.id != None:
             if UserProfile.objects.filter(id=request.user.id).exists():
                 user = UserProfile.objects.get(id=request.user.id)
-                return render(request, '2048.html', {"user": user})
-        return render(request, '2048.html')
+                return render(request, '2048.html', {"user": user, "records": records})
+        return render(request, '2048.html', {"records": records})
 
     def post(self, request):
         print(hasattr(request.user, 'id'))
@@ -42,6 +45,10 @@ class Game2048(View):
                 new_record = Records2048()
                 new_record.send_time = datetime.date.today()
                 new_record.user_id = request.user.id
+                if request.user.nick_name != "":
+                    new_record.user_name = request.user.nick_name
+                else:
+                    new_record.user_name = request.user.email
                 new_record.score = new_score
                 new_record.save()
             #数据库比较数据，存入或舍弃
