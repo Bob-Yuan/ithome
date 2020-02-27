@@ -271,6 +271,7 @@ function isgameover(){
 }
 
 function gameover(){
+    send_score();
     alert("Game Over!");
 }
 
@@ -403,7 +404,7 @@ function myMoveUp(){
                         board[i][j] = 0;
 
                         //add score
-                        score += board[i][k];
+                        score += board[k][j];
                         updateScore(score);
 
                         hasConflicted[k][j] = true;
@@ -450,7 +451,7 @@ function myMoveDown(){
                         board[i][j] = 0;
 
                         //add score
-                        score += board[i][k];
+                        score += board[k][j];
                         updateScore(score);
 
                         hasConflicted[k][j] = true;
@@ -529,7 +530,7 @@ function MoveLeftDown(){
                         board[i][S-i] = 0;
 
                         //add score
-                        score += board[i][S-i];
+                        score += board[k][S-k];
                         updateScore(score);
 
                         hasConflicted[k][S-k] = true;
@@ -566,7 +567,7 @@ function MoveRightUp(){
                         board[i][S-i] = 0;
 
                         //add score
-                        score += board[i][S-i];
+                        score += board[k][S-k];
                         updateScore(score);
 
                         hasConflicted[k][S-k] = true;
@@ -704,4 +705,44 @@ function MoveLeftUp(){
     setTimeout("updateBoardView()",200);
 
     return true;
+}
+
+function send_score() {
+    //发送得分
+    var score_data = {"score":score};
+
+    $.ajax({
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        headers: { "X-CSRFToken": token_csrf },
+        url: "/activity/2048/",
+        dataType: "json",
+        cache: false,
+        data: JSON.stringify(score_data),
+        error: function (data) {
+            alert("服务器错误！成绩发送失败！");
+        },
+        success: function (data) {
+            if (null != data && "" != data) {
+                console.log(data);
+                // if(data.status == 1){
+                //     if(data.redirect_url != "" && data.redirect_url != null) {
+                //         ShowErrorMessage(data.msg, data.status);
+                //         if(top.location!=self.location){
+                //             window.setTimeout(function(){ parent.location.href = data.redirect_url; },1000);
+                //         }else{
+                //             window.setTimeout(function(){ window.location.href = "http://"+window.location.host; },1000);
+                //         }
+                //     }
+                //     else{
+                //         //location.replace(http+window.location.host);
+                //         ShowErrorMessage(data.msg, data.status);
+                //         window.setTimeout(function(){ parent.location.href = "http://"+window.location.host; },1000);
+                //     }
+                // }else{
+                //     ShowErrorMessage(data.msg, data.status);  //1=成功，2=失败，默认为0
+                // }
+            }
+        }
+    });
 }

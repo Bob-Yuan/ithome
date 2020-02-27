@@ -99,7 +99,14 @@
 {% if request.user.is_authenticated %}
                         <li class="dm" style="display: block;position:absolute;right:300px;">
                             <a href="javascript:;" class="item-link" id="rm_avatar">
-                                <img src="https://avatar.ithome.com/avatars/001/71/89/07_60.jpg" onerror="this.src='//quan.ithome.com/statics/images/noavatar.png'">njupt
+                                <img src="{{ user.image }}" onerror="this.src='//quan.ithome.com/statics/images/noavatar.png'">
+                                <span>
+                                    {% if user.nick_name %}
+                                        {{ user.nick_name }}
+                                    {% else %}
+                                        {{ user.email }}
+                                    {% endif %}
+                                </span>
                             </a>
                             <div id="avatar" class="menu" style="display: none; height: 111px; padding-top: 5px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">
                                 <ul>

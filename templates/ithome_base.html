@@ -114,7 +114,14 @@
             <div class="tb-item dm">
                 <div id="toplogin">
                     <a href="javascript:;" class="item-link" id="rm_avatar">
-                        <img src="https://avatar.ithome.com/avatars/001/71/89/07_60.jpg" onerror="this.src='//quan.ithome.com/statics/images/noavatar.png'">njupt
+                        <img src="{{ user.image }}" onerror="this.src='//quan.ithome.com/statics/images/noavatar.png'">
+                        <span>
+                            {% if user.nick_name %}
+                                {{ user.nick_name }}
+                            {% else %}
+                                {{ user.email }}
+                            {% endif %}
+                        </span>
                     </a>
                     <div id="avatar" class="menu" style="display: none;">
                         <ul>

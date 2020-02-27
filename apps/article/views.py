@@ -6,6 +6,7 @@ from django.views.generic.base import View
 from pure_pagination import Paginator, PageNotAnInteger
 
 from .models import Articles
+from users.models import UserProfile
 
 
 class ArticleIndexView(View):
@@ -22,6 +23,11 @@ class ArticleIndexView(View):
         p = Paginator(articles, 10, request=request)
         articles = p.page(page)
 
+        if request.user.id != None:
+            if UserProfile.objects.filter(id=request.user.id).exists():
+                user = UserProfile.objects.get(id=request.user.id)
+                return render(request, 'ithome_index.html', {"articles": articles, "user": user})
+
         return render(request, 'ithome_index.html', {"articles": articles})
 
 
@@ -36,6 +42,11 @@ class DateArticleListView(View):
         p = Paginator(articles, 10, request=request)
         articles = p.page(page)
 
+        if request.user.id != None:
+            if UserProfile.objects.filter(id=request.user.id).exists():
+                user = UserProfile.objects.get(id=request.user.id)
+                return render(request, 'ithome_index.html', {"articles": articles, "user": user})
+
         return render(request, 'ithome_index.html', {"articles": articles})
 
 
@@ -44,4 +55,10 @@ class ArticleView(View):
 
     def get(self, request, total_id):
         article = Articles.objects.filter(total_id=total_id)
+
+        if request.user.id != None:
+            if UserProfile.objects.filter(id=request.user.id).exists():
+                user = UserProfile.objects.get(id=request.user.id)
+                return render(request, 'ithome_article.html', {"article": article[0], "user": user})
+
         return render(request, 'ithome_article.html', {"article": article[0]})

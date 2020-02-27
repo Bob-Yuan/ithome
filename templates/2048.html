@@ -125,7 +125,7 @@
             opacity: 1;
         }
         #rm_avatar span {
-            width: 40px;
+            /*width: 40px;*/
             height: 26px;
             display: inline-block;
             overflow: hidden;
@@ -141,7 +141,7 @@
             color: #000;
             text-align: center;
             line-height: 35px;
-            width:202px;
+            /*width:202px;*/
         }
         a.item-link:after {
             display: inline-block;
@@ -196,7 +196,7 @@ ul{
     </style>
 </head>
 <body>
-
+{% csrf_token %}
     <div id="hd">
         <div id="nav">
 {% if request.user.is_authenticated %}
@@ -204,7 +204,14 @@ ul{
                     <div class="tb-item dm" style="display: block;position:absolute;right:100px;">
                         <div id="toplogin">
                             <a href="javascript:;" class="item-link" id="rm_avatar">
-                                <img src="https://avatar.ithome.com/avatars/001/71/89/07_60.jpg" onerror="this.src='//quan.ithome.com/statics/images/noavatar.png'"><span>njupt</span>
+                                <img src="{{ user.image }}" onerror="this.src='//quan.ithome.com/statics/images/noavatar.png'">
+                                <span>
+                                    {% if user.nick_name %}
+                                        {{ user.nick_name }}
+                                    {% else %}
+                                        {{ user.email }}
+                                    {% endif %}
+                                </span>
                             </a>
                             <div id="avatar" class="menu" style="display: none;">
                                 <ul>
@@ -278,7 +285,10 @@ ul{
         </div>
      </div>
 <script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/2.1.1/jquery.min.js"></script>
-<script>(window.jQuery || document.write("<script src='https://img.ithome.com/file/js/jquery/jquery.min.js'><\/script>"));</script>
+<script>
+    (window.jQuery || document.write("<script src='https://img.ithome.com/file/js/jquery/jquery.min.js'><\/script>"));
+    var token_csrf = "{{ csrf_token }}";
+</script>
 <script src="{% static 'js/article/common.js' %}"></script>
 <script src="{% static 'js/article/popwin.js' %}"></script>
 <script src="{% static 'js/article/top.js' %}"></script>
