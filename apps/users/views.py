@@ -380,6 +380,48 @@ class UpdatePwdView(LoginRequiredMixin, View):
                 content_type='application/json')
 
 
+class SendEmailCodeView(LoginRequiredMixin, View):
+    """发送邮箱验证码的view:"""
+
+    def get(self, request):
+        # 取出需要发送的邮件
+        email = request.GET.get("email", "")
+
+        # 不能是已注册的邮箱
+        if UserProfile.objects.filter(email=email):
+            return HttpResponse(
+                '{"email":"邮箱已经存在"}',
+                content_type='application/json')
+        send_register_eamil(ip_addr, email, "update_email")
+        return HttpResponse(
+            '{"status":"success"}',
+            content_type='application/json')
+
+
+class UpdateEmailView(LoginRequiredMixin, View):
+    """修改邮箱的view:"""
+    login_url = '/login/'
+    redirect_field_name = 'next'
+
+    def post(self, request):
+        email = request.POST.get("email", "")
+        code = request.POST.get("code", "")
+
+        existed_records = EmailVerifyRecord.objects.filter(
+            email=email, code=code, send_type='update_email')
+        if existed_records:
+            user = request.user
+            user.email = email
+            user.save()
+            return HttpResponse(
+                '{"status":"success"}',
+                content_type='application/json')
+        else:
+            return HttpResponse(
+                '{"email":"验证码无效"}',
+                content_type='application/json')
+
+
 # class MyMessageView(LoginRequiredMixin, View):
 #     """我的消息"""
 #     login_url = '/login/'
@@ -407,48 +449,6 @@ class UpdatePwdView(LoginRequiredMixin, View):
 #         return render(request, "usercenter-message.html", {
 #             "messages": messages,
 #         })
-#
-#
-# class SendEmailCodeView(LoginRequiredMixin, View):
-#     """发送邮箱验证码的view:"""
-#
-#     def get(self, request):
-#         # 取出需要发送的邮件
-#         email = request.GET.get("email", "")
-#
-#         # 不能是已注册的邮箱
-#         if UserProfile.objects.filter(email=email):
-#             return HttpResponse(
-#                 '{"email":"邮箱已经存在"}',
-#                 content_type='application/json')
-#         send_register_eamil(email, "update_email")
-#         return HttpResponse(
-#             '{"status":"success"}',
-#             content_type='application/json')
-#
-#
-# class UpdateEmailView(LoginRequiredMixin, View):
-#     """修改邮箱的view:"""
-#     login_url = '/login/'
-#     redirect_field_name = 'next'
-#
-#     def post(self, request):
-#         email = request.POST.get("email", "")
-#         code = request.POST.get("code", "")
-#
-#         existed_records = EmailVerifyRecord.objects.filter(
-#             email=email, code=code, send_type='update_email')
-#         if existed_records:
-#             user = request.user
-#             user.email = email
-#             user.save()
-#             return HttpResponse(
-#                 '{"status":"success"}',
-#                 content_type='application/json')
-#         else:
-#             return HttpResponse(
-#                 '{"email":"验证码无效"}',
-#                 content_type='application/json')
 #
 #
 # class MyCourseView(LoginRequiredMixin, View):

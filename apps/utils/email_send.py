@@ -69,6 +69,10 @@ def send_register_eamil(ip_addr, email, send_type="register"):
         )
         msg = EmailMessage(email_title, email_body, EMAIL_FROM, [email])
         msg.content_subtype = "html"
+        print(1,email_title)
+        print(2,email_body)
+        print(3,EMAIL_FROM)
+        print(4,email)
 
     send_status = msg.send()
     # 如果发送成功
