@@ -59,7 +59,7 @@ class UserInfoView(LoginRequiredMixin, View):
     redirect_field_name = 'next'
 
     def get(self, request):
-        return render(request, "usercenter-info.html", {})
+        return render(request, "userinfo.html")
 
     def post(self, request):
         # 不像用户咨询是一个新的。需要指明instance。不然无法修改，而是新增用户
@@ -323,6 +323,63 @@ class ResetView(View):
                     "active_code": active_code,  "msg": "密码小于5位"})
 
 
+class UploadImageView(LoginRequiredMixin, View):
+    """用户上传图片的view:用于修改头像"""
+    login_url = '/login/'
+    redirect_field_name = 'next'
+
+    def post(self, request):
+        # 这时候用户上传的文件就已经被保存到imageform了 ，为modelform添加instance值直接保存
+        image_form = UploadImageForm(
+            request.POST, request.FILES, instance=request.user)
+        if image_form.is_valid():
+            image_form.save()
+            # # 取出cleaned data中的值,一个dict
+            # image = image_form.cleaned_data['image']
+            # request.user.image = image
+            # request.user.save()
+            return HttpResponse(
+                '{"status":"success"}',
+                content_type='application/json')
+        else:
+            return HttpResponse(
+                '{"status":"fail"}',
+                content_type='application/json')
+
+
+class UpdatePwdView(LoginRequiredMixin, View):
+    """在个人中心修改用户密码"""
+    login_url = '/login/'
+    redirect_field_name = 'next'
+
+    def post(self, request):
+        modify_form = ModifyPwdForm(request.POST)
+        if modify_form.is_valid():
+            pwd1 = request.POST.get("password1", "")
+            pwd2 = request.POST.get("password2", "")
+            # 如果两次密码不相等，返回错误信息
+            if pwd1 != pwd2:
+                return HttpResponse(
+                    '{"status":"fail", "msg":"密码不一致"}',
+                    content_type='application/json')
+            # 如果密码一致
+            user = request.user
+            # 加密成密文
+            user.password = make_password(pwd2)
+            # save保存到数据库
+            user.save()
+            return HttpResponse(
+                '{"status":"success"}',
+                content_type='application/json')
+        # 验证失败说明密码位数不够。
+        else:
+            # 通过json的dumps方法把字典转换为json字符串
+            return HttpResponse(
+                json.dumps(
+                    modify_form.errors),
+                content_type='application/json')
+
+
 # class MyMessageView(LoginRequiredMixin, View):
 #     """我的消息"""
 #     login_url = '/login/'
@@ -350,30 +407,6 @@ class ResetView(View):
 #         return render(request, "usercenter-message.html", {
 #             "messages": messages,
 #         })
-#
-#
-# class UploadImageView(LoginRequiredMixin, View):
-#     """用户上传图片的view:用于修改头像"""
-#     login_url = '/login/'
-#     redirect_field_name = 'next'
-#
-#     def post(self, request):
-#         # 这时候用户上传的文件就已经被保存到imageform了 ，为modelform添加instance值直接保存
-#         image_form = UploadImageForm(
-#             request.POST, request.FILES, instance=request.user)
-#         if image_form.is_valid():
-#             image_form.save()
-#             # # 取出cleaned data中的值,一个dict
-#             # image = image_form.cleaned_data['image']
-#             # request.user.image = image
-#             # request.user.save()
-#             return HttpResponse(
-#                 '{"status":"success"}',
-#                 content_type='application/json')
-#         else:
-#             return HttpResponse(
-#                 '{"status":"fail"}',
-#                 content_type='application/json')
 #
 #
 # class SendEmailCodeView(LoginRequiredMixin, View):
@@ -492,34 +525,3 @@ class ResetView(View):
 #         })
 #
 #
-# class UpdatePwdView(LoginRequiredMixin, View):
-#     """在个人中心修改用户密码"""
-#     login_url = '/login/'
-#     redirect_field_name = 'next'
-#
-#     def post(self, request):
-#         modify_form = ModifyPwdForm(request.POST)
-#         if modify_form.is_valid():
-#             pwd1 = request.POST.get("password1", "")
-#             pwd2 = request.POST.get("password2", "")
-#             # 如果两次密码不相等，返回错误信息
-#             if pwd1 != pwd2:
-#                 return HttpResponse(
-#                     '{"status":"fail", "msg":"密码不一致"}',
-#                     content_type='application/json')
-#             # 如果密码一致
-#             user = request.user
-#             # 加密成密文
-#             user.password = make_password(pwd2)
-#             # save保存到数据库
-#             user.save()
-#             return HttpResponse(
-#                 '{"status":"success"}',
-#                 content_type='application/json')
-#         # 验证失败说明密码位数不够。
-#         else:
-#             # 通过json的dumps方法把字典转换为json字符串
-#             return HttpResponse(
-#                 json.dumps(
-#                     modify_form.errors),
-#                 content_type='application/json')

@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import UserInfoView#, MyMessageView, UploadImageView, SendEmailCodeView, UpdateEmailView, UpdatePwdView, \
+from .views import UserInfoView, UploadImageView, UpdatePwdView#, MyMessageView, SendEmailCodeView, UpdateEmailView, \
     #MyCourseView, MyFavOrgView, MyFavTeacherView, MyFavCourseView
 
 
@@ -9,8 +9,8 @@ app_name = "users"
 urlpatterns = [
     path('info/', UserInfoView.as_view(), name="user_info"),
     # path('my_message/', MyMessageView.as_view(), name="my_message"),
-    # path('image/upload/', UploadImageView.as_view(), name="image_upload"),
-    # path('update/pwd/', UpdatePwdView.as_view(), name="update_pwd"),
+    path('image/upload/', UploadImageView.as_view(), name="image_upload"),
+    path('update/pwd/', UpdatePwdView.as_view(), name="update_pwd"),
     # path('sendemail_code/', SendEmailCodeView.as_view(), name="sendemail_code"),
     # path('update_email/', UpdateEmailView.as_view(), name="update_email"),
     # path('mycourse/', MyCourseView.as_view(), name="mycourse"),

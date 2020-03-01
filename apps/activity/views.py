@@ -21,11 +21,6 @@ class Game2048(View):
         #print(request.user.is_authenticated())
 
         records = Records2048.objects.filter(send_time=datetime.date.today()).order_by("-score")[0:10]
-
-        if request.user.id != None:
-            if UserProfile.objects.filter(id=request.user.id).exists():
-                user = UserProfile.objects.get(id=request.user.id)
-                return render(request, '2048.html', {"user": user, "records": records})
         return render(request, '2048.html', {"records": records})
 
     def post(self, request):

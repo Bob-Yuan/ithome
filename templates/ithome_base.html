@@ -114,20 +114,20 @@
             <div class="tb-item dm">
                 <div id="toplogin">
                     <a href="javascript:;" class="item-link" id="rm_avatar">
-                        <img src="{{ user.image }}" onerror="this.src='//quan.ithome.com/statics/images/noavatar.png'">
+                        <img src="{{ MEDIA_URL }}{{ request.user.image }}" onerror="this.src='//quan.ithome.com/statics/images/noavatar.png'">
                         <span>
-                            {% if user.nick_name %}
-                                {{ user.nick_name }}
+                            {% if request.user.nick_name %}
+                                {{ request.user.nick_name }}
                             {% else %}
-                                {{ user.email }}
+                                {{ request.user.email }}
                             {% endif %}
                         </span>
                     </a>
                     <div id="avatar" class="menu" style="display: none;">
                         <ul>
                             <li>
-                                <a href="https://my.ruanmei.com/?hash=68A7744A3E8AA1C906713549F337D35B2F2F782FFBE8570BFFCD5374FA09CE0975D449857F1F4FC62CD007C406BADE12511636A530F012729C650BB909AE47B38133BE4F36285D4607B4CD5E3B782FA86DD9782A9F4CAFD74172F02E83D654C5" target="_blank">个人资料</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-                                <a href="http://quan.ithome.com/user/editavatar" target="_blank">修改头像</a>
+                                <a href="{% url 'users:user_info' %}" target="_blank">个人资料</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+                                <a href="http://quan.ithome.com/user/editavatar" target="_blank">我的积分</a>
                             </li>
                             <li class="line"></li>
                             <li style="text-align:center;"><a id="btnLogout" href="javascript:;">退出登录</a></li>
