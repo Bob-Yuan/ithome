@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'article',
     'users',
     'activity',
+    'QueryAssistant',
 ]
 
 AUTH_USER_MODEL = "users.UserProfile"

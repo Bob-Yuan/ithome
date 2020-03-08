@@ -63,13 +63,13 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#常用综合" class="smooth">
+                        <a href="#commonTool" class="smooth">
                             <i class="fa  fa-star"></i><span class="title">常用综合</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#国外常用" class="smooth">
-                            <i class="fa  fa-file-o"></i><span class="title">国外常用</span>
+                        <a href="#aboutme" class="smooth">
+                            <i class="fa  fa-file-o"></i><span class="title">我的</span>
                         </a>
                     </li>
 
@@ -405,28 +405,20 @@ li {
 
             <br/>
 
-            <h4 class="text-gray"><i class="fa fa-file-o" style="margin:0px 7px 0px 0px"></i>国外常用</h4>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="nothing">没有内容</div>
-                </div>
-            </div>
-
-            <br/>
-
-            <h4 class="text-gray"><i class="fa fa-star" style="margin:0px 7px 0px 0px"></i>常用综合</h4>
+            <h4 class="text-gray" id="commonTool"><i class="fa fa-star" style="margin:0px 7px 0px 0px"></i>常用综合</h4>
             <div class="row">
                 <div class="col-md-4 col-lg-3">
-                    <div class="xe-widget xe-conversations box2 label-info" onclick="window.open('/go/?url=aHR0cHM6Ly9tc2RuLml0ZWxseW91LmNuLw==', '_blank')" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="https://msdn.itellyou.cn/">
+                    <div class="xe-widget xe-conversations box2 label-info" onclick="window.open(`{% url 'QurtyAssistant:fuli' %}`, '_blank')" data-toggle="tooltip" data-placement="bottom" title="查询工具" data-original-title="https://www.ithome.com/">
                         <div class="xe-comment-entry">
-                            <a class="xe-user-img"><img src="https://f.ydr.me/https://msdn.itellyou.cn/" onerror="javascript:this.src='http://hello-123.com/wp-content/themes/webstack/images/favicon.png'" class="img-circle" width="40"></a>
+                            <a class="xe-user-img"><img src="{% static 'QueryAssistant/image/tool.png' %}" onerror="javascript:this.src='http://hello-123.com/wp-content/themes/webstack/images/favicon.png'" class="img-circle" width="40"></a>
                             <div class="xe-comment">
-                                <a href="javascript:void(0)" class="xe-user-name overflowClip_1"><strong>ITellYou</strong></a>
-                                <p class="overflowClip_2">MSDN，我告诉你。</p>
+                                <a href="javascript:void(0)" class="xe-user-name overflowClip_1"><strong>iTool</strong></a>
+                                <p class="overflowClip_2">查询工具</p>
                             </div>
                         </div>
                     </div>
                 </div>
+
 
                 <div class="col-md-4 col-lg-3">
                     <div class="xe-widget xe-conversations box2 label-info" onclick="window.open('/go/?url=aHR0cHM6Ly93d3cuYXBwaW5uLmNvbS8=', '_blank')" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="https://www.appinn.com/">
@@ -560,6 +552,40 @@ li {
                     </div>
                 </div>
             </div>
+
+            <br/>
+
+            <h4 class="text-gray" id="aboutme"><i class="fa fa-file-o" style="margin:0px 7px 0px 0px"></i>我的</h4>
+            <div class="row">
+                <div class="col-md-4 col-lg-3">
+                    <div class="xe-widget xe-conversations box2 label-info" onclick="window.open(`https://blog.csdn.net/bobyuan888`, '_blank')" data-toggle="tooltip" data-placement="bottom" title="CSDN" data-original-title="https://blog.csdn.net/bobyuan888">
+                        <div class="xe-comment-entry">
+                            <a class="xe-user-img"><img src="{% static 'QueryAssistant/image/csdn.png' %}" onerror="javascript:this.src='http://hello-123.com/wp-content/themes/webstack/images/favicon.png'" class="img-circle" width="40"></a>
+                            <div class="xe-comment">
+                                <a href="javascript:void(0)" class="xe-user-name overflowClip_1"><strong>我的博客</strong></a>
+                                <p class="overflowClip_2">csdn.net</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-lg-3">
+                    <div class="xe-widget xe-conversations box2 label-info" onclick="window.open(`https://github.com/Bob-Yuan`, '_blank')" data-toggle="tooltip" data-placement="bottom" title="github" data-original-title="https://github.com/Bob-Yuan">
+                        <div class="xe-comment-entry">
+                            <a class="xe-user-img"><img src="{% static 'QueryAssistant/image/github.jpg' %}" onerror="javascript:this.src='http://hello-123.com/wp-content/themes/webstack/images/favicon.png'" class="img-circle" width="40"></a>
+                            <div class="xe-comment">
+                                <a href="javascript:void(0)" class="xe-user-name overflowClip_1"><strong>我的github</strong></a>
+                                <p class="overflowClip_2">github.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+{#            <div class="row">#}
+{#                <div class="col-lg-12">#}
+{#                    <div class="nothing">没有内容</div>#}
+{#                </div>#}
+{#            </div>#}
 
             <br/>
 

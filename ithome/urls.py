@@ -39,6 +39,7 @@ urlpatterns = [
     path("users/", include("users.urls", namespace="users")),
     path("article/", include("article.urls", namespace="article")),
     path("activity/", include("activity.urls", namespace="activity")),
+    path("query_assistant/", include("QueryAssistant.urls", namespace="QurtyAssistant")),
 
     path("media/<path:path>", serve, {"document_root": MEDIA_ROOT}),
 ]
