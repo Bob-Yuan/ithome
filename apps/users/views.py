@@ -422,6 +422,11 @@ class UpdateEmailView(LoginRequiredMixin, View):
                 content_type='application/json')
 
 
+class PointRewardView(View):
+    """积分兑奖"""
+    def get(self, request):
+        return render(request,"Redeem.html")
+
 # class MyMessageView(LoginRequiredMixin, View):
 #     """我的消息"""
 #     login_url = '/login/'

@@ -37,6 +37,8 @@ class UserProfile(AbstractUser):
         max_length=100,
         verbose_name=u"头像"
     )
+    credits = models.IntegerField(default=0, verbose_name="积分")
+    goldCoin = models.IntegerField(default=0, verbose_name="金币")
 
     # meta信息，即后台栏目名
     class Meta:

@@ -1,0 +1,170 @@
+body, button, dd, dl, dt, form, h1, h2, h3, h4, h5, h6, input, li, ol, p, textarea, ul {
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+}
+
+body, button, input, textarea {
+    color: #333;
+    font-size: 9pt;
+    font-family: Microsoft Yahei,Arial;
+}
+
+body {
+    background: #fff;
+    /*最大宽度限制-begin*/
+    max-width: 640px;
+    margin: 0 auto;
+    /*最大宽度限制-end*/
+}
+
+
+a {
+    outline: 0;
+    color: #272a30;
+    vertical-align: baseline;
+    text-decoration: none;
+}
+
+    a:hover {
+        color: #d22222;
+        text-decoration: none;
+    }
+
+    a:active {
+        color: #8f001e;
+    }
+
+input, textaera {
+    outline: 0;
+    border: none;
+    vertical-align: middle;
+    resize: none;
+}
+
+img {
+    border: 0;
+}
+
+li, ul {
+    list-style: none;
+}
+
+
+/*商品列表公用样式*/
+.prolist {
+    border-top: solid #ddd 1px;
+    position: relative;
+}
+
+    .prolist .title {
+        margin: 10px 15px;
+        border-left: 3px solid #d22222;
+        margin-bottom: 10px;
+        padding-left: 10px;
+        font-size: 15px;
+        font-weight: 500;
+        color: #3c3c3c;
+    }
+
+
+
+.protable {
+    border-top: 1px solid #ddd;
+    padding: 10px;
+}
+
+    .protable > li {
+        width: 48%;
+        display: inline-block;
+        border: solid 1px #ddd;
+        margin-bottom: 10px;
+        /*padding-bottom: 3px;*/
+    }
+
+        .protable > li .touchblock {
+            display: block;
+            position:relative;
+        }
+
+            .protable > li .touchblock:active, .protable > li .touchblock:hover {
+                background-color: #eee;
+            }
+
+        .protable > li:nth-child(2n) {
+            float: right;
+        }
+
+        .protable > li .pricerow {
+            padding: 0 5px;
+            color: #d22222;
+            white-space: nowrap;
+            padding-bottom: 5px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+            .protable > li .pricerow .coinsize {
+                font-size: 16px;
+            }
+
+            .protable > li .pricerow .money {
+                color: #aaa;
+                padding-top: 5px;
+                display: inline-block;
+            }
+
+            .protable > li .pricerow .coinnum {
+                float: right;
+                color: #d22222;
+            }
+
+                .protable > li .pricerow .coinnum .coinsize {
+                    font-size: 16px;
+                }
+
+        .protable > li img {
+            width: 100%;
+            /*display: block;*/
+            vertical-align:middle;
+        }
+
+        .protable > li span.titletext {
+            font-size: 14px;
+            color: #3c3c3c;
+            height: 40px;
+            display: block;
+            overflow: hidden;
+            line-height: 20px;
+            padding: 5px 5px 0 5px;
+        }
+
+        .protable > li strong {
+            color: #d22222;
+        }
+/*商品列表公用样式*/
+
+
+
+/*金币任务页面的titleblock*/
+
+/*金币任务页面的titleblock*/
+
+
+.pagebottombtn {
+    width: 90%;
+    border-radius: 5px;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    background-color: #d22222;
+    line-height: 35px;
+    color: #fff;
+    outline: 0;
+    border: 0;
+}
+
+    .pagebottombtn:active, .pagebottombtn:hover {
+        color: #fff;
+        background-color: #bb0606;
+    }

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer" />
+    <title>我的购票</title>
+
+    <link href="{% static 'lottery/css/base.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'lottery/css/style.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'lottery/css/showhis.css' %}" rel="stylesheet" type="text/css">
+    <link href="http://at.alicdn.com/t/font_8d5l8fzk5b87iudi.css" rel="stylesheet" type="text/css">
+
+    <script src="{% static 'lottery/js/jquery.min.js' %}"></script>
+
+    <link rel="stylesheet" href="{% static 'lottery/css/top.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'lottery/css/all.css' %}" type="text/css">
+    <style type="text/css">
+        body {
+            padding-top: 0px;
+        }
+        #credits{
+            padding:0 10%;
+            margin-top: 35px;
+            height:35px;
+        }
+        #wodejifen{
+            padding: 5px 0px;
+            background-position: 14px center;
+            background-repeat: no-repeat;
+            font-size: 16px;
+        }
+        #wode{
+            color:#d22222;
+            background-color: #ffffff;
+        }
+        #container{width:80%;border:1px solid #ccc;margin:5px 10% 0 10%;}
+        #container .main{width:55%;background:white;padding: 0 10px 0 0;margin:0;float:left;}
+        #container .wrap{width:45%;background: white;padding: 0;margin:0;float:left;}
+    </style>
+
+</head>
+<body>
+<div id="hd">
+    <div id="nav">
+        <ul class="nav_list">
+            <li><a href="#" class="nav-item nav-item-7">彩红网</a></li>
+        </ul>
+        <ul class="nav_list">
+            <li><a  href="{% url 'activity:lottery' %}" class="nav-item nav-item-7" id="touzhu">投注</a></li>
+        </ul>
+        <ul class="nav_list">
+            <li><a  href="#" class="nav-item nav-item-7" id="wode" style="color:#d22222;">我的</a></li>
+        </ul>
+
+
+{% if request.user.is_authenticated %}
+        <div class="tb-nav">
+            <div class="tb-item dm">
+                <div id="toplogin">
+                    <a href="javascript:;" class="item-link" id="rm_avatar">
+                        <img src="{{ MEDIA_URL }}{{ request.user.image }}" onerror="this.src='//quan.ithome.com/statics/images/noavatar.png'">
+                        <span>
+                            {% if request.user.nick_name %}
+                                {{ request.user.nick_name }}
+                            {% else %}
+                                {{ request.user.email }}
+                            {% endif %}
+                        </span>
+                    </a>
+                    <div id="avatar" class="menu" style="display: none;">
+                        <ul>
+                            <li>
+                                <a href="{% url 'users:point_reward' %}" target="_blank">我的积分</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                <a href="{% url 'users:user_info' %}" target="_blank">个人资料</a>
+                            </li>
+                            <li class="line"></li>
+                            <li style="text-align:center;"><a id="btnLogout" href="javascript:;">退出登录</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% else %}
+        <div class="tb-nav" >
+            <div class="tb-item dm">
+                <div id="toplogin">
+                    <div class="prelogin">
+                        <a href="{% url 'register' %}" target="_blank">注册</a>
+                        <a href="javascript:; " class="login">登录</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endif %}
+    </div>
+</div>
+
+<div id="credits">
+    <div id="wodejifen">
+        我的积分：<span id="mycredits">{{ credits }}</span>
+    </div>
+</div>
+
+
+<div id="container">
+    <div class="main">
+        <div>
+            <div class="chart-hd" lot="220051">
+            <div class="logo">
+                <img src="http://p8.qhimg.com/t01103fd0ffc4f536cf.png">
+                双色球            </div>
+
+            <ul class="chart-tag">
+                <li class="cur"><span><a href="#">我的购买</a></span></li>
+            </ul>
+        </div>
+            <div class="chart-tab">
+                <table width="100%" class="his-table">
+                    <thead class="kaijiang">
+                        <tr>
+                            <th rowspan="2" width="15%">期号&nbsp; <a href="#" class="tharr tharr-up"></a></th>
+                            <th rowspan="2" width="15%">开奖日期</th>
+                            <th colspan="2" width="45%">购买号码</th>
+                            <th rowspan="2" width="10%">倍数</th>
+                            <th rowspan="2" width="15%">状态</th>
+                        </tr>
+                        <tr>
+                            <th width="16%">红球</th>
+                            <th width="4%">蓝球</th>
+                        </tr>
+                    </thead>
+                    <tbody id="data-tab">
+
+                    {% for userbuy in user_buy_big_lottery %}
+                        <tr style="background: none;">
+                            <td>{{ userbuy.issue }}</td>
+                            <td>{{ userbuy.kaijiang_date }}</td>
+                            <td>
+                                <span class="ball_5">{{ userbuy.number1 }}</span>&nbsp;
+                                <span class="ball_5">{{ userbuy.number2 }}</span>&nbsp;
+                                <span class="ball_5">{{ userbuy.number3 }}</span>&nbsp;
+                                <span class="ball_5">{{ userbuy.number4 }}</span>&nbsp;
+                                <span class="ball_5">{{ userbuy.number5 }}</span>&nbsp;
+                                <span class="ball_5">{{ userbuy.number6 }}</span>&nbsp;
+                            </td>
+                            <td>
+                                <span class="ball_1">{{ userbuy.number7 }}<span></span></span>
+                            </td>
+                            <td>{{ userbuy.times }}倍</td>
+                            <td>{{ userbuy.LotteryStatus }}</td>
+                        </tr>
+                    {%  endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrap" wday="">
+        <div class="chart-hd" lot="220051">
+            <div class="logo">
+                <img src="http://p8.qhimg.com/t01103fd0ffc4f536cf.png">
+                双色球            </div>
+
+            <ul class="chart-tag">
+                <li class="cur"><span><a href="#">历史开奖数据</a></span></li>
+            </ul>
+        </div>
+        <div class="chart-tab">
+            <table width="100%" style="display: none; width: 980px; position: absolute; z-index: 123; top: -282px;">
+                <thead class="kaijiang">
+                    <tr>
+                        <th rowspan="2" width="10%">期号&nbsp; <a href="#" class="tharr tharr-up"></a></th>
+                        <th rowspan="2" width="10%">开奖日期</th>
+                        <th colspan="2" width="20%">开奖号码</th>
+                    </tr>
+                    <tr>
+                        <th width="16%">红球</th>
+                        <th width="4%">蓝球</th>
+                    </tr>
+                </thead>
+            </table>
+            <table width="100%" class="his-table">
+                <thead class="kaijiang">
+                    <tr>
+                        <th rowspan="2" width="10%">期号&nbsp; <a href="#" class="tharr tharr-up"></a></th>
+                        <th rowspan="2" width="10%">开奖日期</th>
+                        <th colspan="2" width="20%">开奖号码</th>
+                    </tr>
+                    <tr>
+                        <th width="16%">红球</th>
+                        <th width="4%">蓝球</th>
+                    </tr>
+                </thead>
+                <tbody id="data-tab">
+                {% for number in big_lottery_winning_numbers %}
+                    <tr style="background: none;">
+                        {{ number.issue|safe }}
+                        {{ number.kaijiang_date|safe }}
+                        {{ number.red_balls|safe }}
+                        {{ number.blue_ball|safe }}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <a href="https://chart.cp.360.cn/kaijiang/ssq" target="_blank">更多»</a>
+    </div>
+</div>
+
+
+
+    {% csrf_token %}
+    <script type="text/javascript">
+        var token_csrf = "{{ csrf_token }}";
+        var issue = "{{ issue }}";
+        var creadits = "{{ credits }}";
+    </script>
+    <script src="{% static 'lottery/js/script.js' %}" type="text/javascript"></script>
+
+    <script>(window.jQuery || document.write("<script src='https://img.ithome.com/file/js/jquery/jquery.min.js'><\/script>"));</script>
+    <script src="{% static 'js/article/common.js' %}"></script>
+    <script src="{% static 'js/article/popwin.js' %}"></script>
+    <script src="{% static 'js/article/top.js' %}"></script>
+
+</body>
+</html>

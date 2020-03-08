@@ -1,0 +1,116 @@
+body {
+    font-family: 'Microsoft YaHei',Helvetica,Arial,sans-serif;
+    background-color: #f4f4f4;
+}
+
+body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, a, code, em, img, q, small, strong, dd, dl, dt, li, ol, ul, fieldset, form, label, table, tbody, tr, th, td, input {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+    a, a:active, a:hover, a:focus, a:visited {
+        text-decoration: none;
+    }
+
+a, img {
+    -webkit-touch-callout: none;
+}
+
+ol, ul, li {
+    list-style: none;
+}
+
+textarea, input[type="password"], input[type="text"] {
+    resize: none;
+    outline: 0;
+    -webkit-appearance: none;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    background: #fff;
+}
+
+.clearfix:after {
+    display: block;
+    clear: both;
+    content: "";
+    visibility: hidden;
+    height: 0;
+}
+
+p {
+    background-image: url(about:blank);
+    background-color: transparent;
+    word-break: break-all;
+}
+
+
+
+
+.rem {
+    margin-bottom: 15px;
+    padding: 20px;
+}
+
+    .rem .r {
+        color: red;
+    }
+
+    .rem .c {
+        font-size: 15px;
+        color: #808080;
+    }
+
+
+
+
+.btnlottery {
+    padding: 15px;
+}
+
+    .btnlottery .savebtn {
+        border-radius: 5px;
+        display: block;
+        margin: 0 auto;
+        text-align: center;
+        width: 300px;
+        background-color: #d22222;
+        line-height: 35px;
+        color: #fff;
+        outline: 0;
+        border: 0;
+    }
+
+.slider {
+    display: none;
+}
+
+.focus span {
+    width: 10px;
+    height: 10px;
+    margin-right: 10px;
+    border-radius: 50%;
+    background: #666;
+    font-size: 0;
+}
+
+    .focus span.current {
+        background: #fff;
+    }
+
+.address_row {
+    background-color: #fff;
+    border-top: #ddd solid 1px;
+    padding: 10px;
+    overflow: hidden;
+}
+
+    .address_row div {
+        float: left;
+        line-height: 30px;
+    }
+
+    .address_row input {
+        border: 0;
+    }
+ 

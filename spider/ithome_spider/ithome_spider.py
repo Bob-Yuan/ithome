@@ -6,7 +6,7 @@ import datetime
 
 #windows
 import sys
-sys.path.insert(0, '../')       #这边离根目录ithome有多远就加几个"../" 比如当前目录/ithome/ithome_spider/,那么就加一个
+sys.path.insert(0, '../../')       #这边离根目录ithome有多远就加几个"../" 比如当前目录/ithome/ithome_spider/,那么就加一个
 
 import os
 if not os.getenv('DJANGO_SETTINGS_MODULE'):
@@ -14,10 +14,10 @@ if not os.getenv('DJANGO_SETTINGS_MODULE'):
 
 import django
 django.setup()
-from ithome_spider import html_downloader
-from ithome_spider import html_outputer
-from ithome_spider import html_parser
-from ithome_spider import url_manager
+from spider.ithome_spider import html_downloader
+from spider.ithome_spider import html_outputer
+from spider.ithome_spider import html_parser
+from spider.ithome_spider import url_manager
 
 from ithome.settings import DATABASES_HOST, DATABASES_NAME, DATABASES_USER, DATABASES_PASSWORD
 #windwos
