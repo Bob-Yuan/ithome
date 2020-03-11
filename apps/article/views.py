@@ -61,4 +61,4 @@ class ArticleView(View):
         #         user = UserProfile.objects.get(id=request.user.id)
         #         return render(request, 'ithome_article.html', {"article": article[0], "user": user})
 
-        return render(request, 'ithome_article.html', {"article": article[0]})
+        return render(request, 'ithome/ithome_article.html', {"article": article[0]})

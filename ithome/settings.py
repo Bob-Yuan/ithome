@@ -118,7 +118,7 @@ WSGI_APPLICATION = 'ithome.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-DATABASES_HOST = '127.0.0.1'
+DATABASES_HOST = 'localhost'
 DATABASES_NAME = 'ithome'
 DATABASES_USER = 'root'
 DATABASES_PASSWORD = '123456'

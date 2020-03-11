@@ -124,18 +124,18 @@ class MyLotteryView(View):
             user_buy_status_0 = BigLotteryUserBuy.objects.filter(user_id=request.user.id, LotteryStatus=0)
             newest_lottery = LotteryInfo.objects.filter(type="fcssq")
             for a_user_buy in user_buy_status_0:
-                aa
+                pass
 
     def get(self, request):
         credits = 0
+        big_lottery_winning_numbers = BigLotteryWinningNumbers.objects.all().order_by('-id')[:15]
 
         if request.user.id != None:
             user = UserProfile.objects.get(id=request.user.id)
             credits = user.credits
 
             user_buy_big_lottery = BigLotteryUserBuy.objects.filter(user_id=request.user.id)
-            big_lottery_winning_numbers = BigLotteryWinningNumbers.objects.all().order_by('-id')[:15]
             return render(request, 'activity/lottery_my.html', {"user_buy_big_lottery": user_buy_big_lottery, "big_lottery_winning_numbers": big_lottery_winning_numbers,
                                                         "credits": credits})
 
-        return render(request, 'activity/lottery_my.html', {"credits": credits})
+        return render(request, 'activity/lottery_my.html', {"credits": credits, "big_lottery_winning_numbers": big_lottery_winning_numbers})

@@ -6,9 +6,9 @@ import django
 import MySQLdb
 import urllib.request
 from bs4 import BeautifulSoup
-from ithome.settings import DATABASES_HOST, DATABASES_NAME, DATABASES_USER, DATABASES_PASSWORD
 
-sys.path.insert(0, '../../')       #这边离根目录ithome有多远就加几个"../" 比如当前目录/ithome/ithome_spider/,那么就加一个
+sys.path.insert(0, '../../')       #添加环境变量，包的查找
+from ithome.settings import DATABASES_HOST, DATABASES_NAME, DATABASES_USER, DATABASES_PASSWORD
 
 if not os.getenv('DJANGO_SETTINGS_MODULE'):
     os.environ['DJANGO_SETTINGS_MODULE']='ithome.settings'
@@ -130,9 +130,9 @@ def transferContent(content):
 
 
 if __name__ == "__main__":
-    # url = "https://chart.cp.360.cn/kaijiang/ssq"
-    # html_cont = download(url, 1)
-    # parse(html_cont, 1)
+    url = "https://chart.cp.360.cn/kaijiang/ssq"
+    html_cont = download(url, 1)
+    parse(html_cont, 1)
 
     url = "https://kaijiang.aicai.com/fcssq/"
     html_cont = download(url, 2)
