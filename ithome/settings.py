@@ -178,12 +178,12 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-EMAIL_HOST = "smtp.163.com"
+EMAIL_HOST = "smtp.qq.com"
 EMAIL_PORT = 25
-EMAIL_HOST_USER = "qq1178373915@163.com"
-EMAIL_HOST_PASSWORD = "83812355qq"   #这个是授权码，不是密码
+EMAIL_HOST_USER = "yuanbo95@qq.com"
+EMAIL_HOST_PASSWORD = "83812355qq=="   #这个是授权码，不是密码
 EMAIL_USE_TLS = False
-EMAIL_FROM = "qq1178373915@163.com"
+EMAIL_FROM = "yuanbo95@qq.com"
 
 CAPTCHA_LENGTH = 4
 CAPTCHA_IMAGE_SIZE = (80, 35)

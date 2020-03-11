@@ -59,7 +59,7 @@ class UserInfoView(LoginRequiredMixin, View):
     redirect_field_name = 'next'
 
     def get(self, request):
-        return render(request, "userinfo.html")
+        return render(request, "user/userinfo.html")
 
     def post(self, request):
         # 不像用户咨询是一个新的。需要指明instance。不然无法修改，而是新增用户
@@ -84,7 +84,7 @@ class LoginView(View):
         # render三变量: request 模板名称 一个字典写明传给前端的值
         redirect_url = request.GET.get('next', '')
         login_form = LoginForm()
-        return render(request, "login.html", {"redirect_url": redirect_url, "login_form": login_form, "myflag": 0})
+        return render(request, "user/login.html", {"redirect_url": redirect_url, "login_form": login_form, "myflag": 0})
 
     def post(self, request):
         # 类实例化需要一个字典参数dict:request.POST就是一个QueryDict所以直接传入
@@ -156,7 +156,7 @@ class RegisterView(View):
     def get(self, request):
         # 添加验证码
         register_form = RegisterForm()
-        return render(request, "register.html", {'register_form': register_form, "myflag": 0})
+        return render(request, "user/register.html", {'register_form': register_form, "myflag": 0})
 
     def post(self, request):
         # 实例化form
@@ -226,11 +226,11 @@ class ActiveUserView(View):
                 user.is_active = True
                 user.save()
                 # 激活成功跳转到登录页面
-                return render(request, "login.html", {
+                return render(request, "user/login.html", {
                     "msg": "激活成功！您现在可以登录了！", "active_form": active_form, "myflag": 1 })
         # 自己瞎输的验证码
         else:
-            return render(request, "register.html", {"msg": "您的激活链接无效", "active_form": active_form, "myflag": 2})
+            return render(request, "user/register.html", {"msg": "您的激活链接无效", "active_form": active_form, "myflag": 2})
 
 
 class ForgetPwdView(View):
@@ -240,7 +240,7 @@ class ForgetPwdView(View):
     def get(self, request):
         # 给忘记密码页面加上验证码
         active_form = ActiveForm(request.POST)
-        return render(request, "forgetpwd.html", {"active_form": active_form, "myflag": 0})
+        return render(request, "user/forgetpwd.html", {"active_form": active_form, "myflag": 0})
     # post方法实现
 
     def post(self, request):
@@ -287,11 +287,11 @@ class ResetView(View):
                 email = record.email
                 # 将email传回来
                 # 只传回active_code
-                return render(request, "password_reset.html", {"active_code": active_code})
+                return render(request, "user/password_reset.html", {"active_code": active_code})
         # 自己瞎输的验证码
         else:
             return render(
-                request, "forgetpwd.html", {"msg": "您的重置密码链接无效,请重新请求", "active_form": active_form, "myflag": 0})
+                request, "user/forgetpwd.html", {"msg": "您的重置密码链接无效,请重新请求", "active_form": active_form, "myflag": 0})
 
     def post(self, request, active_code):
         modiypwd_form = ModifyPwdForm(request.POST)
@@ -302,7 +302,7 @@ class ResetView(View):
             # email = request.POST.get("email", "")
             # 如果两次密码不相等，返回错误信息
             if pwd1 != pwd2:
-                return render(request, "password_reset.html", {"active_code": active_code, "msg": "密码不一致"})
+                return render(request, "user/password_reset.html", {"active_code": active_code, "msg": "密码不一致"})
             # 如果密码一致
             # 找到激活码对应的邮箱
             all_record = EmailVerifyRecord.objects.filter(code=active_code)
@@ -313,13 +313,13 @@ class ResetView(View):
             user.password = make_password(pwd2)
             # save保存到数据库
             user.save()
-            return render(request, "login.html", {"user": user, "msg": "密码修改成功，请登录", "login_form": login_form, "myflag": 1})
+            return render(request, "user/login.html", {"user": user, "msg": "密码修改成功，请登录", "login_form": login_form, "myflag": 1})
 
         # 验证失败说明密码位数不够。
         else:
             active_code = request.POST.get("active_code", "")
             return render(
-                request, "password_reset.html", {
+                request, "user/password_reset.html", {
                     "active_code": active_code,  "msg": "密码小于5位"})
 
 
@@ -425,7 +425,7 @@ class UpdateEmailView(LoginRequiredMixin, View):
 class PointRewardView(View):
     """积分兑奖"""
     def get(self, request):
-        return render(request,"Redeem.html")
+        return render(request, "activity/Redeem.html")
 
 # class MyMessageView(LoginRequiredMixin, View):
 #     """我的消息"""

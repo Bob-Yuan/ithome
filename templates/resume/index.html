@@ -51,7 +51,7 @@
         <div id="lead-content">
             <h1>Boy's 简历</h1><br>
             <h2>python web开发方向</h2>
-            <a href="{% url 'resume:download' %}" class="btn-rounded-white">下载我的简历</a>
+            <a href="javascript:void(0);" class="btn-rounded-white" onclick="disp_prompt()">下载我的简历</a>
         </div>
         <!-- End #lead-content -->
 
@@ -187,7 +187,7 @@
         <h2>联系我</h2>
         <div id="contact-form">
             <form method="POST" action="/leaveMessage/">
-                {%csrf_token%}
+                {% csrf_token %}
                 <input type="hidden" name="_subject" value="Contact request from personal website" />
                 <!--<input type="email" name="_replyto" placeholder="Your email" required>-->
                 E-mail: yuanbo95@qq.com<br>
@@ -239,6 +239,81 @@
     <!-- End footer -->
 
     <script type="text/javascript">
+        function disp_prompt()
+        {
+            var token_csrf = "{{ csrf_token }}";
+            var email=prompt("请输入邮箱地址，稍后会将简历发送到您的邮箱"); // 弹出input框
+
+            if(email==""){
+                $.ajax({
+                    type: "GET",
+                    contentType: "application/json; charset=utf-8",
+                    headers: { "X-CSRFToken": token_csrf },
+                    url: "{% url 'resume:download' %}",
+                    cache: false,
+
+                    error: function (data) {
+                        alert("服务器错误！文件下载失败！");
+                    },
+                    success: function (data) {
+
+                    }
+                });
+                return true;
+            }else{
+                $.ajax({
+                    type: "GET",
+                    contentType: "application/json; charset=utf-8",
+                    headers: { "X-CSRFToken": token_csrf },
+                    url: "{% url 'resume:download' %}",
+                    cache: false,
+
+                    error: function (data) {
+                        alert("服务器错误！文件下载失败！");
+                    },
+                    success: function (data) {
+
+                    }
+                });
+                //检测邮箱格式
+                var pattern= /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+                var strEmail=pattern.test(email);
+                if(strEmail){
+                    //邮箱格式正确
+                }else{
+                    //邮箱格式不正确
+                    alert("邮箱格式不正确");
+                    return false;
+                }
+                //ajax
+                var hr_email = {"email":email};
+
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    headers: { "X-CSRFToken": token_csrf },
+                    url: "/resume/send_resume/",
+                    dataType: "json",
+                    cache: false,
+                    data: JSON.stringify(hr_email),
+                    async : true,
+                    timeout: 10000,
+                    error: function (data) {
+                        alert("服务器错误！邮件发送失败！");
+                    },
+                    success: function (data) {
+                        if (null != data && "" != data) {
+                            if(data.status == "1"){
+                                alert("邮件发送成功，请查收！");
+                            }else{
+                                alert("邮件发送错误！")
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
         var sendMsgFlag = {{ sendMessageFlag }};
         if( sendMsgFlag )
         {

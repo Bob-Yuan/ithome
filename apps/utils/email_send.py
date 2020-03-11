@@ -1,3 +1,4 @@
+import time
 from random import Random
 
 from users.models import EmailVerifyRecord
@@ -38,7 +39,7 @@ def send_register_eamil(ip_addr, email, send_type="register"):
         # email_body = "欢迎注册慕学在线网:  请点击下面的链接激活你的账号: http://127.0.0.1:8000/active/{0}".format(code)
 
         email_body = loader.render_to_string(
-            "email_register.html",  # 需要渲染的html模板
+            "email/email_register.html",  # 需要渲染的html模板
             {
                 "active_code": code,  # 参数
                 "ip_addr": ip_addr
@@ -52,7 +53,7 @@ def send_register_eamil(ip_addr, email, send_type="register"):
     elif send_type == "forget":
         email_title = "qxdq.xyz找回密码链接"
         email_body = loader.render_to_string(
-            "email_forget.html",  # 需要渲染的html模板
+            "email/email_forget.html",  # 需要渲染的html模板
             {
                 "reset_code": code  # 参数
             }
@@ -62,7 +63,7 @@ def send_register_eamil(ip_addr, email, send_type="register"):
     elif send_type == "update_email":
         email_title = "qxdq.xyz修改邮箱验证码"
         email_body = loader.render_to_string(
-            "email_update_email.html",  # 需要渲染的html模板
+            "email/email_update_email.html",  # 需要渲染的html模板
             {
                 "active_code": code  # 参数
             }

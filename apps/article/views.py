@@ -28,7 +28,7 @@ class ArticleIndexView(View):
         #         user = UserProfile.objects.get(id=request.user.id)
         #         return render(request, 'ithome_index.html', {"articles": articles, "user": user})
 
-        return render(request, 'ithome_index.html', {"articles": articles})
+        return render(request, 'ithome/ithome_index.html', {"articles": articles})
 
 
 class DateArticleListView(View):
@@ -47,7 +47,7 @@ class DateArticleListView(View):
         #         user = UserProfile.objects.get(id=request.user.id)
         #         return render(request, 'ithome_index.html', {"articles": articles, "user": user})
 
-        return render(request, 'ithome_index.html', {"articles": articles})
+        return render(request, 'ithome/ithome_index.html', {"articles": articles})
 
 
 class ArticleView(View):

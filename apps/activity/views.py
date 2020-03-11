@@ -21,7 +21,7 @@ class Game2048View(View):
         #print(request.user.is_authenticated())
 
         records = Records2048.objects.filter(send_time=datetime.date.today()).order_by("-score")[0:10]
-        return render(request, '2048.html', {"records": records})
+        return render(request, 'activity/2048.html', {"records": records})
 
     def post(self, request):
         data = json.loads(request.body)
@@ -63,7 +63,7 @@ class LotteryView(View):
         if request.user.id != None:
             user = UserProfile.objects.get(id=request.user.id)
             credits = user.credits
-        return render(request, 'lottery.html', {"credits": credits, "lottery_info": lottery_info})
+        return render(request, 'activity/lottery.html', {"credits": credits, "lottery_info": lottery_info})
 
     def post(self, request):
         data = json.loads(request.body)
@@ -135,7 +135,7 @@ class MyLotteryView(View):
 
             user_buy_big_lottery = BigLotteryUserBuy.objects.filter(user_id=request.user.id)
             big_lottery_winning_numbers = BigLotteryWinningNumbers.objects.all().order_by('-id')[:15]
-            return render(request, 'lottery_my.html', {"user_buy_big_lottery": user_buy_big_lottery, "big_lottery_winning_numbers": big_lottery_winning_numbers,
+            return render(request, 'activity/lottery_my.html', {"user_buy_big_lottery": user_buy_big_lottery, "big_lottery_winning_numbers": big_lottery_winning_numbers,
                                                         "credits": credits})
 
-        return render(request, 'lottery_my.html', { "credits": credits})
+        return render(request, 'activity/lottery_my.html', {"credits": credits})
