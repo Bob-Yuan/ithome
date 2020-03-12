@@ -9,6 +9,7 @@ from bs4 import BeautifulSoup
 
 sys.path.insert(0, '../../')       #添加环境变量，包的查找
 from ithome.settings import DATABASES_HOST, DATABASES_NAME, DATABASES_USER, DATABASES_PASSWORD
+from crontab.judgeLottery import JudgeAwards
 
 if not os.getenv('DJANGO_SETTINGS_MODULE'):
     os.environ['DJANGO_SETTINGS_MODULE']='ithome.settings'
@@ -58,12 +59,23 @@ def parse(html_cont, type):
 
         for i in range(len(data)-1, -1, -1):
             #if(取出日期大于则pass，else加入数据库)
-            html_data = data[i].find_all("td")
+            html_data_td = data[i].find_all("td")
+            html_data_span = data[i].find_all("span")
 
-            if int(newestDate[4:-5]) < int(str(html_data[0])[4:-5]):
-                sql = "INSERT INTO activity_biglotterywinningnumbers(issue, kaijiang_date, red_balls, blue_ball) VALUES ('"\
-                      + transferContent(str(html_data[0])) + "', '" + transferContent(str(html_data[1])) + "', '" + \
-                      transferContent(str(html_data[2])) + "', '" + transferContent(str(html_data[3])) + "');"
+            redballs_number_data = ""
+            for j in range(0, len(html_data_span)-2):
+                if j != len(html_data_span)-3:
+                    redballs_number_data = redballs_number_data + html_data_span[j].get_text() + ","
+                else:
+                    redballs_number_data = redballs_number_data + html_data_span[j].get_text()
+
+            blueball_number_data = html_data_span[6].get_text()
+
+            if int(newestDate[4:-5]) < int(str(html_data_td[0])[4:-5]):
+                sql = "INSERT INTO activity_biglotterywinningnumbers(issue, kaijiang_date, red_balls_html, blue_ball_html,\
+                 red_balls_nums, blue_ball_num) VALUES ('"+ transferContent(str(html_data_td[0])) + "', '" + \
+                      transferContent(str(html_data_td[1])) + "', '" + transferContent(str(html_data_td[2])) + "', '" + transferContent(str(html_data_td[3]))\
+                      + "', '" + transferContent(str(redballs_number_data)) + "', '" + transferContent(str(blueball_number_data)) + "');"
 
                 try:
                     cursor.execute(sql)
@@ -72,6 +84,10 @@ def parse(html_cont, type):
                     print(e)
                     print("db error")
                     db.rollback()
+
+                #调用判奖函数
+                #issue和type以及开奖号码
+                JudgeAwards(type, newestDate[4:-5], redballs_number_data, blueball_number_data)
             else:
                 pass
 
@@ -103,6 +119,7 @@ def parse(html_cont, type):
                 print(e)
                 print("db error")
                 db.rollback()
+
         else:
             pass
 
@@ -130,10 +147,12 @@ def transferContent(content):
 
 
 if __name__ == "__main__":
+    #开奖记录
     url = "https://chart.cp.360.cn/kaijiang/ssq"
     html_cont = download(url, 1)
     parse(html_cont, 1)
 
+    #下次开奖时间和期号
     url = "https://kaijiang.aicai.com/fcssq/"
     html_cont = download(url, 2)
     parse(html_cont, 2)

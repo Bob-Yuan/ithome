@@ -119,13 +119,6 @@ class LotteryView(View):
 
 
 class MyLotteryView(View):
-    def checkStatus(self, request):
-        if request.user.id != None:
-            user_buy_status_0 = BigLotteryUserBuy.objects.filter(user_id=request.user.id, LotteryStatus=0)
-            newest_lottery = LotteryInfo.objects.filter(type="fcssq")
-            for a_user_buy in user_buy_status_0:
-                pass
-
     def get(self, request):
         credits = 0
         big_lottery_winning_numbers = BigLotteryWinningNumbers.objects.all().order_by('-id')[:15]
