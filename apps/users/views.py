@@ -166,6 +166,7 @@ class RegisterView(View):
         if register_form.is_valid():
             email_account = data["email"]
             pass_word = data["password"]
+
             # 用户查重
             if UserProfile.objects.filter(email=email_account):
                 data = {
@@ -173,6 +174,13 @@ class RegisterView(View):
                     "msg": "用户已存在！"
                 }
                 return JsonResponse(data)
+
+            # 发送注册激活邮件
+            send_register_eamil(ip_addr, email_account, "register")
+            data = {
+                'status': 1,
+                "msg": "注册成功！请注意邮箱激活链接！"
+            }
 
             # 实例化一个user_profile对象，将前台值存入
             user_profile = UserProfile()
@@ -192,12 +200,6 @@ class RegisterView(View):
             user_message.message = "欢迎注册慕学在线网!! --系统自动消息"
             user_message.save()
 
-            # 发送注册激活邮件
-            send_register_eamil(ip_addr, email_account, "register")
-            data = {
-                'status': 1,
-                "msg": "注册成功！请注意邮箱激活链接！"
-            }
             return JsonResponse(data)
         # 注册邮箱form验证失败
         else:

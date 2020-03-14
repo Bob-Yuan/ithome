@@ -76,7 +76,7 @@ class SendResumeView(View):
             receiver = to_addr
             smtpserver = 'smtp.qq.com'
             username = 'yuanbo95@qq.com'
-            password = 'mppyzxmyaaxgbebh'
+            password = 'pjcgbmngmlqsbaia'
             mail_title = '袁博-python-15850587369'
 
             message = MIMEMultipart()

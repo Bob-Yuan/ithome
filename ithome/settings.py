@@ -181,7 +181,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 EMAIL_HOST = "smtp.qq.com"
 EMAIL_PORT = 25
 EMAIL_HOST_USER = "yuanbo95@qq.com"
-EMAIL_HOST_PASSWORD = "83812355qq=="   #这个是授权码，不是密码
+EMAIL_HOST_PASSWORD = "pjcgbmngmlqsbaia"   #这个是授权码，不是密码
 EMAIL_USE_TLS = False
 EMAIL_FROM = "yuanbo95@qq.com"
 
@@ -191,4 +191,4 @@ CAPTCHA_TEXT_FIELD_TEMPLATE = BASE_DIR+"/templates/captcha/field_template.html"
 CAPTCHA_OUTPUT_FORMAT = "%(text_field)s %(hidden_field)s %(image)s"
 #CAPTCHA_FIELD_TEMPLATE =
 
-ip_addr = "http://127.0.0.1:8000"
+ip_addr = "http://127.0.0.1:8000"    #网站网址
