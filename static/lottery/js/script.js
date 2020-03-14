@@ -310,7 +310,7 @@ $("#timesOfLottery").bind("input", totalNumChange);
 $("#confirmBox2").click(function () {
 
     //价格大于积分，则报错
-    if(parseInt($("#priceOfLottery").html())>creadits){
+    if(parseInt($("#priceOfLottery").html())>credits){
         alert("积分不足！");
         return 0;
     }
@@ -321,8 +321,8 @@ $("#confirmBox2").click(function () {
         tickets[i] = lottery.eq(i).find('b').eq(0).html()+' '+lottery.eq(i).find('b').eq(2).html();
     }
     var times = $("#timesOfLottery").val();
-    alert(kaijiang_date);
-    var lottery_data = {"type":"daletou","tickets":tickets,"times":times, "issue":issue, "kaijiang_date":kaijiang_date};
+
+    var lottery_data = {"type":"fcssq","tickets":tickets,"times":times, "issue":issue, "kaijiang_date":kaijiang_date};
 
     $.ajax({
         type: "POST",
@@ -337,24 +337,8 @@ $("#confirmBox2").click(function () {
         },
         success: function (data) {
             if (null != data && "" != data) {
-                $("#mycredits").text(data.credits);
-                 // if(data.status == 1){
-                //     if(data.redirect_url != "" && data.redirect_url != null) {
-                //         ShowErrorMessage(data.msg, data.status);
-                //         if(top.location!=self.location){
-                //             window.setTimeout(function(){ parent.location.href = data.redirect_url; },1000);
-                //         }else{
-                //             window.setTimeout(function(){ window.location.href = "http://"+window.location.host; },1000);
-                //         }
-                //     }
-                //     else{
-                //         //location.replace(http+window.location.host);
-                //         ShowErrorMessage(data.msg, data.status);
-                //         window.setTimeout(function(){ parent.location.href = "http://"+window.location.host; },1000);
-                //     }
-                // }else{
-                //     ShowErrorMessage(data.msg, data.status);  //1=成功，2=失败，默认为0
-                // }
+                alert(data.msg);
+                location.reload();
             }
         }
     });

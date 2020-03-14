@@ -72,7 +72,7 @@
                     <div id="avatar" class="menu" style="display: none;">
                         <ul>
                             <li>
-                                <a href="{% url 'users:point_reward' %}" target="_blank">我的积分</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                <a href="{% url 'activity:point_reward' 0 %}" target="_blank">我的积分</a>&nbsp;&nbsp;|&nbsp;&nbsp;
                                 <a href="{% url 'users:user_info' %}" target="_blank">个人资料</a>
                             </li>
                             <li class="line"></li>
@@ -99,7 +99,11 @@
 
 <div id="credits">
     <div id="wodejifen">
-        我的积分：<span id="mycredits">{{ credits }}</span>
+{% if request.user.is_authenticated %}
+        我的积分：<span id="mycredits">{{ user.credits }}</span>&nbsp;
+        我的金币：<span id="mycredits">{{ user.goldCoin }}</span>
+{% else %}
+{% endif %}
     </div>
 </div>
 
@@ -149,7 +153,7 @@
                                 <span class="ball_1">{{ userbuy.number7 }}<span></span></span>
                             </td>
                             <td>{{ userbuy.times }}倍</td>
-                            <td>{{ userbuy.LotteryStatus }}</td>
+                            <td id="LotteryStatus{{ forloop.counter }}"></td>
                         </tr>
                     {%  endfor %}
                     </tbody>
@@ -197,10 +201,10 @@
                 <tbody id="data-tab">
                 {% for number in big_lottery_winning_numbers %}
                     <tr style="background: none;">
-                        {{ number.issue|safe }}
+                        {{ number.issue_html|safe }}
                         {{ number.kaijiang_date|safe }}
-                        {{ number.red_balls|safe }}
-                        {{ number.blue_ball|safe }}
+                        {{ number.red_balls_html|safe }}
+                        {{ number.blue_ball_html|safe }}
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -216,7 +220,51 @@
     <script type="text/javascript">
         var token_csrf = "{{ csrf_token }}";
         var issue = "{{ issue }}";
-        var creadits = "{{ credits }}";
+        var credits = "{{ user.credits }}";
+        var goldCoin = "{{ user.goldCoin }}"
+        var jiangjin_GoldCoin = "{{ jiangjin_GoldCoin }}";
+
+        function JudgeLotteryStatus(jquery_obj, lotteryStatus, id){
+
+            if(lotteryStatus == '0'){
+                jquery_obj.html("未开奖");
+            }else if(lotteryStatus == '1'){
+                jquery_obj.html("一等奖 <a href=/activity/lottery_reward/" + id +" style='color:#d22222'> 兑奖 </a>");
+            }else if(lotteryStatus == '2'){
+                jquery_obj.html("二等奖 <a href=/activity/lottery_reward/" + id +" style='color:#d22222'> 兑奖 </a>");
+            }else if(lotteryStatus == '3'){
+                jquery_obj.html("三等奖 <a href=/activity/lottery_reward/" + id +" style='color:#d22222'> 兑奖 </a>");
+            }else if(lotteryStatus == '4'){
+                jquery_obj.html("四等奖 <a href=/activity/lottery_reward/" + id +" style='color:#d22222'> 兑奖 </a>");
+            }else if(lotteryStatus == '5'){
+                jquery_obj.html("五等奖 <a href=/activity/lottery_reward/" + id +" style='color:#d22222'> 兑奖 </a>");
+            }else if(lotteryStatus == '6'){
+                jquery_obj.html("六等奖 <a href=/activity/lottery_reward/" + id +" style='color:#d22222'> 兑奖 </a>");
+            }else if(lotteryStatus == '10'){
+                jquery_obj.html("未中奖");
+            }else if(lotteryStatus == '11'){
+                jquery_obj.html("一等奖 已兑");
+            }else if(lotteryStatus == '12'){
+                jquery_obj.html("二等奖 已兑");
+            }else if(lotteryStatus == '13'){
+                jquery_obj.html("三等奖 已兑");
+            }else if(lotteryStatus == '14'){
+                jquery_obj.html("四等奖 已兑");
+            }else if(lotteryStatus == '15'){
+                jquery_obj.html("五等奖 已兑");
+            }else if(lotteryStatus == '16'){
+                jquery_obj.html("六等奖 已兑");
+            }
+        }
+
+{% for userbuy in user_buy_big_lottery %}
+        JudgeLotteryStatus($("#LotteryStatus{{ forloop.counter }}"), "{{ userbuy.LotteryStatus }}", "{{ userbuy.id }}");
+{% endfor %}
+        if(jiangjin_GoldCoin != "0"){
+            alert("兑奖成功！金币+"+ jiangjin_GoldCoin);
+            location.reload();
+        }
+
     </script>
     <script src="{% static 'lottery/js/script.js' %}" type="text/javascript"></script>
 

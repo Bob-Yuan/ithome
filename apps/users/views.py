@@ -19,6 +19,7 @@ from utils.email_send import send_register_eamil
 from .models import UserProfile, UserMessage, EmailVerifyRecord #, Banner
 from .forms import LoginForm, RegisterForm, ActiveForm, ForgetForm, ModifyPwdForm, UploadImageForm, UserInfoForm
 
+
 # Create your views here.
 
 
@@ -421,11 +422,6 @@ class UpdateEmailView(LoginRequiredMixin, View):
                 '{"email":"验证码无效"}',
                 content_type='application/json')
 
-
-class PointRewardView(View):
-    """积分兑奖"""
-    def get(self, request):
-        return render(request, "activity/Redeem.html")
 
 # class MyMessageView(LoginRequiredMixin, View):
 #     """我的消息"""

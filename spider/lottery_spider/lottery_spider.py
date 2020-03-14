@@ -17,7 +17,7 @@ if not os.getenv('DJANGO_SETTINGS_MODULE'):
 django.setup()
 
 
-def download(url, type):
+def download(url, download_type):
     if url is None:
         return None
     try:
@@ -27,9 +27,9 @@ def download(url, type):
 
         if response.getcode() != 200:
             return None
-        if type == 1:
+        if download_type == 1:
             content = response.read().decode('GBK')
-        elif type == 2:
+        elif download_type == 2:
             content = response.read().decode('utf8')
         return content
     except:
@@ -37,7 +37,7 @@ def download(url, type):
         return None
 
 
-def parse(html_cont, type):
+def parse(html_cont, parse_type):
     if html_cont is None:
         return
 
@@ -46,7 +46,7 @@ def parse(html_cont, type):
     db = MySQLdb.connect(DATABASES_HOST, DATABASES_USER, DATABASES_PASSWORD, DATABASES_NAME, charset="utf8")
     cursor = db.cursor()
 
-    if type == 1:
+    if parse_type == 1:
         sql = "SELECT * FROM activity_biglotterywinningnumbers order by id DESC limit 1;"
         cursor.execute(sql)
         data = cursor.fetchone()
@@ -70,10 +70,11 @@ def parse(html_cont, type):
                     redballs_number_data = redballs_number_data + html_data_span[j].get_text()
 
             blueball_number_data = html_data_span[6].get_text()
+            issue_num = html_data_td[0].get_text()
 
             if int(newestDate[4:-5]) < int(str(html_data_td[0])[4:-5]):
-                sql = "INSERT INTO activity_biglotterywinningnumbers(issue, kaijiang_date, red_balls_html, blue_ball_html,\
-                 red_balls_nums, blue_ball_num) VALUES ('"+ transferContent(str(html_data_td[0])) + "', '" + \
+                sql = "INSERT INTO activity_biglotterywinningnumbers(issue_html, issue_num, kaijiang_date, red_balls_html, blue_ball_html,\
+                 red_balls_nums, blue_ball_num) VALUES ('"+ transferContent(str(html_data_td[0])) + "', '" + transferContent(str(issue_num)) + "', '" + \
                       transferContent(str(html_data_td[1])) + "', '" + transferContent(str(html_data_td[2])) + "', '" + transferContent(str(html_data_td[3]))\
                       + "', '" + transferContent(str(redballs_number_data)) + "', '" + transferContent(str(blueball_number_data)) + "');"
 
@@ -87,11 +88,12 @@ def parse(html_cont, type):
 
                 #调用判奖函数
                 #issue和type以及开奖号码
-                JudgeAwards(type, newestDate[4:-5], redballs_number_data, blueball_number_data)
+                lottery_type = "fcssq"
+                JudgeAwards(lottery_type, newestDate[4:-5], redballs_number_data, blueball_number_data)
             else:
                 pass
 
-    elif type == 2:
+    elif parse_type == 2:
         sql = "SELECT * FROM activity_lotteryinfo WHERE type='fcssq' order by id DESC limit 1;"
         cursor.execute(sql)
         data = cursor.fetchone()
@@ -147,12 +149,12 @@ def transferContent(content):
 
 
 if __name__ == "__main__":
-    #开奖记录
+    # download_type =1 下载开奖记录 parse_type=1 解析开奖记录
     url = "https://chart.cp.360.cn/kaijiang/ssq"
     html_cont = download(url, 1)
     parse(html_cont, 1)
 
-    #下次开奖时间和期号
+    # download_type =1 下载下次开奖时间和期号 parse_type=2 解析下次开奖时间和期号
     url = "https://kaijiang.aicai.com/fcssq/"
     html_cont = download(url, 2)
     parse(html_cont, 2)

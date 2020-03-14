@@ -248,7 +248,7 @@
 {% if request.user.is_authenticated %}
 
         <div class="unloggedshow">
-            <a style="font-size: 15px;">我的金币:<span style="color:#D22222">9999</span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a style="font-size: 15px;">我的金币:<span style="color:#D22222">{{ user.goldCoin }}</span></a>&nbsp;&nbsp;&nbsp;&nbsp;
             <a href="{% url 'activity:lottery' %}" style="color:red;font-size: 15px;">获取金币 ››</a>
         </div>
 {% else %}
@@ -267,49 +267,25 @@
     <div class="prolist">
         <h3 class="title">超值兑换</h3>
         <ol class="protable">
-
+{% for prize in prizes %}
             <li>
-                <a href="GoodsContent.aspx?id=35" class="touchblock" data-todayremain="9957">
+                <a href="{% url 'activity:point_reward' prize.id %}" class="touchblock" data-todayremain="9957">
                     <div class="picwrapper ">
-                        <img src=" http://img.ithome.com/images/coinshop/bu.png@base@tag=imgScale&amp;w=300&amp;h=225&amp;q=90">
-
+                        <img src="/static/{{ prize.image }}">
                     </div>
                     <span class="titletext">
-                        补签卡兑换
+                        {{ prize.name }}
                     </span>
-                    <span class="shengyuinfo">&nbsp;库存:99997737
+                    <span class="shengyuinfo">&nbsp;
+                        {{ prize.desc }}
                     </span>
                     <div class="pricerow">
-
-                        <span class="coinsize">1000</span>
-                        金币
-
+                        <span class="coinsize">{{ prize.price }}</span>金币
                     </div>
                 </a>
             </li>
-
-            <li>
-                <a href="GoodsContent.aspx?id=5" class="touchblock" data-todayremain="9991">
-                    <div class="picwrapper ">
-                        <img src=" http://img.ithome.com/images/coinshop/geng.png@base@tag=imgScale&amp;w=300&amp;h=225&amp;q=90">
-
-                    </div>
-                    <span class="titletext">
-                        更名卡兑换
-                    </span>
-                    <span class="shengyuinfo">&nbsp;库存:99999149
-                    </span>
-                    <div class="pricerow">
-
-                        <span class="coinsize">1000</span>
-                        金币
-
-                    </div>
-                </a>
-            </li>
-
+{% endfor %}
         </ol>
-        <ol class="protable lapintable"><li class="lapin"><a href="https://mall.lapin365.com/m/product/productdetails?productId=156"><div class="lpp"><img src="https://img.lapin365.com/mall/images/00001051.png@base@tag=imgScale&amp;w=495&amp;h=495"></div><span class="name">IT之家经典红笔记本 - 支持金币全额兑换（包邮）</span><div class="price"><span class="new">40</span></div></a></li><li class="lapin"><a href="https://mall.lapin365.com/m/product/productdetails?productId=95"><div class="lpp"><img src="https://img.lapin365.com/mall/images/00000785.png@base@tag=imgScale&amp;w=495&amp;h=495"></div><span class="name">Office 365 个人/家庭订阅1年版电子密钥</span><div class="price"><span class="new">298~398</span><span class="old">398~498</span></div></a></li></ol>
     </div>
 
 <script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/2.1.1/jquery.min.js"></script>
@@ -449,7 +425,6 @@
 
     <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260153598'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "w.cnzz.com/c.php%3Fid%3D1260153598' type='text/javascript'%3E%3C/script%3E"));</script><span id="cnzz_stat_icon_1260153598"></span><script src=" https://w.cnzz.com/c.php?id=1260153598" type="text/javascript"></script>
     <script>
-
         function appasynclogin(userhash) {
             var currenturl = location.href;
             var refreshurl = '';
@@ -461,6 +436,11 @@
             }
             location.href = refreshurl;
         };
+
+        var id = "{{ id }}";
+        if(id != "0"){
+            alert("兑换成功！");
+        }
     </script>
 
 
@@ -671,97 +651,3 @@
     </div>
 </div>
 </body></html>
-
-{#<!DOCTYPE html>#}
-{#<html lang="en">#}
-{#<head>#}
-{#    <meta charset="UTF-8">#}
-{#    <title>我的积分</title>#}
-{#</head>#}
-{#<body>#}
-{#<section>#}
-
-
-{#	<div class="wp">#}
-{#		<div class="list" style="margin-top:0;">#}
-{#			<div class="left layout">#}
-{#				<div class="head">#}
-{#					<ul class="tab_header">#}
-{#						<li class="{% ifequal sort "" %}active{% endifequal %}"><a href="?sort=&keywords={{ search_keywords }}">最新 </a></li>#}
-{#						<li class="{% ifequal sort "hot" %}active{% endifequal %}"><a href="?sort=hot&keywords={{ search_keywords }}">最热门</a></li>#}
-{#						<li class="{% ifequal sort "students" %}active{% endifequal %}"><a href="?sort=students&keywords={{ search_keywords }}">参与人数</a></li>#}
-{#					</ul>#}
-{#				</div>#}
-{#                <div id="inWindow">#}
-{#                    <div class="tab_cont " id="content">#}
-{#					    <div class="group_list">#}
-{#{% for course in all_course.object_list %}#}
-{#                            <div class="box">#}
-{#                                <a href="{% url 'course:course_detail' course.id %}">#}
-{#                                    <img width="280" height="350" class="scrollLoading" src="{{ MEDIA_URL }}{{ course.image }}"/>#}
-{#                                </a>#}
-{#                                <div class="des">#}
-{#                                    <a href="{% url 'course:course_detail' course.id %}">#}
-{#                                        <h2>{{ course.name }}</h2>#}
-{#                                    </a>#}
-{#                                    <span class="fl">时长：<i class="key">{{ course.learn_times }}</i></span>#}
-{#                                    <span class="fr">学习人数：{{ course.students }}&nbsp;&nbsp;</span>#}
-{#                                </div>#}
-{#                                <div class="bottom">#}
-{#                                    <a href="{% url 'course:course_detail' course.id %}"><span class="fl">来自{{ course.course_org.name }}</span></a>#}
-{#                                    <span class="star fr notlogin" data-favid="15">{{ course.fav_nums }}</span>#}
-{#                                </div>#}
-{#                            </div>#}
-{#{% endfor %}#}
-{#					    </div>#}
-{##}
-{#		                <div class="pageturn">#}
-{#                            <ul class="pagelist">#}
-{#{% if all_course.has_previous %}#}
-{#                                <li class="long"><a href="?{{ all_course.previous_page_number.querystring }}" >上一页</a></li>#}
-{#{% endif %}#}
-{##}
-{#{% for page in all_course.pages %}#}
-{#    {% if page %}#}
-{#        {% ifequal page all_course.number %}#}
-{#                                <li class="active"><a href="?{{ page.querystring }}">{{ page }}</a></li>#}
-{#        {% else %}#}
-{#                                <li><a href="?{{ page.querystring }}">{{ page }}</a></li>#}
-{#        {% endifequal %}#}
-{#    {% else %}#}
-{#                                <li class="none"><a href="">...</a></li>#}
-{#    {% endif %}#}
-{#{% endfor %}#}
-{##}
-{#{% if all_course.has_next %}#}
-{#                                <li class="long"><a href="?{{ all_course.next_page_number.querystring }}">下一页</a></li>#}
-{#{% endif %}#}
-{#                            </ul>#}
-{#                        </div>#}
-{#				    </div>#}
-{#                </div>#}
-{#			</div>#}
-{##}
-{#			<div class="right layout">#}
-{#				<div class="head">热门课程推荐</div>#}
-{#				<div class="group_recommend">#}
-{#{% for hot_course in hot_courses %}#}
-{#                    <dl>#}
-{#						<dt>#}
-{#							<a target="_blank" href="{% url 'course:course_detail' hot_course.id %}">#}
-{#								<img width="240" height="220" class="scrollLoading" src="{{ MEDIA_URL }}{{ hot_course.image }}"/>#}
-{#							</a>#}
-{#						</dt>#}
-{#						<dd>#}
-{#							<a target="_blank" href="{% url 'course:course_detail' hot_course.id %}"><h2> {{ hot_course.name }}</h2></a>#}
-{#							<span class="fl">难度：<i class="key">{{ hot_course.get_degree_display }}</i></span>#}
-{#						</dd>#}
-{#					</dl>#}
-{#{% endfor %}#}
-{#				</div>#}
-{#			</div>#}
-{#		</div>#}
-{#	</div>#}
-{#</section>#}
-{#</body>#}
-{#</html>#}

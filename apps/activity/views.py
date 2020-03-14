@@ -6,10 +6,59 @@ from django.shortcuts import render
 from django.views.generic.base import View
 from django.db.models import Q
 
-from .models import Records2048, BigLotteryUserBuy, BigLotteryWinningNumbers, LotteryInfo
+from .models import GoldCoinPrize, Records2048, BigLotteryUserBuy, BigLotteryWinningNumbers, LotteryInfo
 from users.models import UserProfile
 # Create your views here.
 
+
+class PointRewardView(View):
+    """积分兑奖"""
+    def get(self, request, id):
+        prizes = GoldCoinPrize.objects.filter(Stock_status=1).order_by("price")
+        return render(request, "activity/Redeem.html", {"id": id, "prizes": prizes})
+
+
+
+class LotteryRewardView(View):
+    """彩票兑奖"""
+    def get(self, request, lottery_ticket_id):
+        #将彩票状态修改为已兑奖
+        #用户金币增加
+        jiangjin_GoldCoin = 0
+        big_lottery_winning_numbers = BigLotteryWinningNumbers.objects.all().order_by('-id')[:15]
+
+        if request.user.id != None:
+            print("haha")
+            the_winnint_lottery_ticket = BigLotteryUserBuy.objects.get(id=lottery_ticket_id)
+            original_LotteryStatus = the_winnint_lottery_ticket.LotteryStatus
+
+            if original_LotteryStatus < 10:  #<10即未领奖状态
+                the_winnint_lottery_ticket.LotteryStatus = the_winnint_lottery_ticket.LotteryStatus + 10
+                the_winnint_lottery_ticket.save()
+
+                user = UserProfile.objects.get(id=request.user.id)
+                jiangjin_GoldCoin = 0
+                if original_LotteryStatus == 1:
+                    jiangjin_GoldCoin = 5000000
+                elif original_LotteryStatus == 2:
+                    jiangjin_GoldCoin = 100000
+                elif original_LotteryStatus == 3:
+                    jiangjin_GoldCoin = 3000
+                elif original_LotteryStatus == 4:
+                    jiangjin_GoldCoin = 200
+                elif original_LotteryStatus == 5:
+                    jiangjin_GoldCoin = 10
+                elif original_LotteryStatus == 6:
+                    jiangjin_GoldCoin = 5
+                user.goldCoin = user.goldCoin + jiangjin_GoldCoin
+                user.save()
+
+            user_buy_big_lottery = BigLotteryUserBuy.objects.filter(user_id=request.user.id)
+
+            return render(request, 'activity/lottery_my.html', {"user_buy_big_lottery": user_buy_big_lottery, "big_lottery_winning_numbers": big_lottery_winning_numbers,
+                                                                "jiangjin_GoldCoin": jiangjin_GoldCoin})
+        return render(request, 'activity/lottery_my.html',
+                      {"big_lottery_winning_numbers": big_lottery_winning_numbers, "jiangjin_GoldCoin": jiangjin_GoldCoin})
 
 class Game2048View(View):
     """2048view"""
@@ -58,12 +107,8 @@ class Game2048View(View):
 class LotteryView(View):
     def get(self, request):
         #需要向前端返回期号
-        credits = 0
         lottery_info = LotteryInfo.objects.order_by('-id')[0]
-        if request.user.id != None:
-            user = UserProfile.objects.get(id=request.user.id)
-            credits = user.credits
-        return render(request, 'activity/lottery.html', {"credits": credits, "lottery_info": lottery_info})
+        return render(request, 'activity/lottery.html', {"lottery_info": lottery_info})
 
     def post(self, request):
         data = json.loads(request.body)
@@ -120,15 +165,11 @@ class LotteryView(View):
 
 class MyLotteryView(View):
     def get(self, request):
-        credits = 0
         big_lottery_winning_numbers = BigLotteryWinningNumbers.objects.all().order_by('-id')[:15]
 
         if request.user.id != None:
-            user = UserProfile.objects.get(id=request.user.id)
-            credits = user.credits
-
             user_buy_big_lottery = BigLotteryUserBuy.objects.filter(user_id=request.user.id)
             return render(request, 'activity/lottery_my.html', {"user_buy_big_lottery": user_buy_big_lottery, "big_lottery_winning_numbers": big_lottery_winning_numbers,
-                                                        "credits": credits})
+                                                         "jiangjin_GoldCoin": 0})
 
-        return render(request, 'activity/lottery_my.html', {"credits": credits, "big_lottery_winning_numbers": big_lottery_winning_numbers})
+        return render(request, 'activity/lottery_my.html', {"big_lottery_winning_numbers": big_lottery_winning_numbers, "jiangjin_GoldCoin":0})
