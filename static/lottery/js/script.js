@@ -327,7 +327,7 @@ $("#confirmBox2").click(function () {
     $.ajax({
         type: "POST",
         contentType: "application/json; charset=utf-8",
-        headers: { "X-CSRFToken": token_csrf },
+        //headers: { "X-CSRFToken": token_csrf },
         url: "/activity/lottery/",
         dataType: "json",
         cache: false,

@@ -7,8 +7,9 @@
     <meta property="qc:admins" content="26733071625165516375" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
     <link href="{% static 'css/register/style.css' %}" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="http://img.ithome.com/file/js/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="https://img.ithome.com/file/js/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"></script>
+    <script type="text/javascript" src="{% static 'js/common.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/register/common.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/register/default.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/register/lrz.all.bundle.js' %}"></script>
@@ -183,7 +184,7 @@
             });
         });
 
-        var token_csrf = "{{ csrf_token }}";
+        //var token_csrf = "{{ csrf_token }}";
 
         window.onunload=function(){
             //刷新父页面

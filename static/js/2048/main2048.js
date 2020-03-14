@@ -714,7 +714,7 @@ function send_score() {
     $.ajax({
         type: "POST",
         contentType: "application/json; charset=utf-8",
-        headers: { "X-CSRFToken": token_csrf },
+        //headers: { "X-CSRFToken": token_csrf },
         url: "/activity/2048/",
         dataType: "json",
         cache: false,

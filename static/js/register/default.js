@@ -294,7 +294,7 @@ function loginbtn_clicked() {
     $.ajax({
         type: "POST",
         contentType: "application/json; charset=utf-8",
-        headers: { "X-CSRFToken": token_csrf },
+        //headers: { "X-CSRFToken": token_csrf },
         url: "/login/",
         dataType: "json",
         cache: false,
@@ -735,7 +735,7 @@ function registerbtn_clicked() {
     $.ajax({
         type: "POST",
         contentType: "application/json; charset=utf-8",
-        headers: { "X-CSRFToken": token_csrf },
+        //headers: { "X-CSRFToken": token_csrf },
         url: "/register/",
         dataType: "json",
         cache: false,
@@ -1096,7 +1096,7 @@ function fp_nextbtn_clicked() {
     $.ajax({
         type: "POST",
         contentType: "application/json; charset=utf-8",
-        headers: { "X-CSRFToken": token_csrf },
+        //headers: { "X-CSRFToken": token_csrf },
         url: "/forget/",
         dataType: "json",
         cache: false,
