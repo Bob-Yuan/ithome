@@ -13,6 +13,7 @@
     <link href="{% static '/resume/css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static '/resume/css/styles.css' %}" rel="stylesheet">
 <!--    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">-->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/common.js' %}"></script>
 </head>
 
@@ -187,7 +188,7 @@
     <div id="contact">
         <h2>联系我</h2>
         <div id="contact-form">
-            <form method="POST" action="/leaveMessage/">
+            <form method="POST" action="{% url 'resume:leaveMwssage' %}">
                 {% csrf_token %}
                 <input type="hidden" name="_subject" value="Contact request from personal website" />
                 <!--<input type="email" name="_replyto" placeholder="Your email" required>-->
@@ -322,7 +323,6 @@
         }
     </script>
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
     <script src="{% static '/resume/js/scripts.min.js' %}"></script>
 </body>
 

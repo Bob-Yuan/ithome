@@ -1,19 +1,18 @@
 __author__ = 'boy'
 __date__ = '2019/12/23 1:35'
-
 import MySQLdb
 import datetime
 
 #windows
 import sys
-sys.path.insert(0, '../../')       #这边离根目录ithome有多远就加几个"../" 比如当前目录/ithome/ithome_spider/,那么就加一个
+sys.path.insert(0, './gitrepo/ithome/')       #这边离根目录ithome有多远就加几个"../" 比如当前目录/ithome/ithome_spider/,那么就加一个
 
-import os
-if not os.getenv('DJANGO_SETTINGS_MODULE'):
-    os.environ['DJANGO_SETTINGS_MODULE']='ithome.settings'
+#import os
+#if not os.getenv('DJANGO_SETTINGS_MODULE'):
+#    os.environ['DJANGO_SETTINGS_MODULE']='ithome.settings'
 
-import django
-django.setup()
+#import django
+#django.setup()
 from spider.ithome_spider import html_downloader
 from spider.ithome_spider import html_outputer
 from spider.ithome_spider import html_parser

@@ -57,26 +57,6 @@ AUTHENTICATION_BACKENDS = (
     'users.views.CustomBackend',
 )
 
-
-# cron tasks
-CRONJOBS = [
-    #('*/1 * * * *', 'ithome_spider.ithome_spider.start', '>>' + os.path.join(BASE_DIR, 'log/time.log'))
-    ('*/1 * * * *', 'ithome_spider.ithome_spider.start')
-]
-"""
-     python3 manage.py crontab add  添加定时任务
-     python3 manage.py crontab remove 删除定时任务
-     python3 manage.py crontab show 查看定时任务
-    * * * * * command
-    第一个*表示分钟(0-59) 第二个*表示小时(0-23) 依次类推 每个月的哪一天(1-31) 月份(1-12) 周几(0-6) shell脚本或者命令
-    两种表示方法，
-    一种写具体数字，表示定时
-     0 6 * * * commands >> /tmp/test.log # 每天早上6点执行, 并将信息追加到test.log中
-     */n  n代表每多长时间
-     * */2 * * * commands >> /tmp/test.log    #2小时
-
-"""
-
 PAGINATION_SETTINGS = {
     'PAGE_RANGE_DISPLAYED': 4,
     'MARGIN_PAGES_DISPLAYED': 2,
@@ -191,4 +171,4 @@ CAPTCHA_TEXT_FIELD_TEMPLATE = BASE_DIR+"/templates/captcha/field_template.html"
 CAPTCHA_OUTPUT_FORMAT = "%(text_field)s %(hidden_field)s %(image)s"
 #CAPTCHA_FIELD_TEMPLATE =
 
-ip_addr = "http://127.0.0.1:8000"    #网站网址
+ip_addr = "https://www.qxdq.xyz"    #网站网址

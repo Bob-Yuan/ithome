@@ -18,8 +18,8 @@ from ithome.settings import DATABASES_HOST, DATABASES_NAME, DATABASES_USER, DATA
 # 然后判断中了几个
 #
 # 每次开奖时间到了后执行，首先爬取该期issue开奖号码，根据期号issue，取出当期所有用户的购票。进行判奖，存入状态。
-# 状态LotteryStatus：0：未开奖 1：未中奖 2：中奖已领取 3：一等奖 4：二等奖 5：三等奖 6：四等奖 7：五等奖 8：六等奖 9：七等奖
-
+# 状态LotteryStatus：0:未开奖 1：一等奖 2：二等奖 3：三等奖 4：四等奖 5：五等奖 6：六等奖 10：未中奖
+# 11：一等奖 已兑奖 12：二等奖 已兑奖 13：三等奖 已兑奖 14：四等奖 已兑奖 15：五等奖 已兑奖 16：六等奖 已兑奖
 
 def JudgeAwards(lottery_type, issue, kaijiang_red_balls, kaijiang_blue_ball):
     # type str类型，彩票种类
@@ -241,5 +241,5 @@ def DesignateJudgeAwards(lottery_type, issue):
                 print("db error")
                 db.rollback()
 
-# 当定时任务出错时，手动进行判奖
+# 当定时任务出错时，手动进行判奖，第一个参数是彩票种类，第二个参数是期号
 # DesignateJudgeAwards("fcssq", 2020010)

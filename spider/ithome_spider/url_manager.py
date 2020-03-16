@@ -28,9 +28,10 @@ class UrlManager(object):
         sql = "select * from article_articles order by total_id DESC limit 1;"
         cursor.execute(sql)
         data = cursor.fetchone()
-        self.url = data[3]         #例：https://www.ithome.com/0/464/431.htm
-        if self.url == "":
-            self.url = "https://www.ithome.com/0/465/001.htm"
+        if data == None:
+            self.url = "https://www.ithome.com/0/478/001.htm"
+        else:
+            self.url = data[3]         #例：https://www.ithome.com/0/464/431.htm
         return self.next_url()
 
     def next_url(self):

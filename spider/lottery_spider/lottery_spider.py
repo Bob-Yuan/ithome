@@ -7,9 +7,9 @@ import MySQLdb
 import urllib.request
 from bs4 import BeautifulSoup
 
-sys.path.insert(0, '../../')       #添加环境变量，包的查找
+sys.path.insert(0, './gitrepo/ithome/')       #添加环境变量，包的查找
 from ithome.settings import DATABASES_HOST, DATABASES_NAME, DATABASES_USER, DATABASES_PASSWORD
-from crontab.judgeLottery import JudgeAwards
+from utils.judgeLottery import JudgeAwards
 
 if not os.getenv('DJANGO_SETTINGS_MODULE'):
     os.environ['DJANGO_SETTINGS_MODULE']='ithome.settings'

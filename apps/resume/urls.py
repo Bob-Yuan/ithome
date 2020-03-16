@@ -6,7 +6,7 @@ app_name = 'resume'
 urlpatterns = [
     path('', IndexView.as_view(), name="index"),
     path('daxian/', DaxianView.as_view(), name="daxian"),
-    path('leaveMessage/', LeaveMessageView.as_view()),
+    path('leaveMessage/', LeaveMessageView.as_view(), name="leaveMwssage"),
     path('download/resume/', download_resume, name="download"),
     path('send_resume/', SendResumeView.as_view(), name="send_resume"),
 ]

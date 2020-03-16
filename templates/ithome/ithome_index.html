@@ -16,7 +16,6 @@
     <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://www.ithome.com/rss/">
     <meta name="format-detection" content="telephone=no">
     <link href="https://www.ithome.com/css/style.css?v=7" rel="stylesheet" type="text/css">
-    <link rel="canonical" href="//www.ithome.com/">
     <script src="https://www.googletagservices.com/activeview/js/current/osd.js?cb=%2Fr20100101"></script>
     <script src="https://pagead2.googlesyndication.com/pagead/js/r20191205/r20190131/show_ads_impl.js" id="google_shimpl"></script>
     <link rel="icon" href="{% static 'image/favicon_news_yellow.ico' %}" type="image/x-icon">
@@ -84,8 +83,8 @@
     <script src="{% static 'js/article/cookie.js' %}"></script>
     <script>
         if ((navigator.userAgent.match(/(iPhone|iPod|Android|Windows Phone)/i))) {
-            if (getCookie('gotoweb') == '')
-                location.replace("//m.ithome.com");
+            if (getCookie('gotoweb') == ''){}
+                //location.replace("//m.ithome.com"); //跳转手机版
         }
     </script>
 
