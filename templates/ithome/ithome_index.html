@@ -139,7 +139,7 @@
             <div class="nlst" id="idnlst">
                 <div class="ct">
                     <ul>
-                        <li><a href="{% url "article:index" %}" {% ifequal request.path|get_str '/' %} class="current"{% endifequal %}>当日更新</a></li>
+                        <li><a href="{% url "article:index" %}" {% ifequal request.path|get_str '/' %} class="current"{% endifequal %}>最近更新</a></li>
                         <li><a href="javascript:;" id="t_date" {% ifequal request.path|get_str 'date' %} class="current"{% endifequal %}>选择日期&nbsp;<i class="far fa-calendar-alt"></i></a></li>
                         <div style="display:inline-block;height: 44px;line-height: 44px;width: 572px;text-align:right;">
                             {{ articles.object_list.0.t_date }}

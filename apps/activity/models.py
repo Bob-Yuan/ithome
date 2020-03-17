@@ -9,11 +9,11 @@ from users.models import UserProfile
 class GoldCoinPrize(models.Model):
     """奖品列表"""
 
-    name = models.CharField(max_length=50, verbose_name=u"奖品名")
-    desc = models.CharField(max_length=300, verbose_name=u"奖品描述")
+    name = models.CharField(default="",max_length=50, verbose_name=u"奖品名")
+    describes = models.CharField(default="", max_length=300, verbose_name=u"奖品描述")
     price = models.IntegerField(default=999999, verbose_name=u"价格")
     is_banner = models.BooleanField(default=False, verbose_name=u"是否轮播")
-    Stock_status = models.BooleanField(default=0, verbose_name=u"库存状态")
+    Stock_status = models.BooleanField(default=1, verbose_name=u"库存状态")
     # 修改image path,不能传y m 进来，不能加斜杠是一个相对路径，相对于setting中配置的media root
     image = models.ImageField(
         upload_to="GoldCoinPrize/%Y/%m",

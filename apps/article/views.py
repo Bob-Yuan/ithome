@@ -13,8 +13,9 @@ class ArticleIndexView(View):
     """首页view"""
 
     def get(self, request):
-        date = time.strftime("%Y-%m-%d", time.localtime())
-        articles = Articles.objects.filter(t_date=date).order_by("-total_id")
+        #date = time.strftime("%Y-%m-%d", time.localtime())
+        #articles = Articles.objects.filter(t_date=date).order_by("-total_id")
+        articles = Articles.objects.all().order_by("-total_id")[0:300]
 
         try:
             page = request.GET.get("page", 1)
