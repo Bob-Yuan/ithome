@@ -12,7 +12,6 @@
     <link href="http://at.alicdn.com/t/font_8d5l8fzk5b87iudi.css" rel="stylesheet" type="text/css">
     <link href="{% static 'lottery/css/mod.caiz.css' %}" rel="stylesheet" type="text/css">
     <script src="{% static 'lottery/js/jquery.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/common.js' %}"></script>
     <link rel="stylesheet" href="{% static 'lottery/css/top.css' %}" type="text/css">
     <style type="text/css">
         body {
@@ -69,7 +68,7 @@
                     <div id="avatar" class="menu" style="display: none;">
                         <ul>
                             <li>
-                                <a href="{% url 'activity:point_reward' 0 %}" target="_blank">我的积分</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                <a href="{% url 'activity:goldcoin_reward' 0 %}" target="_blank">我的金币</a>&nbsp;&nbsp;|&nbsp;&nbsp;
                                 <a href="{% url 'users:user_info' %}" target="_blank">个人资料</a>
                             </li>
                             <li class="line"></li>
@@ -225,14 +224,20 @@
                     <span id="clearList">清空列表</span>
                 </div>
             </div>
-            <div class="endconfirm_box">您选了<span id="numsOfLottery">0</span>注， 倍投<input id="timesOfLottery" type="text" value="1">倍，共 <span id="priceOfLottery">0</span> 积分。您当前剩余<span style="color:#d22222">{{ user.credits }}</span>积分</div>
+            <div class="endconfirm_box">
+                您选了<span id="numsOfLottery">0</span>注，
+                倍投<input id="timesOfLottery" type="text" value="1">倍，
+                共 <span id="priceOfLottery">0</span> 积分。
+                您当前剩余<span style="color:#d22222">{{ user.credits }}</span>积分。
+                <a href="{% url 'article:index' %}" style="border: 0px;color:#4d7ad3">(获取积分<img src="{% static "image/external-link-ltr-icon.svg" %}" alt="跳转" />)</a>
+            </div>
             <div class="confirm_box" id="confirmBox2">立即投注</div>
         </div>
     </div>
 
     {% csrf_token %}
     <script type="text/javascript">
-        //var token_csrf = "{{ csrf_token }}";
+        var csrftoken = "{{ csrf_token }}";
         var issue = "{{ lottery_info.issue }}";
         var credits = "{{ user.credits }}";
         var kaijiang_date = "{{ lottery_info.kaijiang_date }}";
@@ -272,6 +277,7 @@
             });
         })
     </script>
+    <script type="text/javascript" src="{% static 'js/common.js' %}"></script>
     <script src="{% static 'lottery/js/script.js' %}" type="text/javascript"></script>
 
     <script>(window.jQuery || document.write("<script src='https://img.ithome.com/file/js/jquery/jquery.min.js'><\/script>"));</script>

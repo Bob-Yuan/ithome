@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
     <link href="{% static 'css/register/style.css' %}" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/common.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/register/common.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/register/default.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/register/lrz.all.bundle.js' %}"></script>
@@ -152,6 +151,7 @@
     </div>
     <script type="text/javascript" src="{% static "js/register/rm-js-sdk.min.js" %}"></script>
     <script>
+        var csrftoken = "{{ csrf_token }}";
 
         if( "{{ myflag }}" != "0"){
             ShowErrorMessage("{{ msg }}", {{ myflag }});
@@ -189,8 +189,8 @@
             setTimeout(window.opener.reload(), 10000);
         }
 
-
     </script>
+    <script type="text/javascript" src="{% static 'js/common.js' %}"></script>
 
 </body>
 </html>

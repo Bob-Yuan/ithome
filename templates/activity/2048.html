@@ -9,7 +9,6 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/2048/2048.css' %}"/>
     <link rel="shortcut icon" href="{% static 'image/2048/favicon.ico' %}">
     <script type="text/javascript" src="{% static 'js/2048/jquery.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/common.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/2048/support2048.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/2048/showanimation2048.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/2048/main2048.js' %}"></script>
@@ -216,7 +215,7 @@ ul{
                             <div id="avatar" class="menu" style="display: none;">
                                 <ul>
                                     <li>
-                                        <a href="{% url 'activity:point_reward' 0 %}" target="_blank">我的积分</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                        <a href="{% url 'activity:goldcoin_reward' 0 %}" target="_blank">我的金币</a>&nbsp;&nbsp;|&nbsp;&nbsp;
                                         <a href="{% url 'users:user_info' %}" target="_blank">个人资料</a>
                                     </li>
                                     <li class="line"></li>
@@ -288,10 +287,11 @@ ul{
             </div>
         </div>
      </div>
-<script>
 
-    //var token_csrf = "{{ csrf_token }}";
+<script>
+    var csrftoken = "{{ csrf_token }}";
 </script>
+<script type="text/javascript" src="{% static 'js/common.js' %}"></script>
 <script src="{% static 'js/article/common.js' %}"></script>
 <script src="{% static 'js/article/popwin.js' %}"></script>
 <script src="{% static 'js/article/top.js' %}"></script>

@@ -14,7 +14,6 @@
     <link href="{% static '/resume/css/styles.css' %}" rel="stylesheet">
 <!--    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">-->
     <script src="{% static 'js/jquery.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/common.js' %}"></script>
 </head>
 
 <body>
@@ -241,6 +240,7 @@
     <!-- End footer -->
 
     <script type="text/javascript">
+        var csrftoken = "{{ csrf_token }}";
         function disp_prompt()
         {
             //var token_csrf = "{{ csrf_token }}";
@@ -294,7 +294,7 @@
                     type: "POST",
                     contentType: "application/json; charset=utf-8",
                     //headers: { "X-CSRFToken": token_csrf },
-                    url: "/resume/send_resume/",
+                    url: "{% url 'resume:send_resume' %}",
                     dataType: "json",
                     cache: false,
                     data: JSON.stringify(hr_email),
@@ -324,6 +324,7 @@
     </script>
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
     <script src="{% static '/resume/js/scripts.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/common.js' %}"></script>
 </body>
 
 </html>

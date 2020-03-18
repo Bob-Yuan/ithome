@@ -11,10 +11,15 @@ from users.models import UserProfile
 # Create your views here.
 
 
-class PointRewardView(View):
-    """积分兑奖"""
+class GoldcoinRewardView(View):
+    """金币兑奖"""
     def get(self, request, id):
         prizes = GoldCoinPrize.objects.filter(Stock_status=1).order_by("price")
+        return render(request, "activity/Redeem.html", {"id": id, "prizes": prizes})
+    def post(self, request, id):
+        print(id)
+        #prizes = GoldCoinPrize.objects.filter(Stock_status=1).order_by("price")
+        #返回json就可以了
         return render(request, "activity/Redeem.html", {"id": id, "prizes": prizes})
 
 

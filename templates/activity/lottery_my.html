@@ -13,7 +13,6 @@
     <link href="http://at.alicdn.com/t/font_8d5l8fzk5b87iudi.css" rel="stylesheet" type="text/css">
 
     <script src="{% static 'lottery/js/jquery.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/common.js' %}"></script>
     <link rel="stylesheet" href="{% static 'lottery/css/top.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'lottery/css/all.css' %}" type="text/css">
     <style type="text/css">
@@ -72,7 +71,7 @@
                     <div id="avatar" class="menu" style="display: none;">
                         <ul>
                             <li>
-                                <a href="{% url 'activity:point_reward' 0 %}" target="_blank">我的积分</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                <a href="{% url 'activity:goldcoin_reward' 0 %}" target="_blank">我的金币</a>&nbsp;&nbsp;|&nbsp;&nbsp;
                                 <a href="{% url 'users:user_info' %}" target="_blank">个人资料</a>
                             </li>
                             <li class="line"></li>
@@ -218,7 +217,7 @@
 
     {% csrf_token %}
     <script type="text/javascript">
-        //var token_csrf = "{{ csrf_token }}";
+        var csrftoken = "{{ csrf_token }}";
         var issue = "{{ issue }}";
         var credits = "{{ user.credits }}";
         var goldCoin = "{{ user.goldCoin }}"
@@ -272,6 +271,7 @@
     <script src="{% static 'js/article/common.js' %}"></script>
     <script src="{% static 'js/article/popwin.js' %}"></script>
     <script src="{% static 'js/article/top.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/common.js' %}"></script>
 
 </body>
 </html>
