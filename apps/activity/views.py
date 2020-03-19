@@ -8,6 +8,7 @@ from django.db.models import Q
 
 from .models import GoldCoinPrize, RedeemRecords, Records2048, BigLotteryUserBuy, BigLotteryWinningNumbers, LotteryInfo
 from users.models import UserProfile
+from spider.lottery_spider import lottery_spider
 # Create your views here.
 
 
@@ -15,7 +16,7 @@ class GoldcoinRewardView(View):
     """金币兑奖"""
     def get(self, request, id):
         prizes = GoldCoinPrize.objects.filter(Stock_status=1).order_by("price")
-        return render(request, "activity/Redeem.html", {"id": id, "prizes": prizes})
+        return render(request, "activity/Redeem.html", {"prizes": prizes})
 
     def post(self, request, id):
         print(id)
@@ -137,7 +138,13 @@ class Game2048View(View):
 class LotteryView(View):
     def get(self, request):
         #需要向前端返回期号
-        lottery_info = LotteryInfo.objects.order_by('-id')[0]
+        lottery_info = LotteryInfo.objects.order_by('-id')
+        print(lottery_info)
+        if len(lottery_info) == 0:      #启动爬虫
+            lottery_spider.start()
+            lottery_info = LotteryInfo.objects.order_by('-id')
+        else:
+            lottery_info = lottery_info[0]
         return render(request, 'activity/lottery.html', {"lottery_info": lottery_info})
 
     def post(self, request):

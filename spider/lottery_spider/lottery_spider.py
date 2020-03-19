@@ -148,7 +148,7 @@ def transferContent(content):
     return stri
 
 
-if __name__ == "__main__":
+def start():
     # download_type =1 下载开奖记录 parse_type=1 解析开奖记录
     url = "https://chart.cp.360.cn/kaijiang/ssq"
     html_cont = download(url, 1)
@@ -158,3 +158,7 @@ if __name__ == "__main__":
     url = "https://kaijiang.aicai.com/fcssq/"
     html_cont = download(url, 2)
     parse(html_cont, 2)
+
+
+if __name__ == "__main__":
+    start()
