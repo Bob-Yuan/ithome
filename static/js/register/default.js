@@ -1238,9 +1238,9 @@ function ShowErrorMessage(msg, type) {
     var errimg = $(".error_img");
     if (null != errimg) {
         if (1 == type) {
-            errimg.attr("src", "http://"+window.location.host+"/static/image/register/ok.png");
+            errimg.attr("src", "https://"+window.location.host+"/static/image/register/ok.png");
         } else {
-            errimg.attr("src", "http://"+window.location.host+"/static/image/register/error.png");
+            errimg.attr("src", "https://"+window.location.host+"/static/image/register/error.png");
         }
     }
 

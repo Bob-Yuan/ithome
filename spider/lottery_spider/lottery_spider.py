@@ -1,20 +1,13 @@
 __author__ = 'boy'
 __date__ = '2020/3/5 16:23'
 import sys
-import os
-import django
 import MySQLdb
 import urllib.request
 from bs4 import BeautifulSoup
 
 sys.path.insert(0, './gitrepo/ithome/')       #添加环境变量，包的查找
 from ithome.settings import DATABASES_HOST, DATABASES_NAME, DATABASES_USER, DATABASES_PASSWORD
-from utils.judgeLottery import JudgeAwards
-
-if not os.getenv('DJANGO_SETTINGS_MODULE'):
-    os.environ['DJANGO_SETTINGS_MODULE']='ithome.settings'
-
-django.setup()
+from ithome_utils.judgeLottery import JudgeAwards
 
 
 def download(url, download_type):
@@ -51,14 +44,15 @@ def parse(html_cont, parse_type):
         cursor.execute(sql)
         data = cursor.fetchone()
         if data == None:
-            newestDate = "<td>0000000</td>"
+            database_newestIssue = "0000000"
         else:
-            newestDate = data[1]
+            database_newestIssue = data[2]
+            print(database_newestIssue)
 
         data = soup.find("tbody", id='data-tab').find_all("tr")
 
         for i in range(len(data)-1, -1, -1):
-            #if(取出日期大于则pass，else加入数据库)
+            #if(取出issue大于则pass，else加入数据库)
             html_data_td = data[i].find_all("td")
             html_data_span = data[i].find_all("span")
 
@@ -72,7 +66,13 @@ def parse(html_cont, parse_type):
             blueball_number_data = html_data_span[6].get_text()
             issue_num = html_data_td[0].get_text()
 
-            if int(newestDate[4:-5]) < int(str(html_data_td[0])[4:-5]):
+            html_newestIssue = str(html_data_td[0])[4:-5]
+
+            print("html_data_td", html_data_td)
+            print("newestIssue[4:-5]", database_newestIssue)
+            print("html_newestIssue", html_newestIssue)
+
+            if int(database_newestIssue) < int(html_newestIssue):
                 sql = "INSERT INTO activity_biglotterywinningnumbers(issue_html, issue_num, kaijiang_date, red_balls_html, blue_ball_html,\
                  red_balls_nums, blue_ball_num) VALUES ('"+ transferContent(str(html_data_td[0])) + "', '" + transferContent(str(issue_num)) + "', '" + \
                       transferContent(str(html_data_td[1])) + "', '" + transferContent(str(html_data_td[2])) + "', '" + transferContent(str(html_data_td[3]))\
@@ -89,7 +89,7 @@ def parse(html_cont, parse_type):
                 #调用判奖函数
                 #issue和type以及开奖号码
                 lottery_type = "fcssq"
-                JudgeAwards(lottery_type, newestDate[4:-5], redballs_number_data, blueball_number_data)
+                JudgeAwards(lottery_type, str(html_data_td[0])[4:-5], redballs_number_data, blueball_number_data)
             else:
                 pass
 
@@ -138,13 +138,13 @@ def transferContent(content):
         stri = ""
         for c in content:
             if c == '"':
-                stri += c.replace('"', '\\\"')
+                stri = stri + c.replace('"', '\\\"')
             elif c == "'":
-                stri += c.replace("'", "\\\'")
+                stri = stri + c.replace("'", "\\\'")
             elif c == "\\":
-                stri += "\\\\"
+                stri = stri + "\\\\"
             else:
-                stri += str(c)
+                stri = stri + str(c)
     return stri
 
 
@@ -154,7 +154,7 @@ if __name__ == "__main__":
     html_cont = download(url, 1)
     parse(html_cont, 1)
 
-    # download_type =1 下载下次开奖时间和期号 parse_type=2 解析下次开奖时间和期号
+    # download_type =2 下载下次开奖时间和期号 parse_type=2 解析下次开奖时间和期号
     url = "https://kaijiang.aicai.com/fcssq/"
     html_cont = download(url, 2)
     parse(html_cont, 2)

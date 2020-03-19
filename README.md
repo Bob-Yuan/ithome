@@ -37,5 +37,7 @@ vim /etc/crontab
 ###3、部署网页网址（用在发送给别人的注册邮件中）
     ip_addr = "https://www.qxdq.xyz"    
 
+###环境变量配置  
+sys.path.insert(0, './gitrepo/ithome/') 
   
 

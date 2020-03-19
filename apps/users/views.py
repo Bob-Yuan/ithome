@@ -176,7 +176,7 @@ class RegisterView(View):
                 return JsonResponse(data)
 
             # 发送注册激活邮件
-            send_register_eamil(ip_addr, email_account, "register")
+            # send_register_eamil(ip_addr, email_account, "register")  暂时先不开启
             data = {
                 'status': 1,
                 "msg": "注册成功！请注意邮箱激活链接！"
