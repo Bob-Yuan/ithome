@@ -188,7 +188,7 @@ class RegisterView(View):
             user_profile.username = email_account
 
             # 默认激活状态为false
-            user_profile.is_active = False        #注意改为False
+            user_profile.is_active = True        #暂时先不用激活，注意部署时改为False
 
             # 加密password进行保存
             user_profile.password = make_password(pass_word)
