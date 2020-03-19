@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.views.generic.base import View
 from django.db.models import Q
 
-from .models import GoldCoinPrize, Records2048, BigLotteryUserBuy, BigLotteryWinningNumbers, LotteryInfo
+from .models import GoldCoinPrize, RedeemRecords, Records2048, BigLotteryUserBuy, BigLotteryWinningNumbers, LotteryInfo
 from users.models import UserProfile
 # Create your views here.
 
@@ -16,11 +16,36 @@ class GoldcoinRewardView(View):
     def get(self, request, id):
         prizes = GoldCoinPrize.objects.filter(Stock_status=1).order_by("price")
         return render(request, "activity/Redeem.html", {"id": id, "prizes": prizes})
+
     def post(self, request, id):
         print(id)
-        #prizes = GoldCoinPrize.objects.filter(Stock_status=1).order_by("price")
-        #返回json就可以了
-        return render(request, "activity/Redeem.html", {"id": id, "prizes": prizes})
+        #取出商品，库存为1则有货。取出用户金币，比较商品价格，足够则兑换，减去金币。将记录存入兑换记录数据表
+        thePrize = GoldCoinPrize.objects.get(id=id)
+        if thePrize.price > request.user.goldCoin:
+            data = {
+                'status': 2,
+                "msg": "金币不足，兑换失败！",
+                'credits': credits
+            }
+            return JsonResponse(data)
+        else:
+            request.user.goldCoin = request.user.goldCoin - thePrize.price
+            request.user.save()
+
+            redeemRecord = RedeemRecords()
+            redeemRecord.send_time = datetime.datetime.now()
+            redeemRecord.user_id = request.user.id
+            redeemRecord.user_name = request.user.email
+            redeemRecord.prize_id = id
+            redeemRecord.prize_name = thePrize.name
+            redeemRecord.save()
+
+            data = {
+                'status': 1,
+                "msg": "兑换成功！稍后工作人员会与您联系！"
+            }
+            return JsonResponse(data)
+
 
 
 

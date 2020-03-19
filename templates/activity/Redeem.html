@@ -1,7 +1,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 {% load static %}
 <head>
-    <meta name="referrer" content="no-referrer" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="author" content="IT之家">
     <meta name="Copyright" content="IT之家版权所有">
@@ -79,7 +78,7 @@
             type: "POST",
             contentType: "application/json; charset=utf-8",
             //headers: { "X-CSRFToken": token_csrf },
-            url: "{% url 'activity:goldcoin_reward' id %}",
+            url: "/activity/redeem/" +id ,
             dataType: "json",
             cache: false,
             //data: JSON.stringify(),
@@ -92,6 +91,7 @@
                 if (null != data && "" != data) {
                     if(data.status == "1"){
                         alert("兑换成功！稍后工作人员会跟您联系，请保持电话畅通。");
+                        location.reload();
                     }else{
                         alert("兑换失败！")
                     }

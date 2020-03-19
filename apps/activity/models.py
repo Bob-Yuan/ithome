@@ -40,6 +40,18 @@ class GoldCoinPrize(models.Model):
         return self.name
 
 
+class RedeemRecords(models.Model):
+    send_time = models.DateTimeField(default=date.today, verbose_name=u"兑换日期")
+    user_id = models.IntegerField(default=0, verbose_name="用户id")
+    user_name = models.CharField(max_length=50, default="", verbose_name=u"用户名称")
+    prize_id = models.IntegerField(default=0, verbose_name="奖品id")
+    prize_name = models.CharField(max_length=50, default="", verbose_name=u"奖品名称")
+
+    class Meta:
+        verbose_name = u"兑换记录"
+        verbose_name_plural = verbose_name
+
+
 class Records2048(models.Model):
     send_time = models.DateTimeField(default=date.today, verbose_name=u"游戏日期")
     user_id = models.CharField(max_length=11, default=0, verbose_name=u"用户id")
