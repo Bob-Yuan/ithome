@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.views.generic.base import View
 from django.db.models import Q
 
-from .models import GoldCoinPrize, RedeemRecords, Records2048, BigLotteryUserBuy, BigLotteryWinningNumbers, LotteryInfo
+from activity.models import GoldCoinPrize, RedeemRecords, Records2048, BigLotteryUserBuy, BigLotteryWinningNumbers, LotteryInfo
 from users.models import UserProfile
 from spider.lottery_spider import lottery_spider
 # Create your views here.
