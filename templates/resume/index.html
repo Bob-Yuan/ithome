@@ -187,7 +187,7 @@
         <h2>联系我</h2>
         <div id="contact-form">
             <form method="POST" action="{% url 'resume:leaveMwssage' %}">
-                {% csrf_token %}
+                <!--{% csrf_token %}-->
                 <input type="hidden" name="_subject" value="Contact request from personal website" />
                 <!--<input type="email" name="_replyto" placeholder="Your email" required>-->
                 E-mail: yuanbo95@qq.com<br>

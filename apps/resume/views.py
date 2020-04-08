@@ -27,12 +27,12 @@ class DaxianView(View):
 
 
 class LeaveMessageView(View):
-    user_message = UserMessage()
 
     def post(self, request):
+        user_message = UserMessage()
         page_sign = request.POST.get("page_sign", "resume_index")
-        self.user_message.message = request.POST.get("message", "")
-        self.user_message.save()
+        user_message.message = request.POST.get("message", "")
+        user_message.save()
         if page_sign == "resume_index":
             return render(request, "resume/index.html", {'sendMessageFlag': 1})
         elif page_sign == "daxian_index":
@@ -89,13 +89,16 @@ class SendResumeView(View):
             part = MIMEApplication(open('./static/download/pythonweb-袁博-15850587369.pdf', 'rb').read())
             part.add_header('Content-Disposition', 'attachment', filename="pythonweb-袁博-15850587369.pdf")
             message.attach(part)
-
-            smtpObj = smtplib.SMTP_SSL(host=smtpserver)
-            smtpObj.connect(host=smtpserver, port=465)
-            smtpObj.login(username, password)
-            smtpObj.sendmail(sender, receiver, message.as_string())
-            print("邮件发送成功！！！")
-            smtpObj.quit()
+            try:
+                smtpObj = smtplib.SMTP_SSL(host=smtpserver)
+                smtpObj.connect(host=smtpserver, port=465)
+                smtpObj.login(username, password)
+                smtpObj.sendmail(sender, receiver, message.as_string())
+                smtpObj.quit()
+                print("邮件发送成功！！！")
+            except:
+                print("邮件发送失败！！！")
+                return HttpResponse('{"status":"2"}', content_type='application/json')
 
             return HttpResponse('{"status":"1"}', content_type='application/json')
         except:
