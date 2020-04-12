@@ -45,4 +45,8 @@ vim /etc/crontab
 ###环境变量配置  
 sys.path.insert(0, './gitrepo/ithome/') 
   
-##4、每次git pull更新后要做的操作  
+##4、每次git pull更新后要做的操作
+启动：sudo uwsgi --ini uwsgi.ini  
+重启：uwsgi --reload uwsgi.pid  
+停止：uwsgi --stop uwsgi.pid 
+  

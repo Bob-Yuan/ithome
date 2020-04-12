@@ -16,3 +16,8 @@ class UnicodeView(View):
 class FuliView(View):
     def get(self, request):
         return render(request, 'QueryAssistant/fuli.html')
+
+
+class JsonView(View):
+    def get(self, request):
+        return render(request, 'QueryAssistant/Json.html')

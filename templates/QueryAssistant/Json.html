@@ -1,0 +1,184 @@
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    <meta name="referrer" content="no-referrer"/>
+    <title>在线JSON校验格式化工具（Be JSON）</title>
+    <link rel="shortcut icon" href="https://tool.lu/favicon.ico">
+    <meta name="keywords" content="在线,JSON,JSON 校验,格式化,xml转json 工具,在线工具,json视图,可视化,程序,服务器,域名注册,正则表达式,测试,在线json格式化工具,json 格式化,json格式化工具,json字符串格式化,json 在线查看器,json在线,json 在线验证,json tools online,在线文字对比工具">
+    <meta name="description" content="在线,JSON,JSON 校验,格式化,xml转json 工具,在线工具,json视图,可视化,程序,服务器,域名注册,正则表达式,测试,在线json格式化工具,json 格式化,json格式化工具,json字符串格式化,json 在线查看器,json在线,json 在线验证,json tools online,在线文字对比工具">
+                    <link rel="dns-prefetch" href="//cdn.staticfile.org">
+    <link rel="dns-prefetch" href="//www.bejson.com">
+        <meta property="qc:admins" content="14002146716252376637571563176">
+    <script src="//cdn.staticfile.org/jquery/1.9.1/jquery.min.js"></script>
+    <!-- Site CSS -->
+    <link href="//cdn.staticfile.org/twitter-bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <script src="//cdn.staticfile.org/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link href="http://www.bejson.com/static/3part/layer2/theme/default/layer.css" rel="stylesheet">
+        <!--<link href="//cdn.staticfile.org/layer/2.3/skin/layer.css" rel="stylesheet">-->
+    <link rel="stylesheet" type="text/css" href="http://www.bejson.com/static/css/global.css">
+    <!--<script src="/static/bejson/common/global.js?20180929"></script>-->
+    <script src="/static/QueryAssistant/js/global.js"></script>
+    <!--<script src="//cdn.bootcss.com/clipboard.js/1.7.1/clipboard.min.js"></script>-->
+    <script src="//cdn.staticfile.org/clipboard.js/1.7.1/clipboard.min.js"></script>
+    <meta name="baidu-site-verification" content="9jisY2iAF8">
+    <script>
+        var NewVer = 201901092;
+    </script>
+    <style type="text/css">
+        .CodeMirror-scroll1 {
+            -moz-box-sizing: content-box;
+            box-sizing: content-box;
+        }
+        .CodeMirror-scroll1 {
+            overflow: scroll !important;
+            margin-bottom: -30px;
+            margin-right: -30px;
+            padding-bottom: 30px;
+            height: 100%;
+            outline: none;
+            position: relative;
+        }
+        .CodeMirror1 {
+            width: 100%;
+            height: 0px;
+            border: 1px solid #e1e1e1;
+            font-size: 14px;
+            font-family: monospace;
+            color: black;
+        }
+    </style>
+</head>
+	<body class="nimbus-is-editor">
+		<div class="aw-container-wrap" style="height: auto !important;">
+			<div class="container" style="height: auto !important;">
+				<div class="row" style="height: auto !important;">
+					<div class="aw-content-wrap clearfix" style="height: auto !important;">
+						<div class=" aw-main-content" style="min-height: 0px !important; max-height: 293px; height: auto !important;">
+							<div style="clear:both"></div>
+							<style>
+							.a2016{
+								color: white;
+								font-family:"Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu ;
+								text-align: center;    background: red;    border-radius: 2px;
+							}
+
+							.touxiang{
+								height: 20px;
+								line-height: 45px;
+							}
+							</style>
+							<!--<div style=" text-align: center;    background: #6699FF;    border-radius: 2px;"><a href="http://beshequ.com/data/thread-111-1-1.html" target="_blank" style="  color: white;  ">求教身份验证是放在session里好？还是用签名串来回交互的好？</a></div>-->
+							<!--<div class="a2016">2016 bejson祝各位工资涨涨涨,写程序无BUG,都能找到对象!!! new Object(); 拿走不谢!</div>-->
+
+							<!-- content st -->
+								<blockquote class="layui-elem-quote layui-quote-nm" style="margin-bottom: 5px;display:none;padding: 4px 20px;font-size:13px;    text-align: left;">
+ 您最近使用了：<span id="history"></span><input name="menusearch" id="menusearch" style="margin-left: 10px;" placeholder="关键字搜索功能块" list="menud" onchange="show1(this)">
+</blockquote><link href="http://www.bejson.com/static/bejson/index/index2.css" rel="stylesheet">
+<script type="text/javascript">
+
+	if (typeof JSON === 'undefined') {
+		document.write('<sc' + 'ript type="text/javascript" src="c/js/json2.js"></sc' + 'ript>');
+	}
+</script>
+<link rel="stylesheet" type="text/css" href="http://www.bejson.com/static/bejson/index/new/style.css?20191204">
+<div class="panel panel-default" id="containerpanel" style="height: auto !important;">
+	<div class="panel-body" style="padding-top: 0px;padding-bottom: 0px;">
+		<!--内容块开始-->
+					<div style="clear: both;"></div>
+
+
+		<div style="">
+       <div>
+       <form name="main" onsubmit="return false" style="margin-top: 10px;">
+       			<div style="width:80%;float: left;">
+				    <textarea id="code" name="code" style="display: none;resize:both"></textarea>
+                    <div class="CodeMirror1 cm-s-default1">
+                        <div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5px; left: 45px;">
+                            <textarea autocorrect="off" autocapitalize="off" spellcheck="false" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;" tabindex="0"></textarea>
+                        </div>
+                        <div class="CodeMirror-vscrollbar" cm-not-content="true">
+                            <div style="min-width: 1px; height: 0px;"></div>
+                        </div>
+                        <div class="CodeMirror-hscrollbar" cm-not-content="true">
+                            <div style="height: 100%; min-height: 1px; width: 0px;"></div>
+                        </div>
+                        <div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div>
+                        <div class="CodeMirror-gutter-filler" cm-not-content="true"></div>
+                    </div>
+				    <div class="grippie" id="btnShouOrFang" onclick="" style="">点击俺最大化</div>
+				</div>
+				<div style="width:20%;float: left;">
+					<div style="margin-top: 10px;margin-left: 10px;">
+						<div class="btn-group btn-group-xs" role="group" aria-label="...">
+						  <button type="button " id="saveData" class="btn btn-default">保存校验数据</button>
+						  <button type="button" id="clearJsonCache" class="btn btn-default">清空记录</button>
+						</div>
+						<ul class="list-group" style="margin-top: 4px;" id="jsonCacheS">这里会展示缓存的校验数据哦。</ul>
+					</div>
+
+				</div>
+				<div style="margin-top: 10px;clear: both;"></div>
+				<div class="validate">
+					<div class="left1 validate" id="btn2020041101" style="float:left">
+						<div class="btn-group" role="group" aria-label="...">
+
+							<button class="copy hide" data-ga="copy"></button>
+							<input name="validate" data-ga="validate" type="submit" id="validate" class="btn btn-primary" value="格式化校验">
+							<input type="button" value="压缩" id="btnYasuo" class="btn btn-default">
+							<input type="button" value="转义" id="btnZhuanyi" class="btn btn-default">
+							<input type="button" value="去除转义" id="btnRemoveZhuanyi" class="btn btn-default">
+							<input type="button" value="unicode转中文" id="btnToChar" class="btn btn-info">
+							<input type="button" value="转GET参数" id="btnToGET" class="btn btn-default">
+							<input click-type="copy" onclick="$(this).attr('data-clipboard-text',app.editor.getValue())" class="btn btn-default" type="button" value="复制">
+							<!--<input name="validate" class="btn btn-default" onclick="javascript:json_input.value='';$('#json_input').focus(); " type="reset" value="清空" />	-->
+					</div>
+					</div>
+				</div>
+				</form>
+				</div>
+
+				</div>
+				<div style="clear: both;"></div>
+		 <section id="result-container">
+            <pre id="result" class="error"></pre>
+       </section>
+       <div style="margin-top: 10px;clear: both;"></div>
+		<div class="panel panel-default" style="display:none" id="articlesSDiv">
+  			<div class="panel-body">
+			<ol id="articlesS">
+
+			</ol>
+
+			</div>
+		</div>
+		<!--<script src="/static/bejson/index/new/sub_index_20190815.js"></script>-->
+        <script src="/static/QueryAssistant/js/sub_index.js"></script>
+		<script src="//upyun.bejson.com/js/bejson/bejson_index20190109.min.js"></script>
+
+				<style type="text/css">
+			#ga{
+				width:100%;text-align:left;margin-top:10px;
+			}
+			@media screen and (max-width: 1960px){
+			    #ga{
+			       width:100%
+			    }
+			}
+		</style>
+	</div>
+</div>
+
+
+		<datalist id="menud"><option onclick="change1(this)" label="首页" value="首页"></option><option onclick="change1(this)" label="格式化校验" value="格式化校验"></option><option onclick="change1(this)" label="JSON视图" value="JSON视图"></option><option onclick="change1(this)" label="JSON压缩转义" value="JSON压缩转义"></option><option onclick="change1(this)" label="JSON生成Java实体类" value="JSON生成Java实体类"></option><option onclick="change1(this)" label="JSON生成C#实体类" value="JSON生成C#实体类"></option><option onclick="change1(this)" label="JSON在线编辑器" value="JSON在线编辑器"></option><option onclick="change1(this)" label="JSON排序" value="JSON排序"></option><option onclick="change1(this)" label="JSON着色" value="JSON着色"></option><option onclick="change1(this)" label="XML-JSON互转" value="XML-JSON互转"></option><option onclick="change1(this)" label="JSON和GET请求字符串互转" value="JSON和GET请求字符串互转"></option><option onclick="change1(this)" label="Excel转Json" value="Excel转Json"></option><option onclick="change1(this)" label="json转csv、excel" value="json转csv、excel"></option><option onclick="change1(this)" label="在线JSON转yaml,yaml转JSON" value="在线JSON转yaml,yaml转JSON"></option><option onclick="change1(this)" label="Base64编码、解码" value="Base64编码、解码"></option><option onclick="change1(this)" label="MD5加密" value="MD5加密"></option><option onclick="change1(this)" label="MD5解密" value="MD5解密"></option><option onclick="change1(this)" label="DES,AES等对称加密解密" value="DES,AES等对称加密解密"></option><option onclick="change1(this)" label="RSA,RSA2公钥私钥加密解密" value="RSA,RSA2公钥私钥加密解密"></option><option onclick="change1(this)" label="SHA加密" value="SHA加密"></option><option onclick="change1(this)" label="Escape编码" value="Escape编码"></option><option onclick="change1(this)" label="URL编码" value="URL编码"></option><option onclick="change1(this)" label="Javascript Eval加密解密" value="Javascript Eval加密解密"></option><option onclick="change1(this)" label="Javascript加密混淆" value="Javascript加密混淆"></option><option onclick="change1(this)" label="摩斯密码加密解密" value="摩斯密码加密解密"></option><option onclick="change1(this)" label="unicode中文互转" value="unicode中文互转"></option><option onclick="change1(this)" label="Javascript/HTML压缩、格式化" value="Javascript/HTML压缩、格式化"></option><option onclick="change1(this)" label="CSS压缩、格式化" value="CSS压缩、格式化"></option><option onclick="change1(this)" label="XML排序、压缩、格式化" value="XML排序、压缩、格式化"></option><option onclick="change1(this)" label="SQL压缩、格式化" value="SQL压缩、格式化"></option><option onclick="change1(this)" label="模拟HTTP请求工具" value="模拟HTTP请求工具"></option><option onclick="change1(this)" label="在线模拟websocket请求工具" value="在线模拟websocket请求工具"></option><option onclick="change1(this)" label="获取你的IP" value="获取你的IP"></option><option onclick="change1(this)" label="获取IP信息" value="获取IP信息"></option><option onclick="change1(this)" label="IP定位周边信息" value="IP定位周边信息"></option><option onclick="change1(this)" label="获取您的浏览器信息" value="获取您的浏览器信息"></option><option onclick="change1(this)" label="常用USER_AGENT" value="常用USER_AGENT"></option><option onclick="change1(this)" label="IP转数字,数字转IP" value="IP转数字,数字转IP"></option><option onclick="change1(this)" label="TCP/IP子网掩码计算换算" value="TCP/IP子网掩码计算换算"></option><option onclick="change1(this)" label="SSL协议套件探测" value="SSL协议套件探测"></option><option onclick="change1(this)" label="图床" value="图床"></option><option onclick="change1(this)" label="在线GIF转成帧" value="在线GIF转成帧"></option><option onclick="change1(this)" label="在线html转js,js转html" value="在线html转js,js转html"></option><option onclick="change1(this)" label="fontawesome图标查询" value="fontawesome图标查询"></option><option onclick="change1(this)" label="在线获取键盘按键值(keycode、ascii码)" value="在线获取键盘按键值(keycode、ascii码)"></option><option onclick="change1(this)" label="字符生成线条字" value="字符生成线条字"></option><option onclick="change1(this)" label="生成音乐播放器" value="生成音乐播放器"></option><option onclick="change1(this)" label="图片在线压缩工具" value="图片在线压缩工具"></option><option onclick="change1(this)" label="在线代码编辑器" value="在线代码编辑器"></option><option onclick="change1(this)" label="在线photoshop" value="在线photoshop"></option><option onclick="change1(this)" label="H5模板在线制作" value="H5模板在线制作"></option><option onclick="change1(this)" label="在线生成圆角图片" value="在线生成圆角图片"></option><option onclick="change1(this)" label="IOS安卓手机开发logo生成工具" value="IOS安卓手机开发logo生成工具"></option><option onclick="change1(this)" label="ICO图标在线转换工具" value="ICO图标在线转换工具"></option><option onclick="change1(this)" label="RunJS在线编辑器" value="RunJS在线编辑器"></option><option onclick="change1(this)" label="ueditor在线代码编辑器" value="ueditor在线代码编辑器"></option><option onclick="change1(this)" label="在线调色板" value="在线调色板"></option><option onclick="change1(this)" label="WEB安全色" value="WEB安全色"></option><option onclick="change1(this)" label="在线图片转Base64编码" value="在线图片转Base64编码"></option><option onclick="change1(this)" label="在线图片大小格式(支持webp)转换" value="在线图片大小格式(支持webp)转换"></option><option onclick="change1(this)" label="iPhone/iPad/Android UI尺寸规范" value="iPhone/iPad/Android UI尺寸规范"></option><option onclick="change1(this)" label="阿里巴巴矢量图标库" value="阿里巴巴矢量图标库"></option><option onclick="change1(this)" label="fontawesome矢量图标库" value="fontawesome矢量图标库"></option><option onclick="change1(this)" label="SVG代码编辑预览" value="SVG代码编辑预览"></option><option onclick="change1(this)" label="常用JS资源库" value="常用JS资源库"></option><option onclick="change1(this)" label="弹出窗口生成器" value="弹出窗口生成器"></option><option onclick="change1(this)" label="自动排版工具" value="自动排版工具"></option><option onclick="change1(this)" label="JSON生成Java实体类" value="JSON生成Java实体类"></option><option onclick="change1(this)" label="SQL生成Java代码" value="SQL生成Java代码"></option><option onclick="change1(this)" label="JSON生成C#实体类" value="JSON生成C#实体类"></option><option onclick="change1(this)" label="mysql转Java实体类" value="mysql转Java实体类"></option><option onclick="change1(this)" label="SQL转CSharp实体类" value="SQL转CSharp实体类"></option><option onclick="change1(this)" label="oracle转Java实体类" value="oracle转Java实体类"></option><option onclick="change1(this)" label="数据库插入、修改字段视图" value="数据库插入、修改字段视图"></option><option onclick="change1(this)" label="properties转yaml" value="properties转yaml"></option><option onclick="change1(this)" label="YAML、YML在线编辑(校验)器" value="YAML、YML在线编辑(校验)器"></option><option onclick="change1(this)" label="字符串拼接(多语言)" value="字符串拼接(多语言)"></option><option onclick="change1(this)" label="驼峰转下划线,下划线转驼峰" value="驼峰转下划线,下划线转驼峰"></option><option onclick="change1(this)" label="在线html转js,js转html" value="在线html转js,js转html"></option><option onclick="change1(this)" label="在线ueditor富文本编辑器转markdown语法" value="在线ueditor富文本编辑器转markdown语法"></option><option onclick="change1(this)" label="php反序列化成JSON和代码" value="php反序列化成JSON和代码"></option><option onclick="change1(this)" label="在线图片大小格式(支持webp)转换" value="在线图片大小格式(支持webp)转换"></option><option onclick="change1(this)" label="jpg,png图片在线转svg" value="jpg,png图片在线转svg"></option><option onclick="change1(this)" label="在线地图经纬度定位换算" value="在线地图经纬度定位换算"></option><option onclick="change1(this)" label="px转em,em转px" value="px转em,em转px"></option><option onclick="change1(this)" label="在线图片转Base64编码" value="在线图片转Base64编码"></option><option onclick="change1(this)" label="unicode中文互转" value="unicode中文互转"></option><option onclick="change1(this)" label="在线短地址转换" value="在线短地址转换"></option><option onclick="change1(this)" label="Unix时间转换(日期转毫秒)" value="Unix时间转换(日期转毫秒)"></option><option onclick="change1(this)" label="进制转换" value="进制转换"></option><option onclick="change1(this)" label="16进制到文本字符串" value="16进制到文本字符串"></option><option onclick="change1(this)" label="字母大小写转换" value="字母大小写转换"></option><option onclick="change1(this)" label="RGB颜色和HEX互转" value="RGB颜色和HEX互转"></option><option onclick="change1(this)" label="在线文档转PDF" value="在线文档转PDF"></option><option onclick="change1(this)" label="二维码生成与解码" value="二维码生成与解码"></option><option onclick="change1(this)" label="数字转中文(人民币)" value="数字转中文(人民币)"></option><option onclick="change1(this)" label="在线文件大小换算" value="在线文件大小换算"></option><option onclick="change1(this)" label="NATIVE/ASCII编码互转工具" value="NATIVE/ASCII编码互转工具"></option><option onclick="change1(this)" label="Html与UBB代码互相转换工具" value="Html与UBB代码互相转换工具"></option><option onclick="change1(this)" label="汉字转换拼音" value="汉字转换拼音"></option><option onclick="change1(this)" label="全角半角转换" value="全角半角转换"></option><option onclick="change1(this)" label="简繁体火星文互转" value="简繁体火星文互转"></option><option onclick="change1(this)" label="Html转换为MarkDown工具" value="Html转换为MarkDown工具"></option><option onclick="change1(this)" label="视频秒转音频(mp3)" value="视频秒转音频(mp3)"></option><option onclick="change1(this)" label="字符串数字对比" value="字符串数字对比"></option><option onclick="change1(this)" label="字符串数组在线排序工具" value="字符串数组在线排序工具"></option><option onclick="change1(this)" label="正则表达式测试" value="正则表达式测试"></option><option onclick="change1(this)" label="xpath测试" value="xpath测试"></option><option onclick="change1(this)" label="条形码生成器" value="条形码生成器"></option><option onclick="change1(this)" label="在线获取键盘按键值(ascii码)" value="在线获取键盘按键值(ascii码)"></option><option onclick="change1(this)" label="Cron表达式生成器" value="Cron表达式生成器"></option><option onclick="change1(this)" label="Cron表达式校验工具" value="Cron表达式校验工具"></option><option onclick="change1(this)" label="中英互译" value="中英互译"></option><option onclick="change1(this)" label="寻找图片、链接或xpath寻找元素" value="寻找图片、链接或xpath寻找元素"></option><option onclick="change1(this)" label="文字对比找不同处" value="文字对比找不同处"></option><option onclick="change1(this)" label="正则表达式代码生成工具" value="正则表达式代码生成工具"></option><option onclick="change1(this)" label="SQL追加或去除双引号" value="SQL追加或去除双引号"></option><option onclick="change1(this)" label="去除重复字符串" value="去除重复字符串"></option><option onclick="change1(this)" label="在线根据首字母排序" value="在线根据首字母排序"></option><option onclick="change1(this)" label="在线文字识别" value="在线文字识别"></option><option onclick="change1(this)" label="获取QQ的SKEY" value="获取QQ的SKEY"></option><option onclick="change1(this)" label="在线查询wordpress主题模版出处" value="在线查询wordpress主题模版出处"></option><option onclick="change1(this)" label="根据微博图片寻找微博出处" value="根据微博图片寻找微博出处"></option><option onclick="change1(this)" label="在线解压缩获取文件列表名" value="在线解压缩获取文件列表名"></option><option onclick="change1(this)" label="支付宝、微信收款码共存" value="支付宝、微信收款码共存"></option><option onclick="change1(this)" label="免费JSON接口" value="免费JSON接口"></option><option onclick="change1(this)" label="Systemd 入门教程：命令篇" value="Systemd 入门教程：命令篇"></option><option onclick="change1(this)" label="jQuery文档" value="jQuery文档"></option><option onclick="change1(this)" label="Bootstrap文档" value="Bootstrap文档"></option><option onclick="change1(this)" label="VueJs文档" value="VueJs文档"></option><option onclick="change1(this)" label="腾讯开发平台" value="腾讯开发平台"></option><option onclick="change1(this)" label="微信公众平台开发文档" value="微信公众平台开发文档"></option><option onclick="change1(this)" label="微信JSSDK开发文档" value="微信JSSDK开发文档"></option><option onclick="change1(this)" label="微信支付开发文档" value="微信支付开发文档"></option><option onclick="change1(this)" label="微信支付服务商文档" value="微信支付服务商文档"></option><option onclick="change1(this)" label="微信小程序开发文档" value="微信小程序开发文档"></option><option onclick="change1(this)" label="淘宝开发文档" value="淘宝开发文档"></option><option onclick="change1(this)" label="支付宝开发文档" value="支付宝开发文档"></option><option onclick="change1(this)" label="支付宝智慧门店文档" value="支付宝智慧门店文档"></option><option onclick="change1(this)" label="支付宝开发商文档" value="支付宝开发商文档"></option><option onclick="change1(this)" label="Android权限大全" value="Android权限大全"></option><option onclick="change1(this)" label="什么是JSON" value="什么是JSON"></option><option onclick="change1(this)" label="举个栗子" value="举个栗子"></option><option onclick="change1(this)" label="JSON API免费接口" value="JSON API免费接口"></option><option onclick="change1(this)" label="正则表达式30分钟入门教程" value="正则表达式30分钟入门教程"></option><option onclick="change1(this)" label="HTTP状态码查询" value="HTTP状态码查询"></option><option onclick="change1(this)" label="HTTP Content对照表" value="HTTP Content对照表"></option><option onclick="change1(this)" label="ASCII码对照表" value="ASCII码对照表"></option><option onclick="change1(this)" label="常用端口解释" value="常用端口解释"></option><option onclick="change1(this)" label="微信公众平台调试工具" value="微信公众平台调试工具"></option><option onclick="change1(this)" label="微信公众平台支付接口调试工具" value="微信公众平台支付接口调试工具"></option><option onclick="change1(this)" label="微信支付接口签名校验工具" value="微信支付接口签名校验工具"></option><option onclick="change1(this)" label="微信卡券JSAPI签名校验工具" value="微信卡券JSAPI签名校验工具"></option><option onclick="change1(this)" label="微信 JS 接口签名校验工具" value="微信 JS 接口签名校验工具"></option><option onclick="change1(this)" label="微信企业号调试工具" value="微信企业号调试工具"></option><option onclick="change1(this)" label="QQ互联API调试工具" value="QQ互联API调试工具"></option><option onclick="change1(this)" label="淘宝oauth2.0测试工具" value="淘宝oauth2.0测试工具"></option><option onclick="change1(this)" label="淘宝API测试工具" value="淘宝API测试工具"></option><option onclick="change1(this)" label="淘宝错误码查询工具" value="淘宝错误码查询工具"></option><option onclick="change1(this)" label="淘宝商品属性工具" value="淘宝商品属性工具"></option><option onclick="change1(this)" label="支付宝联调日志排查" value="支付宝联调日志排查"></option><option onclick="change1(this)" label="支付宝API工具" value="支付宝API工具"></option><option onclick="change1(this)" label="开发者自助排查工具" value="开发者自助排查工具"></option><option onclick="change1(this)" label="新浪微博API工具" value="新浪微博API工具"></option><option onclick="change1(this)" label="sitemap提交入口大全" value="sitemap提交入口大全"></option><option onclick="change1(this)" label="备案查询" value="备案查询"></option><option onclick="change1(this)" label="常用软件下载" value="常用软件下载"></option><option onclick="change1(this)" label="Blogs" value="Blogs"></option><option onclick="change1(this)" label="留言" value="留言"></option><option onclick="change1(this)" label="更新日志" value="更新日志"></option><option onclick="change1(this)" label="广告招租" value="广告招租"></option></datalist>
+		<div id="foot1">
+
+		</div>
+
+<!--<script src="//cdn.staticfile.org/layer/2.3/layer.js"></script>-->
+
+<script src="http://www.bejson.com/static/3part/layer2/layer2.js" type="text/javascript" charset="utf-8"></script>
+</div></div></div></div></div>
+</div>
+</body>
+</html>
