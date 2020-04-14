@@ -21,3 +21,8 @@ class FuliView(View):
 class JsonView(View):
     def get(self, request):
         return render(request, 'QueryAssistant/Json.html')
+
+
+class TextContrastView(View):
+    def get(self, request):
+        return render(request, 'QueryAssistant/textContrast.html')
