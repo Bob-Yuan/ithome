@@ -9,5 +9,5 @@ urlpatterns = [
     path('fuli/', FuliView.as_view(), name="fuli"),
     path('unicode/', UnicodeView.as_view(), name="unicode"),
     path('json/', JsonView.as_view(), name="json"),
-    path('textContrast/', TextContrastView.as_view(), name="textContrast")
+    path('textContrast/', TextContrastView.as_view(), name="textContrast"),
 ]
